@@ -1,1 +1,61 @@
-<p>sign-up-in works!</p>
+<div class = "ui middle aligned center aligned grid">
+    <div class = "three wide column">
+        <h2 class = "ui orange image header">
+            <!Add a small logo here>
+            <div class="content" *ngIf="displayLogin">Sign In</div>
+            <div class="content" *ngIf="!displayLogin">Sign Up</div>
+        </h2>
+        <form class = "ui large form">
+            
+            <div class="ui orange stacked segment" *ngIf="!displayLogin">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="Username" placeholder="Username">
+                    </div>
+                </div>
+            </div>
+            <div class="ui orange stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="envelope icon"></i>
+                        <input type="text" name="email" placeholder="E-mail adress">
+                    </div>
+                </div>
+            </div>
+            <div class="ui orange stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="text" name="password" placeholder="Password">
+                    </div>
+                </div>
+            </div>
+            <div class="ui orange stacked segment" *ngIf="!displayLogin">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="text" name="repeatPassword" placeholder="Repeat password">
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui fluid large orange submit button" *ngIf="displayLogin">Sign In </div>
+            <div class="ui fluid large orange submit button" *ngIf="!displayLogin">Sign Up</div>
+            
+            <div clas="ui error message"></div>
+        </form>
+
+        <div class = "ui message" *ngIf="displayLogin">
+            First time here?  
+            <a class="ui basic orange label" (click)="onLogIn()">Sign Up!</a>
+        </div>
+
+        <div class = "ui message" *ngIf="!displayLogin">
+            Already have an account?  
+            <a class="ui basic orange label" (click)="onSignUp()">Sign In!</a>
+        </div>
+
+
+    </div>
+</div>

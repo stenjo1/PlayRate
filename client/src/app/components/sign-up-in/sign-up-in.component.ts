@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-sign-up-in',
@@ -6,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-up-in.component.css']
 })
 export class SignUpInComponent {
+
+  user: User;
+  displayLogin: boolean = true;
+
+  constructor(){
+    this.user = new User("","","");
+  }
+
+  onSignUp(){
+    this.displayLogin = true;
+  }
+
+  onLogIn(){
+    this.displayLogin = false;
+  }
 
 }
