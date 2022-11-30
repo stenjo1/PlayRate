@@ -1,36 +1,64 @@
 <div class = "ui middle aligned center aligned grid">
     <div class = "three wide column">
         <h2 class = "ui orange image header">
-            <!Add a small logo here>
+            <img class="ui image" src="../../../assets/logo.png">
             <div class="content" *ngIf="displayLogin">Sign In</div>
             <div class="content" *ngIf="!displayLogin">Sign Up</div>
         </h2>
-        <form class = "ui large form">
+        <form class = "ui large form" [formGroup]="signForm" (ngSubmit)="onSignUpSubmit()">
             
-            <div class="ui orange stacked segment" *ngIf="!displayLogin">
+            <!------------------------------------>
+            <div class="ui orange stacked segment" *ngIf="!displayLogin" [ngClass]="{error: usernameHasErrors}">
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="Username" placeholder="Username">
+                        <input type="text" formControlName="username" placeholder="Username">
                     </div>
                 </div>
+
+
+                <div class = "ui pointing red basic label" *ngIf="usernameHasErrors()">
+                    <ul>
+                        <li *ngFor = "let errorMessage of nameErrors()">{{ errorMessage }}</li>
+                    </ul>
+                </div>
             </div>
-            <div class="ui orange stacked segment">
+             <!------------------------------------>
+
+            <div class="ui orange stacked segment" [ngClass]="{error: emailHasErrors}">
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="envelope icon"></i>
-                        <input type="text" name="email" placeholder="E-mail adress">
+                        <input type="text" formControlName="email" placeholder="E-mail adress">
                     </div>
                 </div>
+
+                <div class = "ui pointing red basic label" *ngIf="emailHasErrors()">
+                    <ul>
+                        <li *ngFor = "let errorMessage of nameErrors()">{{ errorMessage }}</li>
+                    </ul>
+                </div>
             </div>
-            <div class="ui orange stacked segment">
+            <!------------------------------------>
+
+
+            <div class="ui orange stacked segment" [ngClass]="{error: emailHasErrors}">
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="text" name="password" placeholder="Password">
+                        <input type="text" formControlName="password" placeholder="Password">
                     </div>
                 </div>
+
+                <div class = "ui pointing red basic label" *ngIf="emailHasErrors()">
+                    <ul>
+                        <li *ngFor = "let errorMessage of nameErrors()">{{ errorMessage }}</li>
+                    </ul>
+                </div>
             </div>
+            <!------------------------------------>
+
+
             <div class="ui orange stacked segment" *ngIf="!displayLogin">
                 <div class="field">
                     <div class="ui left icon input">
@@ -40,8 +68,8 @@
                 </div>
             </div>
 
-            <div class="ui fluid large orange submit button" *ngIf="displayLogin">Sign In </div>
-            <div class="ui fluid large orange submit button" *ngIf="!displayLogin">Sign Up</div>
+            <button class="ui fluid large orange submit button" *ngIf="displayLogin"  type="submit">Sign In</button>
+            <button class="ui fluid large orange submit button" *ngIf="!displayLogin" type="submit">Sign Up</button>
             
             <div clas="ui error message"></div>
         </form>
