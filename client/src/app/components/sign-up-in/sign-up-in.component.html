@@ -16,10 +16,9 @@
                     </div>
                 </div>
 
-
                 <div class = "ui pointing red basic label" *ngIf="usernameHasErrors()">
                     <ul>
-                        <li *ngFor = "let errorMessage of nameErrors()">{{ errorMessage }}</li>
+                        <li *ngFor = "let errorMessage of usernameErrors()">{{ errorMessage }}</li>
                     </ul>
                 </div>
             </div>
@@ -33,38 +32,27 @@
                     </div>
                 </div>
 
-                <div class = "ui pointing red basic label" *ngIf="emailHasErrors()">
+                <div class = "ui pointing red basic label" *ngIf="emailHasErrors() && !displayLogin ">
                     <ul>
-                        <li *ngFor = "let errorMessage of nameErrors()">{{ errorMessage }}</li>
+                        <li *ngFor = "let errorMessage of emailErrors()">{{ errorMessage }}</li>
                     </ul>
                 </div>
             </div>
             <!------------------------------------>
 
 
-            <div class="ui orange stacked segment" [ngClass]="{error: emailHasErrors}">
+            <div class="ui orange stacked segment" [ngClass]="{error: passwordHasErrors}">
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="text" formControlName="password" placeholder="Password">
+                        <input type="password" formControlName="password" placeholder="Password">
                     </div>
                 </div>
 
-                <div class = "ui pointing red basic label" *ngIf="emailHasErrors()">
+                <div class = "ui pointing red basic label" *ngIf="passwordHasErrors() && !displayLogin ">
                     <ul>
-                        <li *ngFor = "let errorMessage of nameErrors()">{{ errorMessage }}</li>
+                        <li *ngFor = "let errorMessage of passwordErrors()">{{ errorMessage }}</li>
                     </ul>
-                </div>
-            </div>
-            <!------------------------------------>
-
-
-            <div class="ui orange stacked segment" *ngIf="!displayLogin">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="text" name="repeatPassword" placeholder="Repeat password">
-                    </div>
                 </div>
             </div>
 
@@ -73,6 +61,11 @@
             
             <div clas="ui error message"></div>
         </form>
+       
+        <div class = "ui negative message" *ngIf="displayLogin && failedLogin">
+            <p>Login has failed!</p>
+        </div>
+
 
         <div class = "ui message" *ngIf="displayLogin">
             First time here?  
@@ -83,7 +76,6 @@
             Already have an account?  
             <a class="ui basic orange label" (click)="onSignUp()">Sign In!</a>
         </div>
-
 
     </div>
 </div>
