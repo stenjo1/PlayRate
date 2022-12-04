@@ -17,7 +17,7 @@ export class SignUpInComponent{
   failedLogin: boolean;
  
   constructor(private formBuilder: FormBuilder){
-    this.user = new User("","","");
+    this.user = new User("","","","","");
     this.failedLogin = false;
  
     this.signForm = this.formBuilder.group({

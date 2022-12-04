@@ -1,0 +1,128 @@
+<div class="ui hidden divider"></div>
+<div class="ui container">        
+    <div class="ui grid segment">
+        <div class="two wide column">
+            <img class="ui image" [src]="this.user.imageURL" alt="Profile Default">
+        </div>
+        <div class="fourteen wide column">
+            <div class="ui grid">
+                <div class="two wide column">
+                    <h3 class="ui header content orange">
+                        {{user.username}}
+                    </h3>
+                </div>
+                <div class="column">
+                    <h3 class="ui header content green">
+                        {{user.status}}
+                    </h3>
+                </div>
+                <div class="row">
+                    <div class="three wide column">
+                        <div class="ui fluid button">Finished</div>
+                    </div>
+                    <div class="three wide column">
+                        <div class="ui fluid button">Playing</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="three wide column">
+                        <div class="ui fluid button">Backlog</div>
+                    </div>
+                    <div class="three wide column">
+                        <div class="ui fluid button">Reviews</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui feed">
+        <div class="event">
+            <div class="label">
+                <img src="/assets/profile-default.png">
+            </div>
+            <div class="content">
+                <div class="summary">
+                <a class="user">
+                    {{user.username}}
+                </a> 
+                started playing 
+                <a class="game">Red Dead Redemption 2</a>
+                <div class="date">
+                    1 Hour Ago
+                </div>
+                </div>
+                <div class="meta">
+                <a class="like">
+                    <i class="like icon"></i> 4 Likes
+                </a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <div class="label">
+                <img src="/assets/profile-default.png">
+            </div>
+            <div class="content">
+                <div class="summary">
+                <a class="user">
+                    {{user.username}}
+                </a> 
+                finished playing 
+                <a class="game">Red Dead Redemption 2</a>
+                <div class="date">
+                    1 Hour Ago
+                </div>
+                </div>
+                <div class="meta">
+                <a class="like">
+                    <i class="like icon"></i> 4 Likes
+                </a>
+                </div>
+            </div>
+        </div>
+        <div class="event">
+            <div class="label">
+                <img src="/assets/profile-default.png">
+            </div>
+            <div class="content">
+                <div class="summary">
+                <a class="user">
+                    {{user.username}}
+                </a> 
+                added 
+                <a class="game">Red Dead Redemption 2</a>
+                to their backlog
+                <div class="date">
+                    1 Hour Ago
+                </div>
+                </div>
+                <div class="meta">
+                <a class="like">
+                    <i class="like icon"></i> 4 Likes
+                </a>
+                </div>
+            </div>
+        </div>
+        <div class="ui feed">
+            <div class="event">
+              <div class="label">
+                <img src="/assets/profile-default.png">
+              </div>
+              <div class="content">
+                <div class="date">
+                  3 days ago
+                </div>
+                <div class="summary">
+                   <a>Helen Troy</a> reviewed League of Legends.
+                </div>
+                <div class="extra images">
+                  <a><img src="/assets/lol.png"></a>
+                </div>
+                <div class="extra text">
+                    Damn I really wasted 32000 hours of my life on this.
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</div>
