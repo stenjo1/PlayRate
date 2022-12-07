@@ -7,7 +7,7 @@ if (!fs.existsSync(__uploadDir)) {
 }
 
 const express = require('express');
-/*const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 //TODO: smisliti nove rute ja sam lupila nesto osnovno hvala
 const userRoutes = require('./components/users/usersAPI');
@@ -26,7 +26,7 @@ mongoose
   .then(() => {
     console.log('Successfully connected to MongoDB!');
   });
-*/
+
 app.use(express.urlencoded({
     extended: false,
   })

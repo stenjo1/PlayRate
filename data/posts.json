@@ -1,0 +1,14 @@
+[{
+    "id": 0,
+    "postType": "playing",
+    "userID": 0,
+    "gameID": 0
+  },
+  {
+    "id": 1,
+    "postType": "review",
+    "reviewText": "I would die for this game",
+    "reviewScore": 10,
+    "userID": 0,
+    "gameID": 1
+}]

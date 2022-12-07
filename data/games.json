@@ -1,0 +1,9 @@
+[{
+    "id": 0,
+    "name": "Fortnite",
+    "description": "Best game ever made, victory royale",
+    "imgUrl": "*url ka slici na serveru*",
+    "numberOfReviews": 300000000,
+    "reviewScore": 9.9,
+    "relatedPosts": ["id jednog posta", "id nekog drugog posta itd"] 
+}]
