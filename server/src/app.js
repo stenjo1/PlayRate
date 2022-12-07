@@ -7,14 +7,26 @@ if (!fs.existsSync(__uploadDir)) {
 }
 
 const express = require('express');
-//const mongoose = require('mongoose');
+/*const mongoose = require('mongoose');
 
 //TODO: smisliti nove rute ja sam lupila nesto osnovno hvala
 const userRoutes = require('./components/users/usersAPI');
 const gameRoutes = require('./components/games/gamesAPI');
+const postRoutes = require('./components/games/postsAPI');
 
 const app = express();
 
+const mongoDBString = 'mongodb://localhost:27017/playrate';
+const mongoDBReplicationString = 'mongodb://localhost:27017,localhost:27018,localhost:27019/playrate?replicaSet=rs';
+mongoose
+  .connect(mongoDBString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Successfully connected to MongoDB!');
+  });
+*/
 app.use(express.urlencoded({
     extended: false,
   })
@@ -37,6 +49,7 @@ app.use(function (req, res, next) {
   
 app.use('/api/users', userRoutes);
 app.use('/api/games', gameRoutes);
+app.use('/api/posts', postRoutes);
 
 app.use(express.static(__uploadDir));
 
