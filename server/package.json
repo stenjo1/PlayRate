@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express.js": "^1.0.0"
+    "express.js": "^1.0.0",
+    "mongoose": "^6.8.0",
+    "mongoose-paginate-v2": "^1.7.1"
   }
 }
