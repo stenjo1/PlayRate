@@ -1,14 +1,20 @@
 [{
-    "id": 0,
-    "postType": "playing",
-    "userID": 0,
-    "gameID": 0
+    "postType": "Playing",
+    "userId": {
+      "$oid": "607c7ef62245ea4eb015806d"
+    },
+    "gameId": {
+      "$oid": "607c7ef62245ea4eb015806d"
+    }
   },
   {
-    "id": 1,
-    "postType": "review",
+    "postType": "Review",
     "reviewText": "I would die for this game",
     "reviewScore": 10,
-    "userID": 0,
-    "gameID": 1
+    "userId": {
+      "$oid": "607c7ef62245ea4eb015806d"
+    },
+    "gameId": {
+      "$oid": "607c7ef62245ea4eb015806d"
+    }
 }]
