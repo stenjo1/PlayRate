@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 //const bcrypt = require('bcrypt');
-//const jwtUtil = require('../utils/jwt');
+const jwtUtil = require('../../../utils/jwt');
 
 //const SALT_ROUNDS = 10;
 
 const userSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   username: {
     type: mongoose.Schema.Types.String,
     required: true,
@@ -73,11 +72,12 @@ async function getUserByUsername(username) {
   return user;
 }
 
-/*
+/** 
  * Kreira JSON Web Token sa podacima o korisniku.
  * @param {string} username Korisnicko ime.
  * @returns {Promise<string>} JWT sa podacima o korisniku sa datim korisnickim imenom.
- 
+*/ 
+
 async function getUserJWTByUsername(username) {
   const user = await getUserByUsername(username);
   if (!user) {
@@ -90,7 +90,7 @@ async function getUserJWTByUsername(username) {
     name: user.name,
     imgUrl: user.imgUrl,
   });
-}*/
+}
 
 /*
  * Pamti novog korisnika u bazi podataka.
@@ -100,17 +100,16 @@ async function getUserJWTByUsername(username) {
  * @param {string} name Ime i prezime.
  * @returns {Promise<string>} JWT sa podacima o novom korisniku.
  */
-async function registerNewUser(username, password, email, name) {
+
+async function registerNewUser(username, password, email) {
   const user = new User();
   user.username = username;
   //await user.setPassword(password);
   user.password = password;
   user.email = email;
-  user.name = name;
 
   await user.save();
-  //return getUserJWTByUsername(username);
-  return user;
+  return getUserJWTByUsername(username);
 }
 
 /*
