@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SignUpInComponent } from './components/sign-up-in/sign-up-in.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CreatePostComponent }  from './components/create-post/create-post.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SignUpInComponent,
     ProfilePageComponent,
     HeaderComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
