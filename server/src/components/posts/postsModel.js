@@ -29,6 +29,8 @@ const postSchema = new mongoose.Schema({
   }
 });
 
+postSchema.plugin(mongoosePaginate);
+
 const Post = mongoose.model('Post', postSchema);
 
 /**
@@ -65,8 +67,9 @@ async function createPost(postType, gameId, userId, reviewText, reviewScore) {
  * @returns {Promise<mongoose.Document>} that post or `null`
  */
 async function getPostById(postId) {
- // return await Post.findById(postId).populate(userId).populate(gameId).exec();
- return await Post.findById(postId).exec();
+ // p = await Post.findById(postId).exec();
+  //return p.populate(userId).populate(p.gameId.projection('name')).exec();
+  return await Post.findById(postId).exec();
 }
 
 /**
@@ -97,8 +100,9 @@ async function editReview(postId, newText, newScore) {
  * @param {number} limit Broj postova po stranici. Podrazumevano je 10.
  * @returns {Promise<mongoose.PaginateResult>} Paginacija postova.
  */
+// ne radi, kaze da paginate nije fja
  async function paginateThroughPosts(page = 1, limit = 10) {
-  return await Post.paginate({}, { page, limit, sort: 'postTimestamp', populate: [userId, gameId]});
+  return await Post.paginate({}, { page, limit, sort: 'postTimestamp'});
 }
 
 /**

@@ -25,6 +25,8 @@ const gameSchema = new mongoose.Schema({
   },
 });
 
+gameSchema.plugin(mongoosePaginate);
+
 const Game = mongoose.model('Game', gameSchema);
 
 /**
@@ -63,7 +65,7 @@ const Game = mongoose.model('Game', gameSchema);
  * @returns {Promise<mongoose.PaginateResult>} Paginacija igara.
  */
  async function paginateThroughGames(page = 1, limit = 10) {
-  return await Game.paginate({}, { page, limit, populate: relatedPosts, sort: 'reviewScore'});
+  return await Game.paginate({}, { page, limit, populate: 'relatedPosts', sort: 'reviewScore'});
 }
 
   

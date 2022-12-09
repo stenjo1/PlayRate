@@ -67,7 +67,7 @@ module.exports.editReview = async function (req, res, next) {
 
 
 module.exports.deletePost = async function (req, res, next) {
-    const ownerId = req.userId;
+    //const ownerId = req.userId;  mora da se namesti autentifikacija prvo
     const postId = req.params.postId;
   
     try {
@@ -78,11 +78,11 @@ module.exports.deletePost = async function (req, res, next) {
         throw error;
       }
   
-      if (post.userId.toString() !== ownerId) {
+      /*if (post.userId.toString() !== ownerId) {
         const error = new Error('You are not authorized to remove this post!');
         error.status = 403;
         throw error;
-      }
+      }*/
   
       await Post.deletePost();
       res.status(200).json({ message: `Post successfully removed!` });

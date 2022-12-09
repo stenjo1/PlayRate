@@ -6,7 +6,7 @@ module.exports.getGames = async function (req, res, next) {
     const limit = req.query.limit;
   
     try {
-      const games = await Game.paginateThroughPosts(page, limit);
+      const games = await Game.paginateThroughGames(page, limit);
       res.status(200).json(games);
     } catch (err) {
       next(err);
