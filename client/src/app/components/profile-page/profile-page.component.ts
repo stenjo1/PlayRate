@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from 'src/app/models/user.model'
+import { User,User1 } from 'src/app/models/user.model'
 
 @Component({
   selector: 'app-profile-page',
@@ -7,9 +7,10 @@ import { User } from 'src/app/models/user.model'
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent {
-  user: User;
+  user: User1;
 
   constructor(){
-    this.user = new User("Prophethor", "prophethor@gmail.com", "", "/assets/profile-default.png", "Online");
+    //TOFIX: I've instanced wrong user class because it doesent match current one
+    this.user = new User1("Prophethor", "prophethor@gmail.com", "", "/assets/profile-default.png", "Online");
   }
 }

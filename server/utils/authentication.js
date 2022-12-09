@@ -8,6 +8,7 @@ const jwt = require('./jwt');
  * @param {express.Response} res 
  * @param {express.NextFunction} next 
  */
+
 module.exports.canAuthenticate = async (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;

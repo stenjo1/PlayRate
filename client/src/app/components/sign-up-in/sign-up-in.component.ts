@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
+
+import { AuthService } from 'src/app/services/auth.service';
+
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,15 +13,16 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./sign-up-in.component.css']
 })
 
-export class SignUpInComponent{
+export class SignUpInComponent implements OnDestroy{
 
   user: User;
   displayLogin: boolean = true;
   signForm: FormGroup;
   failedLogin: boolean;
+  sub: Subscription = new Subscription();
  
-  constructor(private formBuilder: FormBuilder){
-    this.user = new User("","","","","");
+  constructor(private formBuilder: FormBuilder,private auth: AuthService){
+    this.user = new User("","","","");
     this.failedLogin = false;
  
     this.signForm = this.formBuilder.group({
@@ -26,6 +31,12 @@ export class SignUpInComponent{
         password: ['',[Validators.required,Validators.minLength(8)]],
     });
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   onSignUp(){
@@ -127,6 +138,7 @@ export class SignUpInComponent{
 
     if(!this.signForm.invalid){
       console.log("Prosao je Sign up!")
+      this.register();
       this.signForm.reset({username: '',email: '',password: ''})
       this.displayLogin = true;
       return;
@@ -142,6 +154,16 @@ export class SignUpInComponent{
     }
     
     return;
+  }
+
+  register(): void {
+
+      const data = this.signForm.value;
+      const obs: Observable<User | null> = this.auth.register(data.username, data.password, data.email);
+      
+      this.sub = obs.subscribe((user: User | null) => {
+        console.log(user)
+      });
   }
 
 }

@@ -1,7 +1,6 @@
 const User = require("./usersModel");
 
 module.exports.registerUser = async (req, res, next) => {
-    console.log(req.body);
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
@@ -13,6 +12,21 @@ module.exports.registerUser = async (req, res, next) => {
           throw error;
         }
     
+        const usernameCheck = await User.getUserByUsername(username);
+        const emailCheck =  await User.getUserByEmail(email);
+
+        if(usernameCheck !== null){
+          const error = new Error('Username has been taken already!');
+          error.status = 400;
+          throw error;
+        }
+
+        if(emailCheck !== null){
+          const error = new Error('This email has been registered already!');
+          error.status = 400;
+          throw error;
+        }
+
         const jwt = await User.registerNewUser(username, password, email);
         return res.status(201).json({
           token: jwt,
@@ -21,3 +35,4 @@ module.exports.registerUser = async (req, res, next) => {
         next(err);
       }
 }
+

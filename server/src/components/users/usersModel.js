@@ -72,6 +72,11 @@ async function getUserByUsername(username) {
   return user;
 }
 
+async function getUserByEmail(email){
+  const user = await User.findOne({ email }).exec();
+  return user;  
+}
+
 /** 
  * Kreira JSON Web Token sa podacima o korisniku.
  * @param {string} username Korisnicko ime.
@@ -140,6 +145,7 @@ async function changeUserProfileImage(userId, imgUrl) {
 
 module.exports = {
   getUserByUsername,
+  getUserByEmail,
   //getUserJWTByUsername,
   registerNewUser,
   updateUserData,
