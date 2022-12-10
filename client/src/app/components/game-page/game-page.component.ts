@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from 'src/app/models/game.module';
+import { Game } from 'src/app/models/game.model';
 
 declare const $:any;
 

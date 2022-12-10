@@ -112,7 +112,7 @@ async function editReview(postId, newText, newScore) {
 async function deletePost(postId) {
   await Post.deleteOne({_id: postId}).exec();
   
-}
+}  // ne radi, tj. radi ali ne obrise zapravo
 
 // Skup funkcija koji se izvozi treba da bude minimalan, tj. da odrzava jedino interfejs nad nasim podacima.
 // Kontroler koji koristi model ne sme da zna da li se koristi MongoDB, MySQL ili nesto trece.

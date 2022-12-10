@@ -68,9 +68,14 @@ const Game = mongoose.model('Game', gameSchema);
   return await Game.paginate({}, { page, limit, populate: 'relatedPosts', sort: 'reviewScore'});
 }
 
+
+async function getGames(){
+  return Game.find({}).exec();
+}
   
   module.exports = {
     attachPost,
     getGameById,
-    paginateThroughGames
+    paginateThroughGames,
+    getGames
   };

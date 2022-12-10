@@ -1,12 +1,22 @@
 const Game = require('./gamesModel');
 
 
-module.exports.getGames = async function (req, res, next) {
+module.exports.getGamesPagination = async function (req, res, next) {
     const page = req.query.page;
     const limit = req.query.limit;
   
     try {
       const games = await Game.paginateThroughGames(page, limit);
+      res.status(200).json(games);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  module.exports.getAllGames = async function (req, res, next) {
+  
+    try {
+      const games = await Game.getAllGames(page, limit);
       res.status(200).json(games);
     } catch (err) {
       next(err);

@@ -1,35 +1,57 @@
 <div class = "ui grid left aligned">
-    <div class="column"></div>
-<div class="ui form ">
+  <div class="column"></div>
+  <form class = "ui large form" [formGroup]="createPostForm" >
     <div class="field">
-        <label>Game</label>
-        <select>
-          <option value="0">Game1</option>
-          <option value="1">Game 2</option>
-        </select>
-    </div>
-
-
-    <div class="field">
-        <label>Post type</label>
-            <select>
-              <option value="0">Review</option>
-              <option value="1">Playing</option>
-              <option value="2">Finished</option>
-              <option value="3">Backlog</option>
-            </select>
-    </div>
-
-    <div class="field">
-        <label>Your rating 1-10</label>
-        <input type="text">
-    </div>
-
-    <div class="field">
-        <label>Review Text</label>
-        <textarea></textarea>
-      </div>
-
-      <button class="ui fluid large orange submit button" type="submit">Submit</button>
-    </div>
+      <label>Choose Game</label>
+    <select class="ui search dropdown" formControlName = "game">
+      <option value="">Game</option>
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+      <option value="CA">California</option>
+      <option value="CO">Colorado</option>
+      <option value="CT">Connecticut</option>
+      <option value="DE">Delaware</option>
+      <option value="DC">District Of Columbia</option>
+      <option value="FL">Florida</option>
+      <option value="GA">Georgia</option>
+      <option value="HI">Hawaii</option>
+      <option value="ID">Idaho</option>
+      <option value="IL">Illinois</option>
+      <option value="IN">Indiana</option>
+      <option value="IA">Iowa</option>
+      <option value="KS">Kansas</option>
+      <option value="KY">Kentucky</option>
+      <option value="LA">Louisiana</option>
+      <option value="ME">Maine</option>
+      <option value="MD">Maryland</option>
+      <option value="MA">Massachusetts</option>
+      <option value="MI">Michigan</option>
+      <option value="MN">Minnesota</option>
+      <option value="MS">Mississippi</option>
+    </select>
   </div>
+<div class="field">
+  <label>Choose Post Type</label>
+<select class="ui dropdown" formControlName="type" (change)="onSelectedType($event)">
+  <option value="0">Review</option>
+  <option value="1">Playing</option>
+  <option value="2">Finished</option>
+  <option value="3">Backlog</option>
+</select>
+</div>
+  
+  <div class="field" *ngIf="review">
+      <label>Your rating 1-10</label>
+      <input type="text" formControlName="reviewScore">
+  </div>
+
+  <div class="field" *ngIf="review">
+      <label>Review Text</label>
+      <textarea formControlName="reviewText"></textarea>
+    </div>
+
+    <button class="ui fluid large orange submit button" type="submit">Submit</button>
+
+</form>
