@@ -10,6 +10,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreatePostComponent }  from './components/create-post/create-post.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

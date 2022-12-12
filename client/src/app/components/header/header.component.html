@@ -1,42 +1,18 @@
-<div class ="ui hidden divider"></div>
-<div class = "ui grid middle aligned">
-    <div class="column"></div>
-
-    <div class = "column">
-        <a href="http://localhost:4200" alt="Home page">
-            <img class="ui small right floated image" src="assets/PlayrateLogo.png" alt="PlayrateLogo">
+<mat-toolbar>
+    <div>
+        <a href="">
+            <img src ='assets/logo.png' class="logo">
+            <span class="title">{{title}}</span>
         </a>
     </div>
-    <div class="three wide column">
-        <div class="left aligned">
-            <a href="http://localhost:4200" alt="Home page" style="text-decoration: none; color: orangered">
-                <h1>Playrate</h1>
-            </a>
-        </div>
+    <div>
+        <mat-form-field appearance="outline" color="accent">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="What game are you looking for?">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
     </div>
-
-    <div class="column left aligned eight wide">
-        <div class="ui fluid action input">
-            <input type="text" placeholder="What game are you looking for?">
-            <div class="ui button">Search</div>
-        </div>     
+    <div>
+        <button mat-raised-button color="warn">Profile</button>
     </div>
-
-    <div class="left aligned column">
-        <a href="http://localhost:4200/profilepage" alt="Profile page">
-            <div class="ui button">
-                Profile
-            </div>
-        </a>
-    </div>
-
-    <div class="two wide left aligned column">
-        <a href="http://localhost:4200/createpost" alt="Create post">
-            <div class="ui button">
-                Create post
-            </div>
-        </a>
-    </div>
-
-    <div class="column"></div>
-</div>
+</mat-toolbar>
