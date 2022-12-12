@@ -23,8 +23,6 @@ const userRoutes = require('./components/users/usersAPI');
 const gameRoutes = require('./components/games/gamesAPI');
 const postRoutes = require('./components/posts/postsAPI');
 
-
-
 const mongoDBString = 'mongodb://localhost:27017/playrate';
 const mongoDBReplicationString = 'mongodb://localhost:27017,localhost:27018,localhost:27019/playrate?replicaSet=rs';
 mongoose

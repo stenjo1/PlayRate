@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../users/userModel');
+const User = require('../src/components/users/usersModel');
 const jwt = require('./jwt');
 
 /**
@@ -10,32 +10,35 @@ const jwt = require('./jwt');
  */
 
 module.exports.canAuthenticate = async (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password;
 
   try {
     // Validiramo podatke
-    if (!username || !password) {
-      const error = new Error('Please provide both username and password');
+    if (!email || !password) {
+      const error = new Error('Please provide both email and password');
       error.status = 400;
       throw error;
     }
 
-    const user = await User.getUserByUsername(username);
+    const user = await User.getUserByEmail(email);
     if (!user) {
-      const error = new Error(`User with username ${username} does not exist!`);
+      const error = new Error(`Invalid login!`);
       error.status = 404;
       throw error;
     }
-
-    if (!(await user.isValidPassword(password))) {
-      const error = new Error(`Wrong password for username ${username}!`);
-      error.status = 401;
+    
+    //TOFIX: This is primitive way of handling user passwords!!!
+    if(user.password != password){
+      const error = new Error(`Invalid login!`);
+      error.status = 404;
       throw error;
     }
 
     // Ako je sve u redu, onda cemo na nivou req objekta sacuvati neophodne podatke o autorizaciji,
     // na primer, identifikator i username korisnika iz baze podataka
+    
+    //TOFIX
     req.userId = user._id;
     req.username = user.username;
 
@@ -52,6 +55,7 @@ module.exports.canAuthenticate = async (req, res, next) => {
  * @param {express.Response} res 
  * @param {express.NextFunction} next 
  */
+
 module.exports.isAuthenticated = async (req, res, next) => {
   try {
     // Ocekujemo da klijent uz svoj zahtev prosledi HTTP zaglavlje oblika:

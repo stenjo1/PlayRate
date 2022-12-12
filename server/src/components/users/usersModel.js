@@ -146,7 +146,7 @@ async function changeUserProfileImage(userId, imgUrl) {
 module.exports = {
   getUserByUsername,
   getUserByEmail,
-  //getUserJWTByUsername,
+  getUserJWTByUsername,
   registerNewUser,
   updateUserData,
   changeUserProfileImage,

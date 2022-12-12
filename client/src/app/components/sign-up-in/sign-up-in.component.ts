@@ -19,7 +19,7 @@ export class SignUpInComponent implements OnDestroy{
   displayLogin: boolean = true;
   signForm: FormGroup;
   failedLogin: boolean;
-  sub: Subscription = new Subscription();
+  userSub: Subscription = new Subscription();
  
   constructor(private formBuilder: FormBuilder,private auth: AuthService){
     this.user = new User("","","","");
@@ -34,8 +34,8 @@ export class SignUpInComponent implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
+    if (this.userSub) {
+      this.userSub.unsubscribe();
     }
   }
 
@@ -139,13 +139,15 @@ export class SignUpInComponent implements OnDestroy{
     if(!this.signForm.invalid){
       console.log("Prosao je Sign up!")
       this.register();
-      this.signForm.reset({username: '',email: '',password: ''})
+      this.signForm.reset({username: '',email: '',password: ''});
       this.displayLogin = true;
       return;
     }
 
     if(this.signForm.get("password")?.valid && this.signForm.get("email")?.valid){
       console.log("Prosao sign in")
+      this.login();
+      this.signForm.reset({username: '',email: '',password: ''});
       this.failedLogin=false;
     }
     else{
@@ -157,13 +159,22 @@ export class SignUpInComponent implements OnDestroy{
   }
 
   register(): void {
-
       const data = this.signForm.value;
       const obs: Observable<User | null> = this.auth.register(data.username, data.password, data.email);
-      
-      this.sub = obs.subscribe((user: User | null) => {
+
+      console.log(obs);
+      this.userSub = obs.subscribe((user: User | null) => {
         console.log(user)
       });
   }
 
+  login(): void {
+    const data = this.signForm.value;
+    
+    const obs: Observable<User | null> = this.auth.login(data.email,data.password);
+    
+    this.userSub = obs.subscribe((user: User | null) => {
+      console.log(user)
+    });
+  }
 }

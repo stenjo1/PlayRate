@@ -12,8 +12,11 @@ module.exports.registerUser = async (req, res, next) => {
           throw error;
         }
     
-        const usernameCheck = await User.getUserByUsername(username);
-        const emailCheck =  await User.getUserByEmail(email);
+        const loweredUsername = username.toLowerCase();
+        const loweredEmail = email.toLowerCase();
+
+        const usernameCheck = await User.getUserByUsername(loweredUsername);
+        const emailCheck =  await User.getUserByEmail(loweredUsername);
 
         if(usernameCheck !== null){
           const error = new Error('Username has been taken already!');
@@ -27,7 +30,7 @@ module.exports.registerUser = async (req, res, next) => {
           throw error;
         }
 
-        const jwt = await User.registerNewUser(username, password, email);
+        const jwt = await User.registerNewUser(loweredUsername, password, loweredEmail);
         return res.status(201).json({
           token: jwt,
         });
@@ -36,3 +39,15 @@ module.exports.registerUser = async (req, res, next) => {
       }
 }
 
+module.exports.loginUser = async (req, res, next) => {
+  const username = req.username;
+
+  try {
+    const jwt = await User.getUserJWTByUsername(username);
+    return res.status(201).json({
+      token: jwt,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
