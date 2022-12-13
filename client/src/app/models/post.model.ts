@@ -1,4 +1,6 @@
-export enum PostType {
+export enum PostType 
+{
+    NoType = 'NoType',
     Review = 'Review',
     Playing = 'Playing',
     Finished = 'Finished',
@@ -7,10 +9,8 @@ export enum PostType {
 
 export class Post{
     constructor(public type: PostType,
-                private userId: string,
-                public user:string,
-                private gameId: string,
-                public game:string,
+                public userId: string,
+                public gameId: string,
                 public rating:number,
                 public reviewText:string){
     }

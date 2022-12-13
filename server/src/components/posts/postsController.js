@@ -43,7 +43,7 @@ module.exports.createPost = async function (req, res, next) {
         error.status = 404;
         throw error;
       }
-      res.status(200).json(post);
+      res.status(200).json(post._id);
     } catch (err) {
       next(err);
     }

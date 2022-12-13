@@ -1,19 +1,19 @@
 <div class = "ui grid left aligned">
   <div class="column"></div>
-  <form class = "ui large form" [formGroup]="createPostForm" >
+  <form class = "ui large form" [formGroup]="createPostForm" (ngSubmit)="onCreatePostFormSubmit()">
     <div class="field">
       <label>Choose Game</label>
     <select class="ui search dropdown" formControlName = "game">
-      <option *ngFor = "let game of games | async" value={{game.gameId}}>{{game.gameName}}</option>
+      <option *ngFor = "let game of games | async" value={{game._id}}>{{game.name}}</option>
     </select>
   </div>
 <div class="field">
   <label>Choose Post Type</label>
 <select class="ui dropdown" formControlName="type" (change)="onSelectedType($event)">
-  <option value="0">Review</option>
-  <option value="1">Playing</option>
-  <option value="2">Finished</option>
-  <option value="3">Backlog</option>
+  <option value="review">Review</option>
+  <option value="playing">Playing</option>
+  <option value="finished">Finished</option>
+  <option value="backlog">Backlog</option>
 </select>
 </div>
   
@@ -27,6 +27,8 @@
       <textarea formControlName="reviewText"></textarea>
     </div>
 
-    <button class="ui fluid large orange submit button" type="submit">Submit</button>
-
+    <a href="http://localhost:4200" alt="Home page">
+      <button class="ui fluid large orange submit button" type="submit" >Submit</button>
+    </a>
+   
 </form>

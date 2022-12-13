@@ -50,17 +50,13 @@ async function createPost(postType, gameId, userId, reviewText, reviewScore) {
     postTimestamp: new Date(),
     postType: postType,
   });
-  if (reviewText) {
-    newPost.reviewText = reviewText;
-  }
-  if (reviewScore) {
-    newPost.reviewScore = reviewScore;
-  }
+  
+  newPost.reviewText = reviewText;
+  newPost.reviewScore = reviewScore;
+  
   return await newPost.save();
 }
 
-//ovde bismo mogli kao getPostsByGameId ili userID, ali onda da ne cuvamo id-ove postova u korisnicima i igricama u bazi, nzm jos sta nam je bolje
-  
 /**
  * Finds the post in the database based on the given id
  * @param {string} postId 
@@ -113,6 +109,8 @@ async function deletePost(postId) {
   await Post.deleteOne({_id: postId}).exec();
   
 }  // ne radi, tj. radi ali ne obrise zapravo
+
+
 
 // Skup funkcija koji se izvozi treba da bude minimalan, tj. da odrzava jedino interfejs nad nasim podacima.
 // Kontroler koji koristi model ne sme da zna da li se koristi MongoDB, MySQL ili nesto trece.

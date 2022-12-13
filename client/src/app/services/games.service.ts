@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable,map } from 'rxjs';
 import { GamesPagination } from '../models/games-pagination';
 import { Game } from '../models/game.model';
+import { Post } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,19 @@ export class GamesService {
     )
   }
 
+  public getGamesArray (): Observable<Game[]>{
+    const obs: Observable<Game[]> = this.http.get<Game[]>("http://localhost:3000/api/games/all");
+    return obs;
+  }
+
+
   public getGameById(id: string): Observable<Game> {
     return this.http.get<Game>(this.gameUrl+id);
+  }
+
+  public attachPost(gameId: string, postId: string, postType: string, reviewScore: number) {
+    const params:HttpParams=new HttpParams().append('gameId', gameId);
+    this.http.post("http://localhost:3000/api/games/post", {"postId": postId, "postType": postType, "reviewScore": reviewScore });    
   }
 
 }
