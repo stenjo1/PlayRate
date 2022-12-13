@@ -1,76 +1,69 @@
-<div class = "ui middle aligned center aligned grid">
-    <div class = "three wide column">
-        <form class = "ui large form" [formGroup]="signForm" (ngSubmit)="onSignUpSubmit()">
-            
-            <!------------------------------------>
-            <div class="ui orange stacked segment" *ngIf="!displayLogin" [ngClass]="{error: usernameHasErrors}">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="user icon"></i>
-                        <input type="text" formControlName="username" placeholder="Username">
-                    </div>
-                </div>
 
-                <div class = "ui pointing red basic label" *ngIf="usernameHasErrors()">
-                    <ul>
-                        <li *ngFor = "let errorMessage of usernameErrors()">{{ errorMessage }}</li>
-                    </ul>
-                </div>
-            </div>
-             <!------------------------------------>
+<mat-card>
+    <mat-card-title>Account</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="signForm" (ngSubmit)="onSignUpSubmit()">
 
-            <div class="ui orange stacked segment" [ngClass]="{error: emailHasErrors}">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="envelope icon"></i>
-                        <input type="text" formControlName="email" placeholder="E-mail adress">
-                    </div>
-                </div>
+            <p *ngIf="!displayLogin">
+                <mat-form-field  appearance="outline" color="accent" [hideRequiredMarker]=true>
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput placeholder="Username*" formControlName="username">
+                </mat-form-field>
+            </p>
 
-                <div class = "ui pointing red basic label" *ngIf="emailHasErrors() && !displayLogin ">
-                    <ul>
-                        <li *ngFor = "let errorMessage of emailErrors()">{{ errorMessage }}</li>
-                    </ul>
-                </div>
-            </div>
-            <!------------------------------------>
-
-
-            <div class="ui orange stacked segment" [ngClass]="{error: passwordHasErrors}">
-                <div class="field">
-                    <div class="ui left icon input">
-                        <i class="lock icon"></i>
-                        <input type="password" formControlName="password" placeholder="Password">
-                    </div>
-                </div>
-
-                <div class = "ui pointing red basic label" *ngIf="passwordHasErrors() && !displayLogin ">
-                    <ul>
-                        <li *ngFor = "let errorMessage of passwordErrors()">{{ errorMessage }}</li>
-                    </ul>
-                </div>
+            <div *ngIf="usernameHasErrors() && !displayLogin">
+                <ul>
+                    <li *ngFor = "let errorMessage of usernameErrors()">{{ errorMessage }}</li>
+                </ul>
             </div>
 
-            <button class="ui fluid large orange submit button" *ngIf="displayLogin"  type="submit">Sign In</button>
-            <button class="ui fluid large orange submit button" *ngIf="!displayLogin" type="submit">Sign Up</button>
-            
-            <div clas="ui error message"></div>
+            <p>
+                <mat-form-field  appearance="outline" color="accent" [hideRequiredMarker]=true>
+                    <mat-label>E-mail address</mat-label>
+                    <input type="text" matInput placeholder="E-mail address*" formControlName="email">
+                    <mat-icon matSuffix>mail</mat-icon>
+                </mat-form-field>
+            </p>
+
+            <div *ngIf="emailHasErrors() && !displayLogin">
+                <ul>
+                    <li *ngFor = "let errorMessage of emailErrors()">{{ errorMessage }}</li>
+                </ul>
+            </div>
+
+            <p>
+                <mat-form-field  appearance="outline" color="accent" [hideRequiredMarker]=true>
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput placeholder="Password*" formControlName="password">
+                    <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+            </p>
+
+            <div class = "ui pointing red basic label" *ngIf="passwordHasErrors() && !displayLogin ">
+                <ul>
+                    <li *ngFor = "let errorMessage of passwordErrors()">{{ errorMessage }}</li>
+                </ul>
+            </div>
+
+            <div class = "ui negative message" *ngIf="displayLogin && failedLogin">
+                <p>Login has failed!</p>
+            </div>
+
+            <div class="button">
+                <button *ngIf="displayLogin"  type="submit" mat-stroked-button>Sign In</button>
+                <button *ngIf="!displayLogin" type="submit" mat-stroked-button>Sign Up</button>
+            </div>
+
+            <div class = "message" *ngIf="displayLogin">
+                First time here?  
+                <a (click)="onLogIn()">Sign Up!</a>
+            </div>
+    
+            <div class = "message" *ngIf="!displayLogin">
+                Already have an account?  
+                <a (click)="onSignUp()">Sign In!</a>
+            </div>
+
         </form>
-       
-        <div class = "ui negative message" *ngIf="displayLogin && failedLogin">
-            <p>Login has failed!</p>
-        </div>
-
-
-        <div class = "ui message" *ngIf="displayLogin">
-            First time here?  
-            <a class="ui basic orange label" (click)="onLogIn()">Sign Up!</a>
-        </div>
-
-        <div class = "ui message" *ngIf="!displayLogin">
-            Already have an account?  
-            <a class="ui basic orange label" (click)="onSignUp()">Sign In!</a>
-        </div>
-
-    </div>
-</div>
+    </mat-card-content>
+</mat-card>
