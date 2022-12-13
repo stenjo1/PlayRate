@@ -5,10 +5,10 @@
             <div class="five wide column">   
                 <div class="ui fluid card">
                     <div class="img">
-                        <img class="ui fluid image" [src]="this.game.bannerPosterUrl" alt="Game banner poster">
+                        <img class="ui fluid image" src="assets/lol.png" alt="Game banner poster">
                     </div>
                     <div class="content">
-                        <p class="header">{{this.game.gameName}}</p>
+                        <p class="header">{{(this.game | async)?.name}}</p>
                         <div class="description">
                             <div class="ui buttons">
                                 <button class="ui primary button">Add to favorits</button>  
@@ -17,7 +17,7 @@
                                     <i class="heart icon"></i> Like
                                     </div>
                                     <a class="ui basic red left pointing label">
-                                    {{this.game.likes}}
+                                      {{(this.game | async)?.likes}}
                                     </a>
                                 </div>
                                 
@@ -33,13 +33,13 @@
             <div class="nine wide column">
                 <form class="ui form">
                     <label class="ui top attached label"><h4>Description</h4></label>
-                    <textarea readonly>{{this.game.gameDescription}}</textarea>
+                    <textarea readonly>{{(this.game | async)?.description}}</textarea>
                 </form>
                 <div class="ui statistics">
                     <div class="statistic">
                       <div class="value">
                         <img src="assets/faves.png" class="ui circular inline image">
-                        {{this.game.favoritesNumber}}
+                        {{(this.game | async)?.favoritesNumber}}
                       </div>
                       <div class="label">
                         Faves
@@ -48,7 +48,7 @@
                     <div class="statistic">
                       <div class="value">
                         <img src="assets/seen.png" class="ui circular inline image">
-                        {{this.game.visitedNumber}}
+                        {{(this.game | async)?.visitedNumber}}
                       </div>
                       <div class="label">
                         Visited
@@ -57,7 +57,7 @@
                     <div class="statistic">
                       <div class="value">
                         <img src="assets/play.png" class="ui circular inline image">
-                        {{this.game.playersNumber}}
+                        {{(this.game | async)?.playersNumber}}
                       </div>
                       <div class="label">
                         Playing
@@ -85,5 +85,4 @@
                 </div>     
             </div>
         </div>
-        
 </div>

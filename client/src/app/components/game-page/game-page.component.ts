@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Game } from 'src/app/models/game.model';
+import { GamesService } from 'src/app/services/games.service';
 
 declare const $:any;
 
@@ -10,7 +12,7 @@ declare const $:any;
 })
 export class GamePageComponent implements OnInit{
 
-  game:Game;
+  game:Observable<Game>=new Observable<Game>;
 
   liked:Boolean=false;
 
@@ -26,13 +28,9 @@ export class GamePageComponent implements OnInit{
 
   ];
 
-  constructor(){
-    this.game=new Game("848448","League of Legends",
-    "What is League of Legends? League of Legends is a team-based strategy game hampions take down towers as you batto victory.",
-                       "/assets/lol.png",
-                       31213, 6.3, 89,22,24,20);
-                     
-                    }
+  constructor(private gameService:GamesService){
+    this.game=this.gameService.getGameById('6398ae415cfe38600a48d5d4');
+  }
 
   ngOnInit(): void {
     $('.ui.rating').rating();
@@ -44,9 +42,9 @@ export class GamePageComponent implements OnInit{
     // console.log
   }
   onLikeButton(){
-    if(!this.liked){
-      this.liked=true;
-      this.game.likes+=1;
-    }
+    // if(!this.liked){
+    //   this.liked=true;
+    //   this.game.likes+=1;
+    // }
   }
 }

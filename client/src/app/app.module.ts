@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { GamePageComponent } from './components/game-page/game-page.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SignUpInComponent,
     ProfilePageComponent,
     HeaderComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    GamePageComponent
   ],
   imports: [
     HttpClientModule,

@@ -95,7 +95,7 @@ async function getGames(){
 }
   
   module.exports = {
-    attachPost,
+    //attachPost,
     getGameById,
     paginateThroughGames,
     getGames

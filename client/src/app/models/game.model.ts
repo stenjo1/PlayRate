@@ -1,11 +1,12 @@
 export class Game{
-    constructor(public gameId: string,
-                public gameName:string,
-                public gameDescription:string,
-                public bannerPosterUrl:string,
+    constructor(
+                public _id: string,
+                public name:string,
+                public description:string,
+                public imgUrl:string,
                 public numberOfReviews: number,
-                public rating:number,
-            //    public relatedPosts: [string], ----- ne ocitava se iz baze nz zasto
+                public reviewScore:number,
+                public relatedPosts: [string],
                 public playersNumber:number,
                 public visitedNumber:number,
                 public favoritesNumber:number,
