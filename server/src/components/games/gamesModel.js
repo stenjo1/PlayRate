@@ -11,8 +11,12 @@ const gameSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     required: true
   },
-  relatedPosts: {
+ /* relatedPosts: {
     type: [mongoose.Schema.Types.ObjectId],
+    required: true
+  },*/
+  imageUrl: {
+    type: mongoose.Schema.Types.String,
     required: true
   },
   numberOfReviews: {
@@ -23,6 +27,22 @@ const gameSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.Number,
     required: true
   },
+  playersNumber: {
+    type: mongoose.Schema.Types.Number,
+    required: true
+  },
+  visitedNumber: {
+    type: mongoose.Schema.Types.Number,
+    required: true
+  },
+  favoritesNumber: {
+    type: mongoose.Schema.Types.Number,
+    required: true
+  },
+  likes: {
+    type: mongoose.Schema.Types.Number,
+    required: true
+  }
 });
 
 gameSchema.plugin(mongoosePaginate);
@@ -38,13 +58,14 @@ const Game = mongoose.model('Game', gameSchema);
   return await Game.findById(gameId).exec();
 }
 
-/**
+/*
+*
  * Attaches a new post to the game
  * @param {string} gameId
  * @param {string} postId
  * @param {string} postType
  * @param {number} reviewScore
- */
+ 
  async function attachPost (gameId, postId, postType, reviewScore) {
   const game = await Game.findById(gameId).exec();
   game.relatedPosts.push(postId);
@@ -56,7 +77,7 @@ const Game = mongoose.model('Game', gameSchema);
     game.increment({numberOfReviews});
   }
   await game.save();
-}
+} */
 
 /**
  * Pronalazi sve igre u bazi, pri cemu se vrsi njihova paginacija na osnovu eventualnih parametara.

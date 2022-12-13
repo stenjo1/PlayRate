@@ -16,7 +16,7 @@ module.exports.getGamesPagination = async function (req, res, next) {
   module.exports.getAllGames = async function (req, res, next) {
   
     try {
-      const games = await Game.getAllGames(page, limit);
+      const games = await Game.getGames();
       res.status(200).json(games);
     } catch (err) {
       next(err);
