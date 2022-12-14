@@ -21,7 +21,12 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     required: true  
   },
-  email: {
+  email: {/**
+  * Pronalazi sve igre u bazi, pri cemu se vrsi njihova paginacija na osnovu eventualnih parametara.
+  * @param {number} page Broj stranice u paginaciji. Podrazumevano je 1.
+  * @param {number} limit Broj igara po stranici. Podrazumevano je 10.
+  * @returns {Promise<mongoose.PaginateResult>} Paginacija igara.
+  */
     type: mongoose.Schema.Types.String,
     required: true,
   },
@@ -68,6 +73,7 @@ const User = mongoose.model('User', userSchema);
  * @returns {Promise<mongoose.Document>} Dokument koji predstavlja korisnika za dato korisnicko ime.
  */
 async function getUserByUsername(username) {
+  username = username.toLowerCase();
   const user = await User.findOne({ username }).exec();
   return user;
 }
@@ -109,6 +115,7 @@ async function getUserJWTByUsername(username) {
 async function registerNewUser(username, password, email) {
   const user = new User();
   user.username = username;
+  user.status = false;
   //await user.setPassword(password);
   user.password = password;
   user.email = email;
@@ -124,12 +131,20 @@ async function registerNewUser(username, password, email) {
  * @param {string} email Nova adresa elektronske poste.
  * @returns {Promise<string>} JWT sa azuriranim podacima o korisniku.
  */
+
 async function updateUserData(username, name, email) {
   const user = await getUserByUsername(username);
   user.name = name;
   user.email = email;
   await user.save();
   //return getUserJWTByUsername(username);
+}
+
+async function changeStatus(email, curStatus){
+  const user = await getUserByEmail(email);
+  user.status = curStatus;
+
+  await user.save();
 }
 
 /**
@@ -143,6 +158,109 @@ async function changeUserProfileImage(userId, imgUrl) {
   await user.save();
 }
 
+async function addFinishedGame(username, gameId){
+  const user = await getUserByUsername(username);
+
+  if(user.finished.includes(gameId))
+    return new Error("Game is already on finished list!");
+
+  user.finished.push(gameId);
+  
+  //TOFIX:
+  // Not sure if the code below is neccesary so ill comment it out
+  // Reason : Because it will just cause confusion (this is not to be expected)
+  //if(user.playing.includes(gameId))
+    //user.playing = user.playing.filter(curGameId => gameId != curGameId.valueOf());
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function addPlayingGame(username, gameId){
+  const user = await getUserByUsername(username);
+
+  if(user.playing.includes(gameId))
+    return new Error("Game is already on played list!");
+
+  user.playing.push(gameId);
+  
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function addBacklogGame(username, gameId){
+  const user = await getUserByUsername(username);
+  
+  if(user.backlog.includes(gameId))
+    return new Error("Game is already on backlog list!");
+  user.backlog.push(gameId);
+  
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function removeFinishedGame(username, gameId){
+  const user = await getUserByUsername(username);
+
+  if(!user.finished.includes(gameId))
+    return new Error("Game is not on finished list!");
+
+  user.finished = user.finished.filter(curGameId => gameId != curGameId.valueOf());
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function removePlayingGame(username, gameId){
+  const user = await getUserByUsername(username);
+
+  if(!user.playing.includes(gameId))
+    return new Error("Game is not on playing list!");
+
+  user.playing = user.playing.filter(curGameId => gameId != curGameId.valueOf());
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function removeBacklogGame(username, gameId){
+  const user = await getUserByUsername(username);
+
+  if(!user.backlog.includes(gameId))
+    return new Error("Game is not on backlog list!");
+
+  user.backlog = user.backlog.filter(curGameId => gameId != curGameId.valueOf());
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function addPost(username, postId){
+  const user = await getUserByUsername(username);
+
+  if(user.posts.includes(postId))
+    return new Error("This post is already linked to this user!");
+
+  user.posts.push(postId);
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+async function removePost(username, postId){
+  const user = await getUserByUsername(username);
+  
+  if(!user.posts.includes(postId))
+    return new Error("This post is not linked to this user!");
+
+  user.posts = user.posts.filter(curPostId => postId != curPostId.valueOf());
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
+
+
 module.exports = {
   getUserByUsername,
   getUserByEmail,
@@ -150,4 +268,14 @@ module.exports = {
   registerNewUser,
   updateUserData,
   changeUserProfileImage,
+  changeStatus,
+  addFinishedGame,
+  addPlayingGame,
+  addBacklogGame,
+  removeFinishedGame,
+  removePlayingGame,
+  removeBacklogGame,
+  addPost,
+  removePost,
+
 };

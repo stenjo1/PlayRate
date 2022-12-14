@@ -37,7 +37,7 @@ module.exports.canAuthenticate = async (req, res, next) => {
 
     // Ako je sve u redu, onda cemo na nivou req objekta sacuvati neophodne podatke o autorizaciji,
     // na primer, identifikator i username korisnika iz baze podataka
-    
+
     //TOFIX
     req.userId = user._id;
     req.username = user.username;
@@ -75,8 +75,12 @@ module.exports.isAuthenticated = async (req, res, next) => {
       throw error;
     }
 
+    // Menjamo status korisnika
+    User.changeStatus(username,true);
+
     // Citamo podatke iz dekodiranog tokena i cuvamo na nivou req objekta,
     // kako bi naredna funkcija srednjeg sloja mogla da iskoristi taj podatak.
+    
     req.userId = decodedToken.id;
     req.username = decodedToken.username;
 

@@ -51,3 +51,149 @@ module.exports.loginUser = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.addFinishedGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.addFinishedGame(username,gameId)
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+  }catch (err){
+    next(err);
+  }
+
+};
+
+module.exports.addPlayingGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.addPlayingGame(username,gameId)
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+  }catch (err){
+    next(err);
+  }
+};
+
+module.exports.addBacklogGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.addBacklogGame(username,gameId)
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+
+};
+
+module.exports.removeFinishedGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.removeFinishedGame(username,gameId);
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+}
+
+module.exports.removePlayingGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.removePlayingGame(username,gameId);
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+}
+
+module.exports.removeBacklogGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.removeBacklogGame(username,gameId);
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+}
+
+module.exports.addPost = async (req, res, next) => {
+  const postId = req.body.postId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.addPost(username,postId)
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+  }catch (err){
+    next(err);
+  }
+};
+
+module.exports.removePost = async (req, res, next) => {
+  const postId = req.body.postId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.removePost(username,postId)
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+  }catch (err){
+    next(err);
+  }
+};
