@@ -1,0 +1,39 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    margin: 100px 25%;
+}
+
+.profilePicture {
+    width: 100%;
+}
+
+.username, .status {
+    margin-left: 1rem;
+    font-size: 40px;
+}
+
+.listHolder {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+.listButton {
+    width: 85%;
+    margin-right: 1rem;
+}
+
+.profileFeed {
+    margin-top: 50px;
+}
+
+.postProfilePicture {
+    max-width: 35px;
+    border-radius: 50%;
+}
+
+.postDescription {
+    margin-left: 1rem;
+}
