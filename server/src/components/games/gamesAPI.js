@@ -6,6 +6,6 @@ const controller = require('./gamesController');
 router.get('/', controller.getGamesPagination);
 router.get('/all', controller.getAllGames);
 router.get('/:gameId', controller.getGameById);
-router.post('/post', controller.attachPost);
+router.put('/post', controller.attachPost);
 
 module.exports = router;

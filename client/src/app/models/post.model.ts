@@ -8,10 +8,13 @@ export enum PostType
 };
 
 export class Post{
-    constructor(public type: PostType,
+    
+    constructor(public _id: string,
+                public postType: PostType,
                 public userId: string,
                 public gameId: string,
-                public rating:number,
-                public reviewText:string){
+                public reviewText:string,
+                public reviewScore:number,
+                public postTimestamp: Date){
     }
 }

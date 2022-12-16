@@ -40,7 +40,7 @@ module.exports.getGameById = async function (req, res, next) {
 };
 
 module.exports.attachPost = async function (req, res, next) {
-    const gameId = req.params.gameId;
+    const gameId = req.body.gameId;
     try {
       const game = await Game.getGameById(gameId);
       if (game === null) {
@@ -48,7 +48,9 @@ module.exports.attachPost = async function (req, res, next) {
         error.status = 404;
         throw error;
       }
-      await game.attachPost(gameId, req.body.postId, req.body.postType, req.body.reviewScore);
+      console.log(gameId + " igri dodaje se post " + req.body.postId);
+      await Game.attachPostId(gameId, req.body.postId, req.body.reviewScore);
+      res.status(200).json(game);
     } catch (err) {
       next(err);
     }

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { async, map, Observable } from 'rxjs';
 import { GamesService } from '../../services/games.service'
 import { Post, PostType } from "../../models/post.model"
 import { PostsService } from 'src/app/services/posts.service';
@@ -15,7 +15,6 @@ export class CreatePostComponent {
   public games;
   review: boolean = false;
   createPostForm: FormGroup;
-  
 
   constructor(private gameService: GamesService, private postService: PostsService, private formBuilder: FormBuilder){
     this.createPostForm = this.formBuilder.group({
@@ -33,28 +32,28 @@ export class CreatePostComponent {
   }
 
   onCreatePostFormSubmit() {
-    let type: PostType = PostType.NoType;
-    let rating = 0;
-    let reviewText = " ";
-    const postType = this.createPostForm.get("postType")?.value;
+
+    let type : PostType;
+    const postType : string = this.createPostForm.get("type")?.value;
+    console.log(postType);
     switch(postType) {
       case "review": {type = PostType.Review; break;}
       case "playing": {type = PostType.Playing; break;}
       case "finished": {type = PostType.Finished; break;}
       case "backlog": {type = PostType.Backlog; break;}
-      //default: error
-    }
-    if (postType==="review") {
-      rating = this.createPostForm.get("reviewScore")?.value;
-      reviewText = this.createPostForm.get("reviewText")?.value;
-
+      default: type=PostType.NoType;
     }
     const gameId = this.createPostForm.get("game")?.value;
     const userId = "63912e2073797a0196f9c4ad"; //ovde treba dohvatiti trenutno ulogavanog usera
-  
+
+    const reviewText =  this.createPostForm.get("reviewText")?.value;
+    const reviewScore =  this.createPostForm.get("reviewScore")?.value;
     
-    let postId = this.postService.addNewPost( new Post(type, userId, gameId, rating, reviewText));
-    this.gameService.attachPost(gameId, postId, postType, rating);
-    //treba dodati post i useru
+    
+      this.postService.createNewPost(type, gameId, userId, reviewText, reviewScore).subscribe((postId)=>{
+        this.gameService.attachPost(gameId, postId, reviewScore);
+            //treba dodati post i useru
+    });
+    
   }
 }

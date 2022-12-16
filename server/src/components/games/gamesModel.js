@@ -16,8 +16,7 @@ const gameSchema = new mongoose.Schema({
     required: true
   },
   imageUrl: {
-    type: mongoose.Schema.Types.String,
-    required: true
+    type: mongoose.Schema.Types.String
   },
   numberOfReviews: {
     type: mongoose.Schema.Types.Number,
@@ -66,16 +65,15 @@ const Game = mongoose.model('Game', gameSchema);
  * @param {string} postType
  * @param {number} reviewScore
  */
- async function attachPost (gameId, postId, postType, reviewScore) {
+ async function attachPostId (gameId, postId, reviewScore) {
   const game = await Game.findById(gameId).exec();
   game.relatedPosts.push(postId);
-  if (postType === 'Review') {
-    if (reviewScore) {
-      newScore = (game.reviewScore*game.numberOfReviews + reviewScore) / (game.numberOfReviews+1);
-      game.updateOne({reviewScore: newScore});
+  if (reviewScore) {
+      newScore = game.reviewScore*game.numberOfReviews/(game.numberOfReviews+1) + reviewScore / (game.numberOfReviews+1);
+      game.reviewScore = newScore;
+      game.numberOfReviews+=1;
     }
-    game.increment({numberOfReviews});
-  }
+  console.log("cuvaju se podaci");
   await game.save();
 } 
 
@@ -95,7 +93,7 @@ async function getGames(){
 }
   
   module.exports = {
-    attachPost,
+    attachPostId,
     getGameById,
     paginateThroughGames,
     getGames

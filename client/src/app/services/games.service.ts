@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable,map } from 'rxjs';
 import { GamesPagination } from '../models/games-pagination';
 import { Game } from '../models/game.model';
-import { Post } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,9 +33,10 @@ export class GamesService {
     return this.http.get<Game>(this.gameUrl+id);
   }
 
-  public attachPost(gameId: string, postId: string, postType: string, reviewScore: number) {
-    const params:HttpParams=new HttpParams().append('gameId', gameId);
-    this.http.post("http://localhost:3000/api/games/post", {"postId": postId, "postType": postType, "reviewScore": reviewScore });    
+  public attachPost(gameId: string, postId: string, reviewScore: number) {
+    console.log("iz attachPost: " + postId);
+    //ovo iznad se ispise, ali se onda ovaj zahtev ne desi (iz postmana radi sto se servera tice)
+    return this.http.put("http://localhost:3000/api/games/post", {"gameId": gameId, "postId": postId, "reviewScore": reviewScore });    
   }
 
 }

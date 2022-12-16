@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
   postType: {
     type: mongoose.Schema.Types.String,
     required: true,
-    enum: ['Review', 'Playing', 'Backlog', 'Finished'] //idk
+    enum: ['Review', 'Playing', 'Backlog', 'Finished', 'NoType'] //idk
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,10 +45,10 @@ const Post = mongoose.model('Post', postSchema);
 async function createPost(postType, gameId, userId, reviewText, reviewScore) {
     const newPost = new Post({
     _id: new mongoose.Types.ObjectId(),
+    postType: postType,
     userId: userId,
     gameId: gameId,
-    postTimestamp: new Date(),
-    postType: postType,
+    postTimestamp: new Date()
   });
   
   newPost.reviewText = reviewText;
@@ -106,7 +106,7 @@ async function editReview(postId, newText, newScore) {
  * @param {string} postId 
  */
 async function deletePost(postId) {
-  await Post.deleteOne({_id: postId}).exec();
+  await Post.deleteOne({_id: postId});
   
 }  // ne radi, tj. radi ali ne obrise zapravo
 
