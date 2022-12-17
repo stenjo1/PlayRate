@@ -34,9 +34,8 @@ export class GamesService {
   }
 
   public attachPost(gameId: string, postId: string, reviewScore: number) {
-    console.log("iz attachPost: " + postId);
-    //ovo iznad se ispise, ali se onda ovaj zahtev ne desi (iz postmana radi sto se servera tice)
     return this.http.put("http://localhost:3000/api/games/post", {"gameId": gameId, "postId": postId, "reviewScore": reviewScore });    
   }
 
 }
+

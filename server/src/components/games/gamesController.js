@@ -48,7 +48,6 @@ module.exports.attachPost = async function (req, res, next) {
         error.status = 404;
         throw error;
       }
-      console.log(gameId + " igri dodaje se post " + req.body.postId);
       await Game.attachPostId(gameId, req.body.postId, req.body.reviewScore);
       res.status(200).json(game);
     } catch (err) {
