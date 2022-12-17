@@ -37,3 +37,7 @@
 .postDescription {
     margin-left: 1rem;
 }
+
+mat-card {
+    width: 100%;
+}
