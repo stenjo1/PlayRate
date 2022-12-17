@@ -13,6 +13,10 @@ router.post("/login",auth.canAuthenticate,controller.loginUser);
 router.put("/addFinishedGame",controller.addFinishedGame);
 router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
+
+//This part does not need authentification
+router.get("/games",controller.getGames);
+
 //TOFIX: This is suposed to be api with authentification 
 router.delete("/removeFinishedGame",controller.removeFinishedGame);
 router.delete("/removePlayingGame",controller.removePlayingGame);

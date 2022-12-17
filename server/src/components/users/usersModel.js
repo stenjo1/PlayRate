@@ -259,6 +259,17 @@ async function removePost(username, postId){
   return getUserJWTByUsername(username);
 }
 
+async function getGames(username){
+  const user = await getUserByUsername(username);
+
+  games = {
+    "finishedGames" : user.finished.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId)),
+    "playingGames" : user.playing.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId)),
+    "backlogGames" : user.backlog.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId)),
+  } 
+
+  return games;
+}
 
 
 module.exports = {
@@ -277,5 +288,5 @@ module.exports = {
   removeBacklogGame,
   addPost,
   removePost,
-
+  getGames,
 };

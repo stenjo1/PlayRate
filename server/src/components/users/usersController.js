@@ -197,3 +197,17 @@ module.exports.removePost = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.getGames = async (req, res, next) => {
+  const games = await User.getGames(req.body.username);
+
+  try{
+    res.status(200).json({
+      finishedGames : games["finishedGames"],
+      playingGames : games["playingGames"],
+      backlogGames : games["backlogGames"]
+    });
+  }catch(err){
+    next(err);
+  }
+}
