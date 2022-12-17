@@ -5,6 +5,10 @@
     margin: 100px 25%;
 }
 
+.profileHeader {
+    margin-bottom: 3rem;
+}
+
 .profilePicture {
     width: 100%;
 }

@@ -29,7 +29,7 @@ export class GamePageComponent implements OnInit{
   constructor(){
     this.game=new Game("League of Legends",
                        "/assets/lol.png",
-                       5,89,31213,22,24,
+                       4.9,89,31213,22,24,
                       "What is League of Legends? League of Legends is a team-based strategy game where two teams of five powerful champions face off to destroy the other's base. Choose from over 140 champions to make epic plays, secure kills, and take down towers as you battle your way to victory.");
   }
 

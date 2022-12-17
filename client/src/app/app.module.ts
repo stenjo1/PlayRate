@@ -13,12 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material/material.module';
+import { GamePageComponent } from './components/game-page/game-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpInComponent,
     ProfilePageComponent,
+    GamePageComponent,
     HeaderComponent,
     CreatePostComponent
   ],
