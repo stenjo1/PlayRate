@@ -11,12 +11,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreatePostComponent }  from './components/create-post/create-post.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MaterialModule } from './material/material.module';
+import { GamePageComponent } from './components/game-page/game-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpInComponent,
     ProfilePageComponent,
+    GamePageComponent,
     HeaderComponent,
     CreatePostComponent,
     GamePageComponent
@@ -26,7 +31,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

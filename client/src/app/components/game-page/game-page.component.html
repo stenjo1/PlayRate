@@ -1,88 +1,35 @@
-<div class="ui hidden divider"></div>
-<div class="ui container">        
-        <div class="ui grid">
-            <!-- Game card on the left -->
-            <div class="five wide column">   
-                <div class="ui fluid card">
-                    <div class="img">
-                        <img class="ui fluid image" src="assets/lol.png" alt="Game banner poster">
-                    </div>
-                    <div class="content">
-                        <p class="header">{{(this.game | async)?.name}}</p>
-                        <div class="description">
-                            <div class="ui buttons">
-                                <button class="ui primary button">Add to favorits</button>  
-                                <div class="ui labeled button" tabindex="0" (click)="onLikeButton()">
-                                    <div class="ui red button">
-                                    <i class="heart icon"></i> Like
-                                    </div>
-                                    <a class="ui basic red left pointing label">
-                                      {{(this.game | async)?.likes}}
-                                    </a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        
-                    </div>
 
-                </div>
-            </div>
-            
-            <!-- Description -->
-            <div class="nine wide column">
-                <form class="ui form">
-                    <label class="ui top attached label"><h4>Description</h4></label>
-                    <textarea readonly>{{(this.game | async)?.description}}</textarea>
-                </form>
-                <div class="ui statistics">
-                    <div class="statistic">
-                      <div class="value">
-                        <img src="assets/faves.png" class="ui circular inline image">
-                        {{(this.game | async)?.favoritesNumber}}
-                      </div>
-                      <div class="label">
-                        Faves
-                      </div>
-                    </div>
-                    <div class="statistic">
-                      <div class="value">
-                        <img src="assets/seen.png" class="ui circular inline image">
-                        {{(this.game | async)?.visitedNumber}}
-                      </div>
-                      <div class="label">
-                        Visited
-                      </div>
-                    </div>
-                    <div class="statistic">
-                      <div class="value">
-                        <img src="assets/play.png" class="ui circular inline image">
-                        {{(this.game | async)?.playersNumber}}
-                      </div>
-                      <div class="label">
-                        Playing
-                      </div>
-                    </div>
-                  </div>
-            </div>  
-        </div>
-        <!-- Reviews -->
-        <div class="ui centered grid" style="height:200px;overflow:scroll">
-            <div class="twelve wide column">
-                <div class="ui comments">
-                    <h2 class="ui dividing center aligned header">Reviews</h2>
-                    <div class="comment" *ngFor="let review of reviews">
-                        <a class="avatar">
-                          <img src="/assets/person.jpg">
-                        </a>
-                        <div class="content">
-                          <a class="author">Matt</a>
-                          <div class="text">
-                            {{review}}
-                          </div>    
-                        </div>
-                      </div>
-                </div>     
-            </div>
-        </div>
+<div class="gameHeader">
+  <mat-card class="gameHeaderLeft">
+    <mat-card-header>
+      <mat-card-title>{{(this.game | async)?.name}}</mat-card-title>
+      <mat-card-subtitle>
+        <mat-icon>star</mat-icon> {{(this.game | async)?.reviewScore}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="(this.game | async)?.imgUrl" alt="Game banner poster">
+    <mat-card-actions>
+      <button mat-stroked-button>ADD TO FINISHED</button>
+      <button mat-stroked-button>ADD TO PLAYING</button>
+      <button mat-stroked-button>ADD TO BACKLOG</button>
+      <button mat-stroked-button>REVIEW</button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="gameHeaderRight">
+    <span>{{(this.game | async)?.description}}</span>
+    <div>
+      // Other statistics
+    </div>
+  </div>
 </div>
+
+<mat-grid-list cols="1" rowHeight="15:1" gutterSize="5px" class="profileFeed">
+  <mat-grid-tile *ngFor="let review of reviews">
+      <mat-card>
+          <mat-card-content>
+              <img src="assets/profile-default.png" class="postProfilePicture">
+              <span class="postDescription">Username: {{review}}</span>
+          </mat-card-content>
+      </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
