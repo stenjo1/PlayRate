@@ -12,7 +12,7 @@ declare const $:any;
 })
 export class GamePageComponent implements OnInit{
 
-  game:Observable<Game>=new Observable<Game>;
+  game:Observable<Game>=new Observable<Game>();
 
   liked:Boolean=false;
 
