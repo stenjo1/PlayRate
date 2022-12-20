@@ -15,7 +15,7 @@ router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
 
 //This part does not need authentification
-router.get("/games",controller.getGames);
+router.get("/games/:username",controller.getGames);
 
 //TOFIX: This is suposed to be api with authentification 
 router.delete("/removeFinishedGame",controller.removeFinishedGame);
@@ -25,7 +25,6 @@ router.delete("/removeBacklogGame",controller.removeBacklogGame);
 //TOFIX: This is suposed to be api with authentification 
 router.put("/addPost",controller.addPost);
 router.delete("/removePost",controller.removePost);
-
 
 module.exports = router;
 

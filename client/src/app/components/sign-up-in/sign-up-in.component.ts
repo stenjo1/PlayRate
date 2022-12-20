@@ -137,7 +137,6 @@ export class SignUpInComponent implements OnDestroy{
   onSignUpSubmit() {
 
     if(!this.signForm.invalid){
-      console.log("Prosao je Sign up!")
       this.register();
       this.signForm.reset({username: '',email: '',password: ''});
       this.displayLogin = true;
@@ -145,7 +144,6 @@ export class SignUpInComponent implements OnDestroy{
     }
 
     if(this.signForm.get("password")?.valid && this.signForm.get("email")?.valid){
-      console.log("Prosao sign in")
       this.login();
       this.signForm.reset({username: '',email: '',password: ''});
       this.failedLogin=false;
@@ -172,7 +170,7 @@ export class SignUpInComponent implements OnDestroy{
     const data = this.signForm.value;
     
     const obs: Observable<User | null> = this.auth.login(data.email,data.password);
-    
+
     this.userSub = obs.subscribe((user: User | null) => {
       console.log(user)
     });

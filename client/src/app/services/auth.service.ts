@@ -29,10 +29,13 @@ export class AuthService {
       return null;
     }
 
-    if(!this.failedRegister){
-      window.alert("Successful registration!");
-      this.failedRegister = false;
-    }
+    // TOFIX:
+    // Implement a way to see if register was successful!
+    
+    //if(!this.failedRegister){
+      //window.alert("Successful registration!");
+      //this.failedRegister = false;
+    //}
 
     const newUser: User =  new User(payload.id, payload.username,payload.password , payload.email);
     this.userSubject.next(newUser);

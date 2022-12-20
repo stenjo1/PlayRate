@@ -199,7 +199,7 @@ module.exports.removePost = async (req, res, next) => {
 };
 
 module.exports.getGames = async (req, res, next) => {
-  const games = await User.getGames(req.body.username);
+  const games = await User.getGames(req.params.username);
 
   try{
     res.status(200).json({
