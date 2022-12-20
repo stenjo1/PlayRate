@@ -29,8 +29,9 @@ export class ProfilePageComponent {
 
   constructor(userService : UserService){
     //TOFIX: I've instanced wrong user class because it doesent match current one
-    const obs : Observable<GameResponse | null>  = userService.getGames();
-    obs.subscribe();
+    //const obs : Observable<{token : string}>  = userService.putAPost("111e252586d8b2d45eed971a");
+    //obs.subscribe();
+
 
     this.user = new User1("Prophethor", "prophethor@gmail.com", "", "/assets/profile-default.png", "Online", [1,2,3],[1,2],[2,3],[]);
   }

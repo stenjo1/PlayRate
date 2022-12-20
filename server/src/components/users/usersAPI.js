@@ -23,8 +23,8 @@ router.delete("/removePlayingGame",controller.removePlayingGame);
 router.delete("/removeBacklogGame",controller.removeBacklogGame);
 
 //TOFIX: This is suposed to be api with authentification 
-router.put("/addPost",controller.addPost);
-router.delete("/removePost",controller.removePost);
+router.put("/addPost",auth.isAuthenticated,controller.addPost);
+router.delete("/removePost",auth.isAuthenticated,controller.removePost);
 
 module.exports = router;
 

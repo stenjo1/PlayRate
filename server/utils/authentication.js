@@ -37,7 +37,8 @@ module.exports.canAuthenticate = async (req, res, next) => {
 
     // Ako je sve u redu, onda cemo na nivou req objekta sacuvati neophodne podatke o autorizaciji,
     // na primer, identifikator i username korisnika iz baze podataka
-
+    await User.changeStatus(email,true);
+    
     //TOFIX
     req.userId = user._id;
     req.username = user.username;
@@ -66,7 +67,7 @@ module.exports.isAuthenticated = async (req, res, next) => {
       error.status = 403;
       throw error;
     }
-
+   
     const token = authHeader.split(' ')[1];
     const decodedToken = jwt.verifyJWT(token);
     if (!decodedToken) {
@@ -74,16 +75,19 @@ module.exports.isAuthenticated = async (req, res, next) => {
       error.status = 401;
       throw error;
     }
-
+   
+   
     // Menjamo status korisnika
-    User.changeStatus(username,true);
-
+    // TOFIX:
+    
+    console.log("Req body -> " + req.body);
+   
     // Citamo podatke iz dekodiranog tokena i cuvamo na nivou req objekta,
     // kako bi naredna funkcija srednjeg sloja mogla da iskoristi taj podatak.
     
+   
     req.userId = decodedToken.id;
     req.username = decodedToken.username;
-
     // Pozivamo narednu funkciju srednjeg sloja
     next();
   } catch (err) {
