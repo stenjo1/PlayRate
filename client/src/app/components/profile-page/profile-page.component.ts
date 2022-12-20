@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User,User1 } from 'src/app/models/user.model'
+import { UserService , GameResponse} from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -25,8 +27,12 @@ export class ProfilePageComponent {
     return this.user.reviews.length;
   }
 
-  constructor(){
+  constructor(userService : UserService){
     //TOFIX: I've instanced wrong user class because it doesent match current one
+    //const obs : Observable<{token : string}>  = userService.putAPost("111e252586d8b2d45eed971a");
+    //obs.subscribe();
+
+
     this.user = new User1("Prophethor", "prophethor@gmail.com", "", "/assets/profile-default.png", "Online", [1,2,3],[1,2],[2,3],[]);
   }
 }
