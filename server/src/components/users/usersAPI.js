@@ -8,21 +8,16 @@ const controller = require("./usersController");
 router.post("/register",controller.registerUser);
 router.post("/login",auth.canAuthenticate,controller.loginUser);
 
-//TOFIX: This is suposed to be api with authentification 
-//router.post("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
-router.put("/addFinishedGame",controller.addFinishedGame);
+router.put("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
 router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
 
-//This part does not need authentification
 router.get("/games/:username",controller.getGames);
 
-//TOFIX: This is suposed to be api with authentification 
-router.delete("/removeFinishedGame",controller.removeFinishedGame);
-router.delete("/removePlayingGame",controller.removePlayingGame);
-router.delete("/removeBacklogGame",controller.removeBacklogGame);
+router.delete("/removeFinishedGame",auth.isAuthenticated,controller.removeFinishedGame);
+router.delete("/removePlayingGame",auth.isAuthenticated,controller.removePlayingGame);
+router.delete("/removeBacklogGame",auth.isAuthenticated,controller.removeBacklogGame);
 
-//TOFIX: This is suposed to be api with authentification 
 router.put("/addPost",auth.isAuthenticated,controller.addPost);
 router.delete("/removePost",auth.isAuthenticated,controller.removePost);
 

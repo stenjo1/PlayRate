@@ -24,8 +24,13 @@ export class UserService{
   private readonly url = {
     getGamesUrl: "http://localhost:3000/api/users/games",
     putAPostUrl: "http://localhost:3000/api/users/addPost",
-    deleteAPostUrl: "http://localhost:3000/api/users/removePost"
-    
+    deleteAPostUrl: "http://localhost:3000/api/users/removePost",
+    putFinishedGame: "http://localhost:3000/api/users/addFinishedGame",
+    putPlayingGame: "http://localhost:3000/api/users/addPlayingGame",
+    putBacklogGame: "http://localhost:3000/api/users/addBacklogGame",
+    deleteFinishedGame: "http://localhost:3000/api/users/removeFinishedGame",
+    deletePlayingGame: "http://localhost:3000/api/users/removePlayingGame",
+    deleteBacklogGame: "http://localhost:3000/api/users/removeBacklogGame",
   }
 
   private curUser : User | null = null;
@@ -92,6 +97,112 @@ export class UserService{
     );
   }
 
+  public putFinishedGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
 
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putFinishedGame,body,{headers})
 
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public putPlayingGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putPlayingGame,body,{headers})
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public putBacklogGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putBacklogGame,body,{headers})
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public deleteFinishedGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const options = {
+      headers : headers,
+      body : body 
+    }
+
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteFinishedGame,options)
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public deletePlayingGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const options = {
+      headers : headers,
+      body : body 
+    }
+
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deletePlayingGame,options)
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public deleteBacklogGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const options = {
+      headers : headers,
+      body : body 
+    }
+
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteBacklogGame,options)
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+  
 }
