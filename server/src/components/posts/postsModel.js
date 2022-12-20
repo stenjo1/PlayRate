@@ -33,6 +33,10 @@ postSchema.plugin(mongoosePaginate);
 
 const Post = mongoose.model('Post', postSchema);
 
+async function getPosts(){
+  return Post.find({}).exec();
+}
+
 /**
  * Creates a post
  * @param {string} postType
@@ -116,6 +120,7 @@ async function deletePost(postId) {
 // Kontroler koji koristi model ne sme da zna da li se koristi MongoDB, MySQL ili nesto trece.
 // Njemu treba da budu dostupne samo informacije o argumentima funkcija i njihovim povratnim vrednostima.
 module.exports = {
+  getPosts,
   paginateThroughPosts,
   createPost,
   editReview,

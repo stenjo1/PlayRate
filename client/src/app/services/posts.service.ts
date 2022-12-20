@@ -27,6 +27,10 @@ export class PostsService {
   public getPostById(id: string): Observable<Post> {
     return this.http.get<Post>(this.postUrl+id);
   }
+
+  public getRecentPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(this.postUrl + "recent");
+  }
   //getPostsByUserId
   //getPostsByGameId
 }

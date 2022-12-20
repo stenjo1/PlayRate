@@ -4,6 +4,7 @@ const router = express.Router();
 const controller = require('./postsController');
 
 router.get('/', controller.getPosts);
+router.get('/recent', controller.getRecentPosts);
 router.post('/', controller.createPost);
 router.get('/:postId', controller.getPostById);
 router.patch('/:postId', controller.editReview);

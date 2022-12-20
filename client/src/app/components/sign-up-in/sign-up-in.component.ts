@@ -5,6 +5,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class SignUpInComponent implements OnDestroy{
   failedLogin: boolean;
   userSub: Subscription = new Subscription();
  
-  constructor(private formBuilder: FormBuilder,private auth: AuthService){
+  constructor(private formBuilder: FormBuilder,private auth: AuthService, private router: Router){
     this.user = new User("","","","");
     this.failedLogin = false;
  
@@ -174,7 +175,10 @@ export class SignUpInComponent implements OnDestroy{
     const obs: Observable<User | null> = this.auth.login(data.email,data.password);
     
     this.userSub = obs.subscribe((user: User | null) => {
-      console.log(user)
+      console.log(user);
+      if(user !== null) {
+          this.router.navigateByUrl('/homepage');
+      }
     });
   }
 }

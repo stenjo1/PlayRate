@@ -1,0 +1,57 @@
+.main-container{
+    margin: 4em 6em 4em 6em;
+}
+
+.games-header{
+}
+
+.activity-header{
+    margin-top: 4em;
+}
+
+.game-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 150%;
+}
+
+.main-mat-grid-list{
+}
+
+.mat-grid-tile .mat-grid-tile-header{
+    font-size: 1.05em;
+    font-weight: 700;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.mat-grid-tile .mat-grid-tile-footer{
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, .8);
+    height: 4em;
+    justify-content: space-between;
+}
+
+.mat-grid-tile .mat-grid-tile-footer .game-description{
+    text-align: left;
+}
+
+.mat-grid-tile .mat-grid-tile-footer .highScore {
+    color: green;
+    font-weight: bold;
+}
+
+.mat-grid-tile .mat-grid-tile-footer .mediumScore {
+    color: orange;
+    font-weight: bold;
+}
+
+.mat-grid-tile .mat-grid-tile-footer .lowScore {
+    color: red;
+    font-weight: bold;
+}
+
+.mdc-list-item{
+    padding: 0;
+}

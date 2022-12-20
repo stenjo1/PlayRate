@@ -13,6 +13,16 @@ module.exports.getPosts = async function (req, res, next) {
     }
   };
 
+module.exports.getRecentPosts = async function (req, res, next) {
+  try {
+    const posts = await Post.getPosts();
+    //const recentPosts = posts.sort(...po datumu);
+    res.status(200).json(posts);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports.getPostById = async function (req, res, next) {
     const postId = req.params.postId;
   

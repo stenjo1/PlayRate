@@ -55,4 +55,17 @@ module.exports.attachPost = async function (req, res, next) {
     }
 };
 
+module.exports.getPopularGames = async function (req, res, next) {
+  const num = req.query.num;
+  try {
+    const games = await Game.getGames();
+    const popularGames = games.sort((game1, game2) => {
+      return game2.reviewScore - game1.reviewScore;
+    }).slice(0, num);
+    res.status(200).json(popularGames);
+  } catch (err) {
+    next(err);
+  }
+};
+
 

@@ -32,6 +32,9 @@ mongoose
   })
   .then(() => {
     console.log('Successfully connected to MongoDB!');
+  }).catch((error) => {
+    console.log("Failed to connect to database.");
+    process.exit();
   });
 
 

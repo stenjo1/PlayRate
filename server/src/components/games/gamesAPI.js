@@ -5,6 +5,7 @@ const controller = require('./gamesController');
 
 router.get('/', controller.getGamesPagination);
 router.get('/all', controller.getAllGames);
+router.get('/popular', controller.getPopularGames);
 router.get('/:gameId', controller.getGameById);
 router.put('/post', controller.attachPost);
 

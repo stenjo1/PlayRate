@@ -13,9 +13,10 @@ export class GamesService {
 
   constructor(private http:HttpClient) {
   }
+
   getGames(page:number=1,limit:number=10):Observable<Game[]>{
     const params:HttpParams=new HttpParams().append('page',page).append('limit',limit);
-    const obs:Observable<GamesPagination>= this.http.get<GamesPagination>(this.gameUrl + "all");    
+    const obs:Observable<GamesPagination>= this.http.get<GamesPagination>(this.gameUrl + "all", {params: params});    
     return obs.pipe(
       map((pagination:GamesPagination)=>{
         return pagination.docs;
@@ -37,5 +38,10 @@ export class GamesService {
     return this.http.put("http://localhost:3000/api/games/post", {"gameId": gameId, "postId": postId, "reviewScore": reviewScore });    
   }
 
+  public getPopularGames(num: number = 10): Observable<Game[]> {
+    const params: HttpParams = new HttpParams().append('num', num)
+    const obs: Observable<Game[]> = this.http.get<Game[]>(this.gameUrl + "popular", {params: params});   
+    return obs;
+  }
 }
 

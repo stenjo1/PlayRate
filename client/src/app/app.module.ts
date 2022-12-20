@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material/material.module';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MaterialModule } from './material/material.module';
     GamePageComponent,
     HeaderComponent,
     CreatePostComponent,
-    GamePageComponent
+    GamePageComponent,
+    HomePageComponent
   ],
   imports: [
     HttpClientModule,
