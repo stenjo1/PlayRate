@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Game } from 'src/app/models/game.model';
 import { GamesService } from 'src/app/services/games.service';
+import { UserService } from 'src/app/services/user.service';
 
 declare const $:any;
 
@@ -12,9 +13,10 @@ declare const $:any;
 })
 export class GamePageComponent implements OnInit{
 
-  game:Observable<Game>=new Observable<Game>();
+  public game:Observable<Game>=new Observable<Game>;
 
-  liked:Boolean=false;
+
+
 
   reviews:String[]=[
     "I played almost 10 years of this game and now i just realize how toxic unbalanced depressive thing is this. its not make fun anymore, just buy skins and make new champs for asians. so annoying this game. i really hate now this game.",
@@ -25,26 +27,35 @@ export class GamePageComponent implements OnInit{
     "I played almost 10 years of this game and now i just realize how toxic unbalanced depressive thing is this. its not make fun anymore, just buy skins and make new champs for asians. so annoying this game. i really hate now this game.",
     "I played almost 10 years of this game and now i just realize how toxic unbalanced depressive thing is this. its not make fun anymore, just buy skins and make new champs for asians. so annoying this game. i really hate now this game.",
     "I played almost 10 years of this game and now i just realize how toxic unbalanced depressive thing is this. its not make fun anymore, just buy skins and make new champs for asians. so annoying this game. i really hate now this game.",
-
   ];
 
-  constructor(private gameService:GamesService){
-    this.game=this.gameService.getGameById('6398ae415cfe38600a48d5d4');
+  constructor(private gameService:GamesService,private userService:UserService){
+    this.game=this.gameService.getGameById('63a3219fcc33994091970416');
   }
 
   ngOnInit(): void {
-    $('.ui.rating').rating();
+    
   }
   
-  getRating():void{
-    // const rate = $('.ui.rating').rating("get value");
-    // this.game.rating=rate
-    // console.log
+  addToFinishedOnClick(): void{
+    this.game.subscribe((g)=>{
+      const obs : Observable<{token : string}>  = this.userService.putFinishedGame(g._id);
+      obs.subscribe();
+    })
   }
-  onLikeButton(){
-    // if(!this.liked){
-    //   this.liked=true;
-    //   this.game.likes+=1;
-    // }
+  addToPlayingOnClick(): void{
+    this.game.subscribe((g)=>{
+      const obs : Observable<{token : string}>  = this.userService.putPlayingGame(g._id);
+      obs.subscribe();
+    })
+  }
+  addToBacklogOnClick(): void{
+    this.game.subscribe((g)=>{
+      const obs : Observable<{token : string}>  = this.userService.putBacklogGame(g._id);
+      obs.subscribe();
+    })
+  }
+  reviewOnClick(): void{
+
   }
 }
