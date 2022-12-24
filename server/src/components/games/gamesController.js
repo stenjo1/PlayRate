@@ -27,8 +27,8 @@ module.exports.getGamesPagination = async function (req, res, next) {
     const gameId = req.params.gameId;
 
     try {
-      const game = await Game.getReviewsForGame(gameId);
-      res.status(200).json(game);
+      const reviews = await Game.getReviewsForGame(gameId);
+      res.status(200).json(reviews);
     } catch (err) {
       next(err);
     }

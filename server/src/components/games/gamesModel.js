@@ -12,7 +12,7 @@ const gameSchema = new mongoose.Schema({
     required: true
   },
   relatedPosts: {
-    type: [mongoose.Schema.Types.String],
+    type: [mongoose.Schema.Types.ObjectId],
     ref: 'Post',
     required: true
   },

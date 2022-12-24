@@ -21,12 +21,7 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.String,
     required: true  
   },
-  email: {/**
-  * Pronalazi sve igre u bazi, pri cemu se vrsi njihova paginacija na osnovu eventualnih parametara.
-  * @param {number} page Broj stranice u paginaciji. Podrazumevano je 1.
-  * @param {number} limit Broj igara po stranici. Podrazumevano je 10.
-  * @returns {Promise<mongoose.PaginateResult>} Paginacija igara.
-  */
+  email: {
     type: mongoose.Schema.Types.String,
     required: true,
   },
@@ -48,6 +43,7 @@ const userSchema = new mongoose.Schema({
   },
   posts: {
     type: [mongoose.Schema.Types.ObjectId],
+    ref: 'Post',
     default: [],
   },
   imgUrl: {
@@ -138,6 +134,11 @@ async function updateUserData(username, name, email) {
   user.email = email;
   await user.save();
   //return getUserJWTByUsername(username);
+}
+
+async function getPostsForUser(username) {
+  const user = await (await getUserByUsername(username)).populate('posts');
+  return user.posts;
 }
 
 async function changeStatus(email, curStatus){
@@ -288,4 +289,5 @@ module.exports = {
   addPost,
   removePost,
   getGames,
+  getPostsForUser
 };

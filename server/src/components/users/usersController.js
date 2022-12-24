@@ -198,6 +198,17 @@ module.exports.removePost = async (req, res, next) => {
   }
 };
 
+module.exports.getPostsForUser = async function (req, res, next) {
+  const username = req.params.username;
+
+  try {
+    const posts = await User.getPostsForUser(username);
+    res.status(200).json(posts);
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports.getGames = async (req, res, next) => {
   const games = await User.getGames(req.params.username);
 
