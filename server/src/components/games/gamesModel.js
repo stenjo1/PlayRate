@@ -13,6 +13,7 @@ const gameSchema = new mongoose.Schema({
   },
   relatedPosts: {
     type: [mongoose.Schema.Types.String],
+    ref: 'Post',
     required: true
   },
   imageUrl: {
@@ -68,14 +69,18 @@ const Game = mongoose.model('Game', gameSchema);
  async function attachPostId (gameId, postId, reviewScore) {
   const game = await Game.findById(gameId).exec();
   game.relatedPosts.push(postId);
-  if (reviewScore) {
+  if (reviewScore>0) {
       newScore = game.reviewScore*game.numberOfReviews/(game.numberOfReviews+1) + reviewScore / (game.numberOfReviews+1);
       game.reviewScore = newScore;
       game.numberOfReviews+=1;
     }
-  console.log("cuvaju se podaci");
   await game.save();
 } 
+
+async function getReviewsForGame (gameId) {
+  const game = await Game.findById(gameId).populate('relatedPosts').exec();
+  return game.relatedPosts.filter((post)=>post.postType==="Review");
+}
 
 /**
  * Pronalazi sve igre u bazi, pri cemu se vrsi njihova paginacija na osnovu eventualnih parametara.
@@ -96,5 +101,6 @@ async function getGames(){
     attachPostId,
     getGameById,
     paginateThroughGames,
-    getGames
+    getGames,
+    getReviewsForGame
   };

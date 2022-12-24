@@ -23,6 +23,17 @@ module.exports.getGamesPagination = async function (req, res, next) {
     }
   };
 
+  module.exports.getReviewsForGame = async function (req, res, next) {
+    const gameId = req.params.gameId;
+
+    try {
+      const game = await Game.getReviewsForGame(gameId);
+      res.status(200).json(game);
+    } catch (err) {
+      next(err);
+    }
+  };
+
 module.exports.getGameById = async function (req, res, next) {
     const gameId = req.params.gameId;
   
