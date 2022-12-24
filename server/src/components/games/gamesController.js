@@ -50,6 +50,18 @@ module.exports.getGameById = async function (req, res, next) {
     }
 };
 
+module.exports.removePost = async (req, res, next) => {
+  const postId = req.body.postId;
+  const gameId = req.body.gameId;
+
+  try{
+    const game = await Game.removePost(gameId,postId)
+    return res.status(200).json(game);
+  }catch (err){
+    next(err);
+  }
+};
+
 module.exports.attachPost = async function (req, res, next) {
     const gameId = req.body.gameId;
     try {

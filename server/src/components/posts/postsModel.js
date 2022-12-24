@@ -105,14 +105,9 @@ async function editReview(postId, newText, newScore) {
   return await Post.paginate({}, { page, limit, sort: 'postTimestamp'});
 }
 
-/**
- * Deletes info about the post with the given id
- * @param {string} postId 
- */
 async function deletePost(postId) {
-  await Post.deleteOne({_id: postId});
-  
-}  // ne radi, tj. radi ali ne obrise zapravo
+  await Post.findByIdAndDelete(postId).exec();
+}  
 
 
 

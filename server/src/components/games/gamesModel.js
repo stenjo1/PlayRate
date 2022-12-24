@@ -77,6 +77,18 @@ const Game = mongoose.model('Game', gameSchema);
   await game.save();
 } 
 
+async function removePost(gameId, postId){
+  const game = await Game.findById(gameId);
+  
+  if(!game.relatedPosts.includes(gameId))
+    return new Error("This post is not linked to this game!");
+
+  game.relatedPosts = game.relatedPosts.filter(curPostId => postId != curPostId.valueOf());
+
+  return await game.save();
+
+}
+
 async function getReviewsForGame (gameId) {
   const game = await Game.findById(gameId).populate('relatedPosts').exec();
   return game.relatedPosts.filter((post)=>post.postType==="Review");
@@ -102,5 +114,6 @@ async function getGames(){
     getGameById,
     paginateThroughGames,
     getGames,
-    getReviewsForGame
+    getReviewsForGame,
+    removePost
   };
