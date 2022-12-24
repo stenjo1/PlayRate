@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { GamesService } from '../../services/games.service'
 import { Post, PostType } from "../../models/post.model"
 import { PostsService } from 'src/app/services/posts.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-post',
@@ -17,7 +18,7 @@ export class CreatePostComponent implements OnDestroy {
   createPostForm: FormGroup;
   private activeSubscriptions: Subscription[] = [];
 
-  constructor(private gameService: GamesService, private postService: PostsService, private formBuilder: FormBuilder){
+  constructor(private gameService: GamesService, private postService: PostsService, private userService: UserService, private formBuilder: FormBuilder){
     this.createPostForm = this.formBuilder.group({
       game: ['', [Validators.required]],
       type: ['', [Validators.required]],
@@ -48,7 +49,7 @@ export class CreatePostComponent implements OnDestroy {
       default: type=PostType.NoType;
     }
     const gameId = this.createPostForm.get("game")?.value;
-    const userId = "63912e2073797a0196f9c4ad"; //ovde treba dohvatiti trenutno ulogavanog usera
+    const userId = this.userService.getCurrentUserId();
 
     const reviewText =  this.createPostForm.get("reviewText")?.value;
     const reviewScore =  this.createPostForm.get("reviewScore")?.value;
@@ -57,7 +58,8 @@ export class CreatePostComponent implements OnDestroy {
     const postsSub = this.postService.createNewPost(type, gameId, userId, reviewText, reviewScore).subscribe((postId)=>{
         const gamesSub = this.gameService.attachPost(gameId, postId, reviewScore).subscribe();
         this.activeSubscriptions.push(gamesSub);
-        //treba dodati post i useru
+        const userSub = this.userService.putAPost(postId).subscribe();
+        this.activeSubscriptions.push(userSub);
     });
     this.activeSubscriptions.push(postsSub);
     

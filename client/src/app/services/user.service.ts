@@ -52,6 +52,13 @@ export class UserService{
     return of({ token: this.jwtService.getToken() });
   }
 
+  public getCurrentUserId(){
+    if (this.curUser)
+      return this.curUser.id;
+    else
+      return " " //baci gresku
+  }
+
   public getGames() : Observable< GameResponse | null > {
     const obs : Observable<GameResponse> = this.http.get<GameResponse>(this.url.getGamesUrl + "/" + this.curUser?.username);
     return obs.pipe(

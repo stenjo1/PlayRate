@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable,map } from 'rxjs';
 import { GamesPagination } from '../models/games-pagination';
 import { Game } from '../models/game.model';
+import { Post } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class GamesService {
   constructor(private http:HttpClient) {
   }
 
-  getGames(page:number=1,limit:number=10):Observable<Game[]>{
+  public getGames(page:number=1,limit:number=10):Observable<Game[]>{
     const params:HttpParams=new HttpParams().append('page',page).append('limit',limit);
     const obs:Observable<GamesPagination>= this.http.get<GamesPagination>(this.gameUrl + "all", {params: params});    
     return obs.pipe(
@@ -32,6 +33,10 @@ export class GamesService {
 
   public getGameById(id: string): Observable<Game> {
     return this.http.get<Game>(this.gameUrl+id);
+  }
+
+  public getGameReviews(id: string): Observable<Post[]> {
+    return this.http.get<Post[]>(this.gameUrl + id + "/reviews");
   }
 
   public attachPost(gameId: string, postId: string, reviewScore: number) {
