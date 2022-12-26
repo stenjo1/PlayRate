@@ -211,7 +211,6 @@ module.exports.getPostsForUser = async function (req, res, next) {
 
 module.exports.getUserByUsername = async function(req, res, next) {
   const user = await User.getUserByUsername(req.params.username);
-  console.log(user);
   try {
     res.status(200).json(user);
   } catch (err) {
