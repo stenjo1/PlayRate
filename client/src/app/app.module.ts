@@ -17,6 +17,8 @@ import { MaterialModule } from './material/material.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
 import { AuthService } from './services/auth.service';
+import { PostComponent } from './post/post.component';
+import { EditReviewComponent } from './edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AuthService } from './services/auth.service';
     HeaderComponent,
     CreatePostComponent,
     GamePageComponent,
-    HomePageComponent
+    HomePageComponent,
+    PostComponent,
+    EditReviewComponent
   ],
   imports: [
     HttpClientModule,

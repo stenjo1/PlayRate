@@ -37,15 +37,7 @@ async function getPosts(){
   return Post.find({}).exec();
 }
 
-/**
- * Creates a post
- * @param {string} postType
- * @param {string} gameId
- * @param {string} userId
- * @param {string} reviewText
- * @param {number} reviewScore
- * @returns {Promise<mongoose.Document>} that post or `null`
- */
+
 async function createPost(postType, gameId, userId, reviewText, reviewScore) {
     const newPost = new Post({
     _id: new mongoose.Types.ObjectId(),
@@ -61,23 +53,10 @@ async function createPost(postType, gameId, userId, reviewText, reviewScore) {
   return await newPost.save();
 }
 
-/**
- * Finds the post in the database based on the given id
- * @param {string} postId 
- * @returns {Promise<mongoose.Document>} that post or `null`
- */
 async function getPostById(postId) {
- // p = await Post.findById(postId).exec();
-  //return p.populate(userId).populate(p.gameId.projection('name')).exec();
   return await Post.findById(postId).exec();
 }
 
-/**
- * Edits an already existing post of review type
- * @param {string} postId
- * @param {string} newText 
- * @param {number} newScore
- */
 async function editReview(postId, newText, newScore) {
   const post = await Post.findById(postId).exec();
   if (post.postType !== 'Review')
@@ -100,7 +79,6 @@ async function editReview(postId, newText, newScore) {
  * @param {number} limit Broj postova po stranici. Podrazumevano je 10.
  * @returns {Promise<mongoose.PaginateResult>} Paginacija postova.
  */
-// ne radi, kaze da paginate nije fja
  async function paginateThroughPosts(page = 1, limit = 10) {
   return await Post.paginate({}, { page, limit, sort: 'postTimestamp'});
 }
@@ -109,11 +87,6 @@ async function deletePost(postId) {
   await Post.findByIdAndDelete(postId).exec();
 }  
 
-
-
-// Skup funkcija koji se izvozi treba da bude minimalan, tj. da odrzava jedino interfejs nad nasim podacima.
-// Kontroler koji koristi model ne sme da zna da li se koristi MongoDB, MySQL ili nesto trece.
-// Njemu treba da budu dostupne samo informacije o argumentima funkcija i njihovim povratnim vrednostima.
 module.exports = {
   getPosts,
   paginateThroughPosts,
