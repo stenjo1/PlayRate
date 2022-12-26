@@ -14,8 +14,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomePageComponent implements OnInit {
 
-  public games: Observable<Game[]> = new Observable<Game[]>;
-  public posts: Observable<Post[]> = new Observable<Post[]>;
+  public games: Observable<Game[]> = new Observable<Game[]>();
+  public posts: Observable<Post[]> = new Observable<Post[]>();
 
   constructor(private gamesService: GamesService, private postsService: PostsService, private router: Router,
      private authService: AuthService ) {

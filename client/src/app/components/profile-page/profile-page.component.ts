@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User,User1 } from 'src/app/models/user.model'
+import { User } from 'src/app/models/user.model'
 import { UserService , GameResponse} from 'src/app/services/user.service';
+import { Game } from 'src/app/models/game.model';
+import { Post } from 'src/app/models/post.model';
+import { PostsService } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -9,29 +12,57 @@ import { UserService , GameResponse} from 'src/app/services/user.service';
   styleUrls: ['./profile-page.component.css']
 })
 export class ProfilePageComponent {
-  user: User1;
+  public user: Observable<User> = new Observable<User>();
+  public finishedGames: Game[] | undefined;
+  public playingGames: Game[] | undefined;
+  public backlogGames: Game[] | undefined;
+  public posts: Observable<Post[]> = new Observable<Post[]>();
+
+  public username: string | undefined;
+
+  constructor(private userService:UserService, private postsService:PostsService){
+    //TODO: instead of getCurrentUserUsername you should get username from URL
+    this.user=this.userService.getUserByUsername(this.userService.getCurrentUserUsername());
+    this.user.subscribe((user) => {
+      this.username = user.username;
+    });
+    this.userService.getGames().subscribe((games)=> {
+      this.finishedGames = games?.finishedGames;
+      this.playingGames = games?.playingGames;
+      this.backlogGames = games?.backlogGames;
+    });
+  }
+
+  getUsername(): string {
+    if(this.username)
+      return this.username;
+    else
+      return "";
+  }
 
   finishedCount() {
-    return this.user.finished.length;
+    const count = this.finishedGames?.length;
+    return count;
   }
 
   playingCount() {
-    return this.user.playing.length;
+    const count = this.playingGames?.length;
+    return count;
   }
 
   backlogCount() {
-    return this.user.backlog.length;
+    const count = this.backlogGames?.length;
+    return count;
   }
 
   reviewCount() {
-    return this.user.reviews.length;
+    let count = 0;
+    this.posts.subscribe((posts) => {
+      posts.forEach((post) => {
+        if(post.postType === "Review") count += 1;
+      })
+    })
+    return count;
   }
 
-  constructor(userService : UserService){
-    //TOFIX: I've instanced wrong user class because it doesent match current one
-    //const obs : Observable<{token : string}>  = userService.deleteFinishedGame("999e252586d8b2d45eed971a");
-    //obs.subscribe();
-
-    this.user = new User1("Prophethor", "prophethor@gmail.com", "", "/assets/profile-default.png", "Online", [1,2,3],[1,2],[2,3],[]);
-  }
 }

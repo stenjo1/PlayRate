@@ -209,6 +209,16 @@ module.exports.getPostsForUser = async function (req, res, next) {
   }
 };
 
+module.exports.getUserByUsername = async function(req, res, next) {
+  const user = await User.getUserByUsername(req.params.username);
+  console.log(user);
+  try {
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports.getGames = async (req, res, next) => {
   const games = await User.getGames(req.params.username);
 

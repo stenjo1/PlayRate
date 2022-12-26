@@ -5,8 +5,8 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
         <div class="playerInfo">
-            <span class="username">{{user.username}}</span>
-            <span class="status">{{user.status}}</span>
+            <span class="username">{{getUsername()}}</span>
+            <span class="status">Online</span>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
@@ -40,7 +40,7 @@
         <mat-card>
             <mat-card-content>
                 <img src="assets/profile-default.png" class="postProfilePicture">
-                <span class="postDescription">{{user.username}} has played <a>Doom</a>.</span>
+                <span class="postDescription">{{getUsername()}} has played <a>Doom</a>.</span>
             </mat-card-content>
         </mat-card>
     </mat-grid-tile>

@@ -16,7 +16,7 @@ declare const $:any;
 })
 export class GamePageComponent implements OnDestroy{
 
-  public game:Observable<Game>=new Observable<Game>;
+  public game:Observable<Game>=new Observable<Game>();
   public reviews;
 
   private activeSubscriptions: Subscription[] = [];

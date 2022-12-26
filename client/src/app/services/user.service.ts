@@ -6,12 +6,13 @@ import { JwtService } from "./jwt.service";
 import { User } from "../models/user.model"
 import { map ,catchError } from "rxjs/operators";
 import { AuthService } from "./auth.service";
+import { Game } from '../models/game.model';
 
 
 export interface GameResponse{
-    finishedGames : [],
-    playingGames : [],
-    backlogGames : [],
+    finishedGames : Game[],
+    playingGames : Game[],
+    backlogGames : Game[],
 }
 
 @Injectable({
@@ -31,6 +32,7 @@ export class UserService{
     deleteFinishedGame: "http://localhost:3000/api/users/removeFinishedGame",
     deletePlayingGame: "http://localhost:3000/api/users/removePlayingGame",
     deleteBacklogGame: "http://localhost:3000/api/users/removeBacklogGame",
+    getUserById: "http://localhost:3000/api/users/getUser"
   }
 
   private curUser : User | null = null;
@@ -52,11 +54,22 @@ export class UserService{
     return of({ token: this.jwtService.getToken() });
   }
 
+  public getUserByUsername(username: string): Observable<User> {
+    return this.http.get<User>(this.url.getUserById + '/' + username);
+  }
+
   public getCurrentUserId(){
     if (this.curUser)
       return this.curUser.id;
     else
       return " " //baci gresku
+  }
+
+  public getCurrentUserUsername(){
+    if(this.curUser)
+      return this.curUser.username;
+    else
+      return "";
   }
 
   public getGames() : Observable< GameResponse | null > {

@@ -13,6 +13,7 @@ router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
 router.get('/:username/posts', controller.getPostsForUser);
 
+router.get('/getUser/:username', controller.getUserByUsername);
 router.get("/games/:username",controller.getGames);
 
 router.delete("/removeFinishedGame",auth.isAuthenticated,controller.removeFinishedGame);
@@ -21,6 +22,7 @@ router.delete("/removeBacklogGame",auth.isAuthenticated,controller.removeBacklog
 
 router.put("/addPost",auth.isAuthenticated,controller.addPost);
 router.delete("/removePost",auth.isAuthenticated,controller.removePost);
+
 
 
 module.exports = router;
