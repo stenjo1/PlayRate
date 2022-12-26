@@ -22,6 +22,8 @@ router.delete("/removeBacklogGame",auth.isAuthenticated,controller.removeBacklog
 router.put("/addPost",auth.isAuthenticated,controller.addPost);
 router.delete("/removePost",auth.isAuthenticated,controller.removePost);
 
+router.get('/getUser/:username', controller.getUserByUsername);
+
 
 module.exports = router;
 
