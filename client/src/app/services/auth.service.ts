@@ -22,11 +22,17 @@ export class AuthService {
 
   constructor(private http: HttpClient, private jwtService: JwtService) {}
 
+  public get userLoggedIn(): boolean {
+    const jwtToken = this.jwtService.getToken();
+
+    return jwtToken !== '';
+  }
+
   public sendUserDataIfExists(): User | null {
     const payload: IJwtTokenData | null = this.jwtService.getDataFromToken();
     
     if(!payload) {
-      return null;
+       return null;
     }
 
     // TOFIX:
@@ -82,4 +88,10 @@ export class AuthService {
       map((response: {token: string}) => this.sendUserDataIfExists())
     )
   }
+
+  public logoutUser(): void {
+    this.jwtService.removeToken();
+    this.userSubject.next(null);
+  }
+
 }

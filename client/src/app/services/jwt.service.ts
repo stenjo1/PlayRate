@@ -38,7 +38,10 @@ export class JwtService {
 
     return jwtData;
   }
-
+  
+  public removeToken(): void {
+    localStorage.removeItem(JwtService.USER_TOKEN_ID);
+  }
 
 
 }
