@@ -1,0 +1,17 @@
+<div class = "ui grid left aligned">
+    <div class="column"></div>
+    <form class = "ui form" [formGroup]="editReviewForm" (ngSubmit)="onSave()">
+    
+    <div class="field">
+        <label>Your rating 1-10</label>
+        <input type="text" formControlName="reviewScore" value={{this.review?.reviewScore}}>
+    </div>
+  
+    <div class="field">
+        <label>Review Text</label>
+        <textarea formControlName="reviewText">{{this.review?.reviewText}}</textarea>
+      </div>
+  
+    <button class="ui fluid large orange submit button" type="submit" >Save</button>
+     
+  </form>
