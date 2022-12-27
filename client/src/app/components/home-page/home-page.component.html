@@ -1,7 +1,8 @@
 <div class="main-container">
     <h2 class="games-header">Popular</h2>
     <mat-grid-list cols="6" rowHeight="20em" gutterSize="2em" class="main-mat-grid-list">
-        <mat-grid-tile *ngFor="let game of games | async">
+        <a  *ngFor="let game of games | async" [routerLink]="['/gamepage',game._id]">
+        <mat-grid-tile>
             <mat-grid-tile-header>{{game.name}}</mat-grid-tile-header>
             <img [src]="game.imgUrl" alt="game poster" class="game-img"/>
             <mat-grid-tile-footer>
@@ -11,6 +12,7 @@
                 </p>
             </mat-grid-tile-footer>
         </mat-grid-tile>
+        </a>
     </mat-grid-list>
     <h2 class="activity-header">Recent Activity</h2>
     <mat-list>

@@ -12,7 +12,8 @@ const routes: Routes = [
   {path: 'homepage', component:HomePageComponent, canActivate: [UserAuthentificatedGuard]},
   {path:'gamepage', component:GamePageComponent, canActivate: [UserAuthentificatedGuard]},
   {path:'profilepage', component:ProfilePageComponent, canActivate: [UserAuthentificatedGuard]},
-  {path:'createpost', component:CreatePostComponent, canActivate: [UserAuthentificatedGuard]}
+  {path:'createpost', component:CreatePostComponent, canActivate: [UserAuthentificatedGuard]},
+  {path:'gamepage/:gameId',component:GamePageComponent,canActivate: [UserAuthentificatedGuard]}
 ];
 
 @NgModule({

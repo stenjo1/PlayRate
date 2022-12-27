@@ -5,6 +5,7 @@ import { GamesService } from 'src/app/services/games.service';
 import { UserService } from 'src/app/services/user.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { PostType } from 'src/app/models/post.model';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 
 declare const $:any;
@@ -17,14 +18,19 @@ declare const $:any;
 export class GamePageComponent implements OnDestroy{
 
   public game:Observable<Game>=new Observable<Game>();
-  public reviews;
+  public reviews:any;
 
   private activeSubscriptions: Subscription[] = [];
 
-  constructor(private gameService:GamesService, private userService:UserService, private postsService:PostsService){
-    const gameId = "63a3219fcc33994091970416"; //kako ovde da dobijemo id trenutne igre
-    this.game=this.gameService.getGameById(gameId);  
-    this.reviews = this.gameService.getGameReviews(gameId);
+  constructor(private activatedRoute:ActivatedRoute,private gameService:GamesService, private userService:UserService, private postsService:PostsService){
+    
+    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
+      const gameId:string | null=params.get('gameId');
+      this.game=this.gameService.getGameById((gameId)!); 
+      this.reviews = this.gameService.getGameReviews(gameId!);
+    })
+
+    
   }
 
   ngOnDestroy(): void {
