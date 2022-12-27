@@ -15,6 +15,7 @@ export class UserAuthentificatedGuard implements CanActivate {
     if (this.authService.userLoggedIn) {
       return this.authService.userLoggedIn;
     }
+    
     return this.router.createUrlTree([""]);
   }
 

@@ -14,5 +14,6 @@
     </div>
     <div>
         <a mat-raised-button color="warn" [routerLink]="['/profilepage',username]" >Profile</a>
+        <a mat-raised-button color="warn" *ngIf="this.isLoggedIn()" (click) = "logoutUser()"  > Sign out</a>
     </div>
 </mat-toolbar>
