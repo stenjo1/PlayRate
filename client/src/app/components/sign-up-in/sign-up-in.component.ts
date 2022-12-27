@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up-in.component.css']
 })
 
-export class SignUpInComponent implements OnDestroy{
+export class SignUpInComponent implements OnDestroy,OnInit{
 
   user: User;
   displayLogin: boolean = true;
@@ -32,6 +32,11 @@ export class SignUpInComponent implements OnDestroy{
         password: ['',[Validators.required,Validators.minLength(8)]],
     });
 
+  }
+
+  ngOnInit(): void {
+    if(this.auth.userLoggedIn)
+      this.router.navigateByUrl("homepage");
   }
 
   ngOnDestroy(): void {
