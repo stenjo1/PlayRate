@@ -5,6 +5,7 @@ import { UserService , GameResponse} from 'src/app/services/user.service';
 import { Game } from 'src/app/models/game.model';
 import { Post } from 'src/app/models/post.model';
 import { PostsService } from 'src/app/services/posts.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -18,14 +19,14 @@ export class ProfilePageComponent {
   public backlogGames: Game[] | undefined;
   public posts: Observable<Post[]> = new Observable<Post[]>();
 
-  public username: string | undefined;
+  public username?: string | null;
 
-  constructor(private userService:UserService, private postsService:PostsService){
-    //TODO: instead of getCurrentUserUsername you should get username from URL
-    this.user=this.userService.getUserByUsername(this.userService.getCurrentUserUsername());
-    this.user.subscribe((user) => {
-      this.username = user.username;
+  constructor(private activatedRoute:ActivatedRoute,private userService:UserService, private postsService:PostsService){
+   
+    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
+      this.username=params.get('userName');
     });
+
     this.userService.getGames().subscribe((games)=> {
       this.finishedGames = games?.finishedGames;
       this.playingGames = games?.playingGames;
