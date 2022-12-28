@@ -1,3 +1,42 @@
+.header{
+    justify-content: flex-start;
+}
+
+.main-container{
+    display: flex;
+}
+
+.review-actions{
+    margin-left: auto;
+}
+
+.review-action-button {
+    width: 1.5em !important;
+    height: 1.5em !important;
+    padding: 0px !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+ 
+    & > *[role=img] {
+       width: 1em;
+       height: 1em;
+       font-size: 1em;
+ 
+       svg {
+          width: 1em;
+          height: 1em;
+       }
+    }
+ 
+    .mat-mdc-button-touch-target {
+       width: 1.5em !important;
+       height: 1.5em !important;
+    }
+ }
+
+.review-action-button-icon{
+}
 
 .header-content{
     margin-top: 0.5em;
@@ -28,6 +67,26 @@
 
 .review-text{
     white-space: normal;
+}
+
+.review-textarea-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+
+.review-textarea{
+    width: 100%;
+    padding: 1em 0em 1em 0.5em;
+    font-family: 'Roboto';
+    font-size: 1em;
+    background-color: #909596;
+}
+
+.save-button{
+    width: 10em;
+    margin-top: 2em;
 }
 
 .review-star{

@@ -12,11 +12,25 @@ import { UserService } from '../../services/user.service';
 export class PostComponent {
   @Input()
   public post!: Post;  //povezati ovo polje sa htmlovima
+  @Input()
+  public reviewText: string | undefined;
+  @Input()
+  public rating: number | undefined;
   public currentUsername: string;
+  public editMode: boolean;
+
+  public editHandler(): void {
+    this.editMode = !this.editMode;
+  }
+
+  public saveChangesHandler(): void{
+    this.editMode = false;    
+    console.log(this.reviewText);
+    console.log(this.rating);
+  }
 
   public constructor(private userService: UserService, private gamesService: GamesService) {
     this.currentUsername = userService.getCurrentUserUsername();
-    // u htmlu raditi ngIf da li je current username i username u postu isti,
-    // ako jeste onda prikazati tri tackice za edit i delete, inace ne
+    this.editMode = false;
   }
 }

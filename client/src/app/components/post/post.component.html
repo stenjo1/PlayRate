@@ -1,17 +1,45 @@
 <mat-card>
-      <mat-card-header>
-        <img mat-card-avatar src="../../assets/profile-default.png" >
-        <div class="header-content"> 
-          <div>
-            <span class="special-text-user">{{post.username}}</span> {{post.postType.toLowerCase()==='review' ? 'has reviewed' : post.postType.toLowerCase()==='playing' ? 'is playing' : post.postType.toLowerCase()==='finished' ? 'has finished playing' : 'wants to play'}} <span class="special-text-game">{{post.gameName}}</span>.
+      <mat-card-header class="header">
+        <div class="main-container">
+          <img mat-card-avatar src="../../assets/profile-default.png" >
+          <div class="header-content"> 
+            <div>
+              <span class="special-text-user">{{post.username}}</span> {{post.postType.toLowerCase()==='review' ? 'has reviewed' : post.postType.toLowerCase()==='playing' ? 'is playing' : post.postType.toLowerCase()==='finished' ? 'has finished playing' : 'wants to play'}} <span class="special-text-game">{{post.gameName}}</span>.
+            </div>
+            <div *ngIf="post.postType.toLowerCase()==='review'" class="date-posted">Posted: {{post.postTimestamp.toString().substring(0, 10)}}  {{post.postTimestamp.toString().substring(11, 16)}}h</div>  
           </div>
-          <div *ngIf="post !== undefined && post.postType.toLowerCase()==='review'" class="date-posted">Posted: {{post.postTimestamp}}</div>  
+        </div>
+        <div class="review-actions">
+          <button *ngIf="post.username === currentUsername && post.postType.toLowerCase()==='review'" mat-icon-button class="review-action-button" color="accent" (click)="editHandler()">
+            <mat-icon class="review-action-button-icon">edit</mat-icon>
+          </button>
+          <button *ngIf="post.username === currentUsername" mat-icon-button aria-label="more-button" class="review-action-button" color="accent">
+            <mat-icon class="review-action-button-icon">delete</mat-icon>
+          </button>
         </div>
       </mat-card-header>
       <mat-divider></mat-divider>
-      <mat-card-content *ngIf="post !== undefined && post.postType.toLowerCase()==='review'">
-        <p class="review-text">{{post.reviewText}}</p>
-        <div class="review-score-div"> 
+      <mat-card-content *ngIf="post.postType.toLowerCase()==='review'">
+        <p *ngIf="!editMode; else editReviewText" class="review-text">{{post.reviewText}}</p>
+        <ng-template #editReviewText>
+          <div class="review-textarea-container">
+            <textarea matInput cdkTextareaAutosize class="review-textarea" [(ngModel)]="reviewText"></textarea>
+            <mat-radio-group aria-labelledby="rating-radio-group" style="margin-top: 1em;" [(ngModel)]="rating">
+              <mat-radio-button [value]="1">1</mat-radio-button>
+              <mat-radio-button [value]="2">2</mat-radio-button>
+              <mat-radio-button [value]="3">3</mat-radio-button>
+              <mat-radio-button [value]="4">4</mat-radio-button>
+              <mat-radio-button [value]="5">5</mat-radio-button>
+              <mat-radio-button [value]="6">6</mat-radio-button>
+              <mat-radio-button [value]="7">7</mat-radio-button>
+              <mat-radio-button [value]="8">8</mat-radio-button>
+              <mat-radio-button [value]="9">9</mat-radio-button>
+              <mat-radio-button [value]="10">10</mat-radio-button>
+            </mat-radio-group>
+            <button mat-raised-button type="submit" color="accent" class="save-button" (click)="saveChangesHandler()">Save</button>
+          </div>
+        </ng-template>
+        <div *ngIf="!editMode" class="review-score-div"> 
             <mat-icon class="review-star">star</mat-icon>
             <span class="review-score">{{post.reviewScore}} / 10</span>
         </div>
