@@ -54,4 +54,10 @@
 
 .mdc-list-item{
     padding: 0;
+    margin-bottom: 1.5em;
+    height: auto;
+}
+
+.mdc-list-item.mdc-list-item--with-one-line{
+    height: auto;
 }

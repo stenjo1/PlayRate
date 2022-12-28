@@ -1,1 +1,16 @@
-<p>post works!</p>
+<mat-card>
+      <mat-card-header>
+        <img mat-card-avatar src="../../assets/profile-default.png" >
+        <p class="header-content"> 
+            <span class="special-text-user">korisnik</span> {{post !== undefined && post.postType.toLowerCase()==='review' ? 'has reviewed' : post !== undefined && post.postType.toLowerCase()==='playing' ? 'is playing' : '???'}} <span class="special-text-game">Doom</span>.
+        </p>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content *ngIf="post !== undefined && post.postType.toLowerCase()==='review'">
+        <p class="review-text">{{post.reviewText}}</p>
+        <div class="review-score-div"> 
+            <mat-icon class="review-star">star</mat-icon>
+            <span class="review-score">{{post.reviewScore}} / 10</span>
+        </div>
+      </mat-card-content>
+</mat-card>

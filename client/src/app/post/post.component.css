@@ -1,0 +1,42 @@
+
+.header-content{
+    margin-top: 0.5em;
+    margin-left: 1em;
+}
+
+.special-text-user{
+    font-size: 1em;
+    font-weight: 500;
+    color: #ff670d;
+}
+
+.special-text-game{
+    font-size: 1em;
+    font-style: italic;
+    color: #ff670d;
+}
+
+.mat-mdc-card-content{
+    margin-top: 1em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-text{
+    white-space: normal;
+}
+
+.review-star{
+    padding: 0;
+    margin: 0;
+}
+
+.review-score-div{
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.review-score{
+    margin-left: 0.5em;
+}
