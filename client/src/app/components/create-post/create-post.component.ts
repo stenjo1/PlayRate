@@ -48,14 +48,15 @@ export class CreatePostComponent implements OnDestroy {
       case "backlog": {type = PostType.Backlog; break;}
       default: type=PostType.NoType;
     }
-    const gameId = this.createPostForm.get("game")?.value;
-    const userId = this.userService.getCurrentUserId();
+    const gameId = this.createPostForm.get("game")?.value.gameId;
+    const gameName = this.createPostForm.get("game")?.value.gameName;
+    const username = this.userService.getCurrentUserUsername();
 
     const reviewText =  this.createPostForm.get("reviewText")?.value;
     const reviewScore =  this.createPostForm.get("reviewScore")?.value;
     
     
-    const postsSub = this.postService.createNewPost(type, gameId, userId, reviewText, reviewScore).subscribe((postId)=>{
+    const postsSub = this.postService.createNewPost(type, gameName, username, reviewText, reviewScore).subscribe((postId)=>{
         const gamesSub = this.gameService.attachPost(gameId, postId, reviewScore).subscribe();
         this.activeSubscriptions.push(gamesSub);
         const userSub = this.userService.putAPost(postId).subscribe();

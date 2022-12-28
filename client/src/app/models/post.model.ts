@@ -11,8 +11,8 @@ export class Post{
     
     constructor(public _id: string,
                 public postType: PostType,
-                public userId: string,
-                public gameId: string,
+                public username: string,
+                public gameName: string,
                 public reviewText:string,
                 public reviewScore:number,
                 public postTimestamp: Date){

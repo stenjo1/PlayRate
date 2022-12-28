@@ -14,6 +14,7 @@ router.put("/addBacklogGame",controller.addBacklogGame);
 router.get('/posts/:username/', controller.getPostsForUser);
 
 router.get('/getUser/:username', controller.getUserByUsername);
+router.get('/getUser/:userId', controller.getUserById);
 router.get("/games/:username",controller.getGames);
 
 router.delete("/removeFinishedGame",auth.isAuthenticated,controller.removeFinishedGame);

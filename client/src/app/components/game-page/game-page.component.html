@@ -23,7 +23,7 @@
   </div>
 </div>
 
-<mat-grid-list cols="1" rowHeight="15:1" gutterSize="5px" class="profileFeed">
+<!--<mat-grid-list cols="1" rowHeight="15:1" gutterSize="5px" class="profileFeed">
   <mat-grid-tile *ngFor="let review of reviews | async">
       <mat-card>
           <mat-card-content>
@@ -32,4 +32,10 @@
           </mat-card-content>
       </mat-card>
   </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->
+
+<mat-list>
+  <mat-list-item *ngFor="let review of reviews | async">
+    <app-post [post]="review"></app-post>
+  </mat-list-item> 
+</mat-list>

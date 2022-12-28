@@ -218,6 +218,15 @@ module.exports.getUserByUsername = async function(req, res, next) {
   }
 }
 
+module.exports.getUserById = async function(req, res, next) {
+  const user = await User.getUserById(req.params.userId);
+  try {
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports.getGames = async (req, res, next) => {
   const games = await User.getGames(req.params.username);
 

@@ -6,7 +6,7 @@ import { GamesService } from 'src/app/services/games.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { PostComponent } from 'src/app//components/post/post.component';
+import { PostComponent } from 'src/app/components/post/post.component';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +22,7 @@ export class HomePageComponent implements OnInit {
      private authService: AuthService ) {
     this.games = this.gamesService.getPopularGames(12);    
     this.posts = this.postsService.getRecentPosts();
-  
+
     if (authService.sendUserDataIfExists() === null){
       router.navigateByUrl("");
     }

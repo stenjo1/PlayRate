@@ -1,31 +1,29 @@
 [{
     "postType": "Playing",
-    "userId": {
-      "$oid": "607c7ef62245ea4eb015806d"
-    },
-    "gameId": {
-      "$oid": "607c7ef62245ea4eb015806d"
+    "username": "Prophethor",
+    "gameName": "Fortnite",
+    "postTimestamp": {
+      "$date": {
+        "$numberLong": "1672185560081"
+      }
     }
   },
   {
     "postType": "Review",
     "reviewText": "I would die for this game",
     "reviewScore": 10,
-    "userId": {
-      "$oid": "607c7ef62245ea4eb015806d"
-    },
-    "gameId": {
-      "$oid": "607c7ef62245ea4eb015806d"
+    "username": "Prophethor",
+    "gameName": "LOL",
+    "postTimestamp": {
+      "$date": {
+        "$numberLong": "1672185560081"
+      }
     }
   },
   {
     "postType": "Review",
-    "userId": {
-      "$oid": "639f85bf78c091ecf665b155"
-    },
-    "gameId": {
-      "$oid": "63a21825bd8880b887e6f9b7"
-    },
+    "username": "Prophethor",
+    "gameName": "LOL",
     "postTimestamp": {
       "$date": {
         "$numberLong": "1672185560081"

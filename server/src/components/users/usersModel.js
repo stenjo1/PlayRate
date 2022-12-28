@@ -79,6 +79,11 @@ async function getUserByEmail(email){
   return user;  
 }
 
+async function getUserById(userId){
+  const user = await User.findById(userId).exec();
+  return user;  
+}
+
 /** 
  * Kreira JSON Web Token sa podacima o korisniku.
  * @param {string} username Korisnicko ime.
@@ -275,6 +280,7 @@ async function getGames(username){
 module.exports = {
   getUserByUsername,
   getUserByEmail,
+  getUserById,
   getUserJWTByUsername,
   registerNewUser,
   updateUserData,
@@ -289,5 +295,6 @@ module.exports = {
   addPost,
   removePost,
   getGames,
-  getPostsForUser
+  getPostsForUser,
+
 };

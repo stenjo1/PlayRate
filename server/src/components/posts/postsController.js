@@ -41,13 +41,13 @@ module.exports.getPostById = async function (req, res, next) {
 
 module.exports.createPost = async function (req, res, next) {
     const postType = req.body.postType;
-    const gameId = req.body.gameId;
-    const userId = req.body.userId;
+    const gameName = req.body.gameName;
+    const username = req.body.username;
     const reviewText = req.body.reviewText;
     const reviewScore = req.body.reviewScore;
 
     try {
-      const post = await Post.createPost(postType, gameId, userId, reviewText, reviewScore);
+      const post = await Post.createPost(postType, gameName, username, reviewText, reviewScore);
       if (post === null) {
         const error = new Error(`Post wasn't created!`);
         error.status = 404;

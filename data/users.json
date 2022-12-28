@@ -3,9 +3,9 @@
     "password": "Pr9ph2th9r",
     "email": "prophethor@gmail.com",
     "status": false,
-    "imgUrl": "*url ka slici na serveru*",
-    "playing": ["id igre"], 
-    "finished": ["id igre"], 
-    "backlog": ["id igre"], 
-    "posts": ["id posta"]
+    "imgUrl": "",
+    "playing": [], 
+    "finished": [], 
+    "backlog": [], 
+    "posts": []
 }]

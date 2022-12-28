@@ -35,6 +35,10 @@ export class GamesService {
     return this.http.get<Game>(this.gameUrl+id);
   }
 
+  public getGameNameById(id: string): Observable<string> {
+    return this.http.get<Game>(this.gameUrl+id).pipe(map((game)=>game.name));
+  }
+
   public getGameReviews(id: string): Observable<Post[]> {
     return this.http.get<Post[]>(this.gameUrl + "/reviews" + id);
   }

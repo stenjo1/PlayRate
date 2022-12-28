@@ -4,7 +4,7 @@
     <div class="field">
       <label>Choose Game</label>
     <select class="ui search dropdown" formControlName = "game">
-      <option *ngFor = "let game of games | async" value={{game._id}}>{{game.name}}</option>
+      <option *ngFor = "let game of games | async" value={{game}}>{{game.name}}</option>
     </select>
   </div>
 <div class="field">

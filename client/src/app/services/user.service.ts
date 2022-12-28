@@ -78,6 +78,10 @@ export class UserService{
       return "";
   }
 
+  public getUsernameById(userId: string): Observable<string> {
+    return this.http.get<User>(this.url.getUserById + '/' + userId).pipe(map((user)=>user.username));
+  }
+
   public getGames() : Observable< GameResponse | null > {
     const obs : Observable<GameResponse> = this.http.get<GameResponse>(this.url.getGamesUrl + "/" + this.curUser?.username);
     return obs.pipe(
