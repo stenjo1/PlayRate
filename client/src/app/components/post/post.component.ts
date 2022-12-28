@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { GamesService } from 'src/app/services/games.service';
 import { Post } from '../../models/post.model';
 import { UserService } from '../../services/user.service';
 
@@ -9,12 +11,12 @@ import { UserService } from '../../services/user.service';
 })
 export class PostComponent {
   @Input()
-  public post: Post | undefined;  //povezati ovo polje sa profile-page html i home-page html pa obrisati undefined
-  currentUserId: string;
+  public post!: Post;  //povezati ovo polje sa htmlovima
+  public currentUsername: string;
 
-  public constructor(private userService: UserService) {
-    this.currentUserId = userService.getCurrentUserId();
-    // u htmlu raditi ngIf da li je current user i userId u postu isti,
+  public constructor(private userService: UserService, private gamesService: GamesService) {
+    this.currentUsername = userService.getCurrentUserUsername();
+    // u htmlu raditi ngIf da li je current username i username u postu isti,
     // ako jeste onda prikazati tri tackice za edit i delete, inace ne
   }
 }

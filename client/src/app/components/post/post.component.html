@@ -3,9 +3,9 @@
         <img mat-card-avatar src="../../assets/profile-default.png" >
         <div class="header-content"> 
           <div>
-            <span class="special-text-user">korisnik</span> {{post !== undefined && post.postType.toLowerCase()==='review' ? 'has reviewed' : post !== undefined && post.postType.toLowerCase()==='playing' ? 'is playing' : '???'}} <span class="special-text-game">Doom</span>.
+            <span class="special-text-user">{{post.username}}</span> {{post.postType.toLowerCase()==='review' ? 'has reviewed' : post.postType.toLowerCase()==='playing' ? 'is playing' : post.postType.toLowerCase()==='finished' ? 'has finished playing' : 'wants to play'}} <span class="special-text-game">{{post.gameName}}</span>.
           </div>
-          <div *ngIf="post !== undefined && post.postType.toLowerCase()==='review'" class="date-posted">Posted: 21. December 2022</div>  
+          <div *ngIf="post !== undefined && post.postType.toLowerCase()==='review'" class="date-posted">Posted: {{post.postTimestamp}}</div>  
         </div>
       </mat-card-header>
       <mat-divider></mat-divider>
