@@ -4,6 +4,10 @@
     margin-left: 1em;
 }
 
+.date-posted{
+    font-size: 0.75em;
+}
+
 .special-text-user{
     font-size: 1em;
     font-weight: 500;

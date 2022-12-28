@@ -1,9 +1,12 @@
 <mat-card>
       <mat-card-header>
         <img mat-card-avatar src="../../assets/profile-default.png" >
-        <p class="header-content"> 
+        <div class="header-content"> 
+          <div>
             <span class="special-text-user">korisnik</span> {{post !== undefined && post.postType.toLowerCase()==='review' ? 'has reviewed' : post !== undefined && post.postType.toLowerCase()==='playing' ? 'is playing' : '???'}} <span class="special-text-game">Doom</span>.
-        </p>
+          </div>
+          <div class="date-posted">Posted: 21. December 2022</div>  
+        </div>
       </mat-card-header>
       <mat-divider></mat-divider>
       <mat-card-content *ngIf="post !== undefined && post.postType.toLowerCase()==='review'">
