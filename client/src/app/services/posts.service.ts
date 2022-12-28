@@ -32,12 +32,11 @@ export class PostsService {
     return this.http.get<Post[]>(this.postUrl + "recent");
   }
 
-  public editReview(postId:string, newText: string, newScore: number) {
-    return this.http.patch(this.postUrl + postId, {
+  public editReview(postId:string, newText: string, newScore: number): Observable<Post> {
+    return this.http.patch<Post>(this.postUrl + postId, {
       "newText": newText,
       "newScore": newScore
     });
   }
-  //getPostsByUserId
-  //getPostsByGameId
+
 }

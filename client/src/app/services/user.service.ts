@@ -24,6 +24,7 @@ export class UserService{
   
   private readonly url = {
     getGamesUrl: "http://localhost:3000/api/users/games",
+    getPostsUrl: "http://localhost:3000/api/users/posts",
     putAPostUrl: "http://localhost:3000/api/users/addPost",
     deleteAPostUrl: "http://localhost:3000/api/users/removePost",
     putFinishedGame: "http://localhost:3000/api/users/addFinishedGame",
@@ -58,6 +59,11 @@ export class UserService{
     return this.http.get<User>(this.url.getUserById + '/' + username);
   }
 
+  public getPostsByUsername(username: string): Observable<User> {
+    return this.http.get<User>(this.url.getPostsUrl + '/' + username);
+  }
+
+
   public getCurrentUserId(){
     if (this.curUser)
       return this.curUser.id;
@@ -79,7 +85,7 @@ export class UserService{
       // This chunk of code should be removed due to bloat because it's only a test 
       tap((response: GameResponse) => console.log("Javljam se iz pipe!!!"  + response.finishedGames)),
     );
-  }
+  }  
   
   public putAPost(postIdNum : string) : Observable<{token:string}> {
     

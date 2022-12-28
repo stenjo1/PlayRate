@@ -11,7 +11,7 @@ router.post("/login",auth.canAuthenticate,controller.loginUser);
 router.put("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
 router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
-router.get('/:username/posts', controller.getPostsForUser);
+router.get('/posts/:username/', controller.getPostsForUser);
 
 router.get('/getUser/:username', controller.getUserByUsername);
 router.get("/games/:username",controller.getGames);

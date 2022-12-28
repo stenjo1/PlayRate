@@ -4,7 +4,7 @@ const router = express.Router();
 const controller = require('./gamesController');
 
 router.get('/', controller.getGamesPagination);
-router.get('/:gameId/reviews', controller.getReviewsForGame);
+router.get('/reviews/:gameId', controller.getReviewsForGame);
 router.get('/all', controller.getAllGames);
 router.get('/popular', controller.getPopularGames);
 router.get('/:gameId', controller.getGameById);
