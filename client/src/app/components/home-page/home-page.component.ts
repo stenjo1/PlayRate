@@ -6,7 +6,7 @@ import { GamesService } from 'src/app/services/games.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { PostComponent } from 'src/app/post/post.component';
+import { PostComponent } from 'src/app//components/post/post.component';
 
 @Component({
   selector: 'app-home-page',

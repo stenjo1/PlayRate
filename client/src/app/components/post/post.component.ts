@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Post } from '../models/post.model';
-import { UserService } from '../services/user.service';
+import { Post } from '../../models/post.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-post',
@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 })
 export class PostComponent {
   @Input()
-  public post: Post | undefined;  //povezati ovo polje sa profile-page html pa obrisati undefined
+  public post: Post | undefined;  //povezati ovo polje sa profile-page html i home-page html pa obrisati undefined
   currentUserId: string;
 
   public constructor(private userService: UserService) {

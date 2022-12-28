@@ -1,8 +1,8 @@
 import { Component, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { PostsService } from '../services/posts.service';
-import { Post } from "../models/post.model"
+import { PostsService } from '../../services/posts.service';
+import { Post } from "../../models/post.model"
 
 @Component({
   selector: 'app-edit-review',

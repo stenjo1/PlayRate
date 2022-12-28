@@ -17,8 +17,8 @@ import { MaterialModule } from './material/material.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
 import { AuthService } from './services/auth.service';
-import { PostComponent } from './post/post.component';
-import { EditReviewComponent } from './edit-review/edit-review.component';
+import { PostComponent } from './components/post/post.component';
+import { EditReviewComponent } from './components/edit-review/edit-review.component';
 
 @NgModule({
   declarations: [
