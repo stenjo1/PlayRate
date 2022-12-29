@@ -13,7 +13,7 @@
           <button *ngIf="post.username === currentUsername && post.postType.toLowerCase()==='review'" mat-icon-button class="review-action-button" color="accent" (click)="editHandler()">
             <mat-icon class="review-action-button-icon">edit</mat-icon>
           </button>
-          <button *ngIf="post.username === currentUsername" mat-icon-button aria-label="more-button" class="review-action-button" color="accent">
+          <button *ngIf="post.username === currentUsername" mat-icon-button aria-label="more-button" class="review-action-button" color="accent" (click)="deleteHandler()">
             <mat-icon class="review-action-button-icon">delete</mat-icon>
           </button>
         </div>
@@ -23,8 +23,8 @@
         <p *ngIf="!editMode; else editReviewText" class="review-text">{{post.reviewText}}</p>
         <ng-template #editReviewText>
           <div class="review-textarea-container">
-            <textarea matInput cdkTextareaAutosize class="review-textarea" [(ngModel)]="reviewText"></textarea>
-            <mat-radio-group aria-labelledby="rating-radio-group" style="margin-top: 1em;" [(ngModel)]="rating">
+            <textarea matInput cdkTextareaAutosize class="review-textarea" [(ngModel)]="post.reviewText"></textarea>
+            <mat-radio-group aria-labelledby="rating-radio-group" style="margin-top: 1em;" [(ngModel)]="post.reviewScore">
               <mat-radio-button [value]="1">1</mat-radio-button>
               <mat-radio-button [value]="2">2</mat-radio-button>
               <mat-radio-button [value]="3">3</mat-radio-button>
