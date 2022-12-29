@@ -13,10 +13,11 @@ export class PostsService {
   constructor(private http:HttpClient) { }
 
 
-  public createNewPost(postType: PostType, gameName: string, username: string, reviewText: string, reviewScore: number){
+  public createNewPost(postType: PostType, gameId: string, gameName: string, username: string, reviewText: string, reviewScore: number){
 
     return this.http.post<Post>("http://localhost:3000/api/posts", {
     "postType" : postType,
+    "gameId" :  gameId,
     "gameName" : gameName,
     "username" : username,
     "reviewText" : reviewText,

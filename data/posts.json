@@ -2,6 +2,7 @@
     "postType": "Playing",
     "username": "Prophethor",
     "gameName": "Fortnite",
+    "gameId": "",
     "postTimestamp": {
       "$date": {
         "$numberLong": "1672185560081"
@@ -14,6 +15,7 @@
     "reviewScore": 10,
     "username": "Prophethor",
     "gameName": "LOL",
+    "gameId": "",
     "postTimestamp": {
       "$date": {
         "$numberLong": "1672185560081"
@@ -24,6 +26,7 @@
     "postType": "Review",
     "username": "Prophethor",
     "gameName": "LOL",
+    "gameId": "",
     "postTimestamp": {
       "$date": {
         "$numberLong": "1672185560081"

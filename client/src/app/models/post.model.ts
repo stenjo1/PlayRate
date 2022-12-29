@@ -13,6 +13,7 @@ export class Post{
                 public postType: PostType,
                 public username: string,
                 public gameName: string,
+                public gameId: string,
                 public reviewText:string,
                 public reviewScore:number,
                 public postTimestamp: Date){

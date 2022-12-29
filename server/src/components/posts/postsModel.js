@@ -8,11 +8,15 @@ const postSchema = new mongoose.Schema({
     required: true,
     enum: ['Review', 'Playing', 'Backlog', 'Finished', 'NoType'] //idk
   },
-  username: {
-    type: mongoose.Schema.Types.String,
+  gameId: {
+    type: mongoose.Schema.Types.ObjectId,
     required: true
   },
   gameName: {
+    type: mongoose.Schema.Types.String,
+    required: true
+  },
+  username: {
     type: mongoose.Schema.Types.String,
     required: true
   },
@@ -36,12 +40,13 @@ async function getPosts(){
 }
 
 
-async function createPost(postType, gameName, username, reviewText, reviewScore) {
+async function createPost(postType, gameId, gameName, username, reviewText, reviewScore) {
     const newPost = new Post({
     _id: new mongoose.Types.ObjectId(),
     postType: postType,
-    username: username,
+    gameId: gameId,
     gameName: gameName,
+    username: username,
     postTimestamp: new Date()
   });
   
