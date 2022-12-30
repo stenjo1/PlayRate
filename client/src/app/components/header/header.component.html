@@ -8,7 +8,11 @@
     <div>
         <mat-form-field appearance="outline" color="accent">
             <mat-label>Search</mat-label>
-            <input matInput placeholder="What game are you looking for?">
+            <input matInput type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="What game are you looking for?"
+                   (keyup.escape)="onEscape()" (blur)="onBlur()" (focus)="isExpanded = true">
+            <ul [@expand]="isExpanded ? 'expanded' : 'collapsed'" fxFlex="0 0 auto">
+                <li *ngFor="let item of results">{{ item.name }}</li>
+            </ul>
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
     </div>

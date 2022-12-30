@@ -11,7 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CreatePostComponent }  from './components/create-post/create-post.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MaterialModule } from './material/material.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -37,12 +37,14 @@ import { GameComponent } from './components/game/game.component';
   ],
   imports: [
     HttpClientModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    NoopAnimationsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
