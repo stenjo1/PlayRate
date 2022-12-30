@@ -21,8 +21,7 @@ export class CreatePostComponent implements OnDestroy {
   constructor(private gameService: GamesService, private postService: PostsService, private userService: UserService, private formBuilder: FormBuilder){
     this.createPostForm = this.formBuilder.group({
       game: ['', [Validators.required]],
-      type: ['', [Validators.required]],
-      reviewScore: ['', [Validators.min(1.0), Validators.max(10.0)]],
+      reviewScore: ['', []],
       reviewText: ['', []]
     });
 
@@ -39,15 +38,6 @@ export class CreatePostComponent implements OnDestroy {
 
   onCreatePostFormSubmit() {
 
-    let type : PostType;
-    const postType : string = this.createPostForm.get("type")?.value;
-    switch(postType) {
-      case "review": {type = PostType.Review; break;}
-      case "playing": {type = PostType.Playing; break;}
-      case "finished": {type = PostType.Finished; break;}
-      case "backlog": {type = PostType.Backlog; break;}
-      default: type=PostType.NoType;
-    }
     const gameId = this.createPostForm.get("game")?.value.gameId;
     const gameName = this.createPostForm.get("game")?.value.gameName;
     const username = this.userService.getCurrentUserUsername();
@@ -56,11 +46,12 @@ export class CreatePostComponent implements OnDestroy {
     const reviewScore =  this.createPostForm.get("reviewScore")?.value;
     
     
-    const postsSub = this.postService.createNewPost(type, gameId, gameName, username, reviewText, reviewScore).subscribe((postId)=>{
+    const postsSub = this.postService.createNewPost(PostType.Review, gameId, gameName, username, reviewText, reviewScore).subscribe((postId)=>{
         const gamesSub = this.gameService.attachPost(gameId, postId, reviewScore).subscribe();
         this.activeSubscriptions.push(gamesSub);
-        const userSub = this.userService.putAPost(postId).subscribe();
+        const userSub = this.userService.putAPost(postId).subscribe(); 
         this.activeSubscriptions.push(userSub);
+        
     });
     this.activeSubscriptions.push(postsSub);
     

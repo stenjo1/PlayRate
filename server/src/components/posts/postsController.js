@@ -83,6 +83,7 @@ module.exports.deletePost = async function (req, res, next) {
   
     try {
       const post = await Post.getPostById(postId);
+      
       if (!post) {
         const error = new Error('Post not found!');
         error.status = 404;
