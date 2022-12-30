@@ -62,9 +62,6 @@ async function getPostById(postId) {
 
 async function editReview(postId, newText, newScore) {
   const post = await Post.findById(postId).exec();
-  if (post.postType !== 'Review')
-    throw error;
-
   if (newScore) {
     post.reviewScore = newScore;
   }
@@ -72,7 +69,7 @@ async function editReview(postId, newText, newScore) {
     post.reviewText = newText;
   }
 
-  await post.save();
+  return await post.save();
 }
 
 /**

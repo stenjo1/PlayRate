@@ -33,6 +33,7 @@ export class PostComponent implements OnDestroy{
 
   public saveChangesHandler(): void{
     this.editMode = false;    
+    console.log(this.post.reviewText, this.post.reviewScore);
     const postSub = this.postService.editReview(this.post._id, this.post.reviewText, this.post.reviewScore).subscribe();
     this.activeSubscriptions.push(postSub);
   }

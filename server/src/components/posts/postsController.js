@@ -70,7 +70,8 @@ module.exports.editReview = async function (req, res, next) {
         error.status = 404;
         throw error;
       }
-      await post.editReview(postId, req.body.newText, req.body.newScore);
+      post = await Post.editReview(postId, req.body.newText, req.body.newScore);
+      res.status(200).json(post);
     } catch (err) {
       next(err);
     }
@@ -83,7 +84,7 @@ module.exports.deletePost = async function (req, res, next) {
   
     try {
       const post = await Post.getPostById(postId);
-      
+
       if (!post) {
         const error = new Error('Post not found!');
         error.status = 404;
