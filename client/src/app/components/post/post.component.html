@@ -4,7 +4,7 @@
           <img mat-card-avatar src="../../assets/profile-default.png" >
           <div class="header-content"> 
             <div>
-              <span class="special-text-user">{{post.username}}</span> {{post.postType.toLowerCase()==='review' ? 'has reviewed' : post.postType.toLowerCase()==='playing' ? 'is playing' : post.postType.toLowerCase()==='finished' ? 'has finished playing' : 'wants to play'}} <span class="special-text-game">{{post.gameName}}</span>.
+              <a href="profilepage/{{post.username}}" class="special-text-user">{{post.username}}</a> {{post.postType.toLowerCase()==='review' ? 'has reviewed' : post.postType.toLowerCase()==='playing' ? 'is playing' : post.postType.toLowerCase()==='finished' ? 'has finished playing' : 'wants to play'}} <a href="gamepage/{{post.gameId}}" class="special-text-game">{{post.gameName}}</a>.
             </div>
             <div *ngIf="post.postType.toLowerCase()==='review'" class="date-posted">Posted: {{post.postTimestamp.toString().substring(0, 10)}}  {{post.postTimestamp.toString().substring(11, 16)}}h</div>  
           </div>

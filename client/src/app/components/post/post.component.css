@@ -51,12 +51,16 @@
     font-size: 1em;
     font-weight: 500;
     color: #ff670d;
+    text-transform: none;
+    text-decoration: none;
 }
 
 .special-text-game{
     font-size: 1em;
     font-style: italic;
     color: #ff670d;
+    text-transform: none;
+    text-decoration: none;
 }
 
 .mat-mdc-card-content{
