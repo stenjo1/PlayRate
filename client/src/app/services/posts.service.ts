@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { map, filter, Observable } from 'rxjs';
+import { map, filter, Observable, take } from 'rxjs';
 import { Post, PostType } from "../models/post.model"
 
 @Injectable({

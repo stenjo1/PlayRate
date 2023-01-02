@@ -16,8 +16,10 @@ module.exports.getPosts = async function (req, res, next) {
 module.exports.getRecentPosts = async function (req, res, next) {
   try {
     const posts = await Post.getPosts();
-    //const recentPosts = posts.sort(...po datumu);
-    res.status(200).json(posts);
+    const recentPosts = posts.sort((post1, post2) => {
+      return post2.postTimestamp - post1.postTimestamp;
+    }).slice(0, 10);;
+    res.status(200).json(recentPosts);
   } catch (err) {
     next(err);
   }
