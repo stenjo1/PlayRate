@@ -40,7 +40,7 @@ export class GamesService {
   }
 
   public getGameReviews(id: string): Observable<Post[]> {
-    return this.http.get<Post[]>(this.gameUrl + "/reviews" + id);
+    return this.http.get<Post[]>(this.gameUrl + "reviews/" + id);
   }
 
   public attachPost(gameId: string, postId: string, reviewScore: number) {

@@ -68,8 +68,11 @@
   </mat-grid-tile>
 </mat-grid-list> -->
 
-<mat-list>
-  <mat-list-item *ngFor="let review of reviews | async">
-    <app-post [post]="review"></app-post>
-  </mat-list-item> 
-</mat-list>
+<div class="reviews-container">
+  <mat-list class="review-list">
+    <mat-list-item *ngFor="let review of reviews | async" class="review-item">
+      <app-post [post]="review"></app-post>
+    </mat-list-item> 
+  </mat-list>
+</div>
+
