@@ -20,6 +20,9 @@ import { AuthService } from './services/auth.service';
 import { PostComponent } from './components/post/post.component';
 import { EditReviewComponent } from './components/edit-review/edit-review.component';
 import { GameComponent } from './components/game/game.component';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
+
+
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { GameComponent } from './components/game/game.component';
     HomePageComponent,
     PostComponent,
     EditReviewComponent,
-    GameComponent
+    GameComponent,
   ],
   imports: [
     HttpClientModule,
@@ -45,6 +48,7 @@ import { GameComponent } from './components/game/game.component';
     BrowserAnimationsModule,
     MaterialModule,
     NoopAnimationsModule,
+    MatAutocompleteModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
