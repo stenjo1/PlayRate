@@ -2,23 +2,36 @@
 <div class="gameHeader">
   <mat-card class="gameHeaderLeft">
     <mat-card-header>
-      <mat-card-title>{{(this.game | async)?.name}}</mat-card-title>
-      <mat-card-subtitle>
-        <mat-icon>star</mat-icon> {{(this.game | async)?.reviewScore}}
-      </mat-card-subtitle>
+      <div class="header-title">
+        <mat-card-title>{{(this.game | async)?.name}}</mat-card-title>
+      </div>
+      <div class="header-subtitle">
+        <mat-card-subtitle>
+          <mat-icon color="warn">star</mat-icon> {{(this.game | async)?.reviewScore}}
+        </mat-card-subtitle>
+      </div>
     </mat-card-header>
-    <img mat-card-image [src]="(this.game | async)?.imgUrl" alt="Game banner poster">
+    <img mat-card-image [src]="(this.game | async)?.imgUrl" alt="Game banner poster" class="game-poster">
     <mat-card-actions>
-      <button mat-stroked-button (click)="addToFinishedOnClick()">ADD TO FINISHED</button>
-      <button mat-stroked-button (click)="addToPlayingOnClick()">ADD TO PLAYING</button>
-      <button mat-stroked-button (click)="addToBacklogOnClick()">ADD TO BACKLOG</button>
-      <button mat-stroked-button (click)="reviewOnClick()">REVIEW</button>
+      <div class="action-buttons-container">
+        <button mat-stroked-button (click)="addToPlayingOnClick()" color="warn">PLAY</button>
+        <button mat-stroked-button (click)="addToFinishedOnClick()" color="warn">FINISH</button>
+        <button mat-stroked-button (click)="addToBacklogOnClick()" color="warn">BACKLOG</button>
+      </div>
+      <div class="review-button-container">
+        <button mat-raised-button (click)="reviewOnClick()" class="review-button" color="accent">REVIEW</button>
+      </div>
     </mat-card-actions>
   </mat-card>
   <div class="gameHeaderRight">
-    <span>{{(this.game | async)?.description}}</span>
-    <div>
-      // Other statistics
+    <div>{{(this.game | async)?.description}}</div>
+    <div class="view-buttons-container">
+      <button mat-raised-button color="accent" class="steam-button">
+        <div class="steam-button-label">
+          <img src="./assets/steam-icon.svg" alt="steam-icon" class="steam-icon"/>
+          <div style="margin-left: 0.5em;">View on Steam</div>
+        </div>
+      </button>
     </div>
   </div>
 </div>

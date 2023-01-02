@@ -1,40 +1,109 @@
 :host {
     display: flex;
     flex-direction: column;
-    justify-content:center;
-    margin: 100px 25%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8em;
 }
 
 .gameHeader {
     display: flex;
     flex-direction: row;
-    margin-bottom: 3rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .gameHeaderLeft {
-    max-width: 50%;
+    width: 40%;
 }
 
 .gameHeaderRight {
-    margin-left: 1rem;
+    max-width: 50%;
+    text-align: left;
+    font-size: 1.25em;
+    font-family: 'Roboto';
+    line-height: 1.75em;
+}
+
+.game-poster {
+    height: 40rem;
+}
+
+.mat-mdc-card-header{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2em;
+}
+
+.header-title{
+}
+
+.mat-mdc-card-title{
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.header-subtitle{
+    margin-left: auto;
+}
+
+.mat-mdc-card-subtitle{
+    text-align: center;
+    display: flex;
+    padding: 0;
+    font-size: 1.25em;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mdc-card__actions{
     display: flex;
     flex-direction: column;
-    font-size: 20px;
+    justify-content: space-around;
+    align-items: stretch;
+    padding: 1em;
 }
 
-.gameFeed {
-    margin-top: 50px;
+.action-buttons-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1em;
 }
 
-mat-card {
-    width:100%;
+.action-buttons-container button{
+    width: 30%;
+    font-weight: bold;
 }
 
-.postProfilePicture {
-    max-width: 35px;
-    border-radius: 50%;
+.review-button-container{
+    width: 100%;
+    margin-top: 1em;
 }
 
-.postDescription {
-    margin-left: 1rem;
+.review-button{
+    width: 100%;
+    font-weight: bold;
+}
+
+.view-buttons-container{
+    margin-top: 1em;
+    text-align: center;
+}
+
+.steam-button-label{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.steam-icon{
+    width: 1.5em;
+    height: 1.5em;
 }
