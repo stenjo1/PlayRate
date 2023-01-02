@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { PostsService } from 'src/app/services/posts.service';
 import { PostType } from 'src/app/models/post.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 declare const $:any;
@@ -20,15 +21,24 @@ export class GamePageComponent implements OnDestroy{
   public game:Observable<Game>=new Observable<Game>();
   public reviews:any;
 
+  public reviewForm:FormGroup;
+
+  public showReview:boolean = false;
+
   private activeSubscriptions: Subscription[] = [];
 
-  constructor(private activatedRoute:ActivatedRoute,private gameService:GamesService, private userService:UserService, private postsService:PostsService){
+  constructor(private activatedRoute:ActivatedRoute,private gameService:GamesService, private userService:UserService, private postsService:PostsService, private formBuilder: FormBuilder){
     
     this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
       const gameId:string | null=params.get('gameId');
       this.game=this.gameService.getGameById((gameId)!); 
       this.reviews = this.gameService.getGameReviews(gameId!);
     })
+
+    this.reviewForm = this.formBuilder.group({
+      reviewScore: ['', [Validators.min(1.0), Validators.max(10.0)]],
+      reviewText: ['', []]
+    });
 
   }
 
@@ -67,7 +77,15 @@ export class GamePageComponent implements OnDestroy{
   }
 
   reviewOnClick(): void{
+    this.showReview = true;
+  }
 
-    //OVDE SE OTVORI CREATE POST KOMPONENTA
+  onReview(): void {
+    const sub = this.game.subscribe((g)=>{
+      const reviewText =  this.reviewForm.get("reviewText")?.value;
+      const reviewScore =  this.reviewForm.get("reviewScore")?.value;
+      const postSub = this.postsService.createNewPost(PostType.Review ,g._id, g.name, this.userService.getCurrentUserUsername(), reviewText, reviewScore).subscribe();
+      this.activeSubscriptions.push(sub, postSub);
+    })
   }
 }

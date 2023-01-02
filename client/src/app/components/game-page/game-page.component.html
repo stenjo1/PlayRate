@@ -23,6 +23,27 @@
   </div>
 </div>
 
+<div *ngIf="showReview">
+  <div class = "ui grid left aligned">
+    <div class="column"></div>
+    <form class = "ui form" [formGroup]="reviewForm" (ngSubmit)="onReview()">
+    
+      <div class="field">
+          <label>Your rating 1-10</label>
+          <input type="text" formControlName="reviewScore" value=0>
+      </div>
+    
+      <div class="field">
+          <label>Review Text</label>
+          <textarea formControlName="reviewText"></textarea>
+        </div>
+    
+      <button class="ui fluid large orange submit button" type="submit" >Save</button>
+      
+    </form>
+  </div>
+</div>
+
 <!--<mat-grid-list cols="1" rowHeight="15:1" gutterSize="5px" class="profileFeed">
   <mat-grid-tile *ngFor="let review of reviews | async">
       <mat-card>
