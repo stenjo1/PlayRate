@@ -9,11 +9,14 @@
         <mat-form-field appearance="outline" color="accent">
             <mat-label>Search</mat-label>
             <input matInput type="text" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="What game are you looking for?"
-                   (keyup.escape)="onEscape()" (blur)="onBlur()" (focus)="isExpanded = true">
-            <ul [@expand]="isExpanded ? 'expanded' : 'collapsed'" fxFlex="0 0 auto">
-                <li *ngFor="let item of results">{{ item.name }}</li>
-            </ul>
+                    [matAutocomplete]="auto">
             <mat-icon matSuffix>search</mat-icon>
+            <mat-autocomplete #auto="matAutocomplete" >
+                <mat-option *ngFor="let game of results" [value]="game.name" [routerLink]="['/gamepage',game._id]">
+                <img [src]="game.imgUrl" alt="item.name" width="80" style="padding-right: 20px;">
+                <p style="display: inline;position: absolute;top: 4px;">{{game.name}}</p>
+            </mat-option>
+              </mat-autocomplete>
         </mat-form-field>
     </div>
     <div>
@@ -21,3 +24,5 @@
         <a mat-raised-button color="warn" *ngIf="this.isLoggedIn()" (click) = "logoutUser()"  > Sign out</a>
     </div>
 </mat-toolbar>
+
+
