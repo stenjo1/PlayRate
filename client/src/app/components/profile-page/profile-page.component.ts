@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model'
 import { UserService , GameResponse} from 'src/app/services/user.service';
 import { Game } from 'src/app/models/game.model';
-import { Post } from 'src/app/models/post.model';
+import { Post, PostType } from 'src/app/models/post.model';
 import { PostsService } from 'src/app/services/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -32,6 +32,8 @@ export class ProfilePageComponent {
       this.playingGames = games?.playingGames;
       this.backlogGames = games?.backlogGames;
     });
+
+    this.posts = this.postsService.getRecentPosts();
   }
 
   getUsername(): string {
@@ -60,7 +62,7 @@ export class ProfilePageComponent {
     let count = 0;
     this.posts.subscribe((posts) => {
       posts.forEach((post) => {
-        if(post.postType === "Review") count += 1;
+        if(post.postType === PostType.Review) count += 1;
       })
     })
     return count;

@@ -35,13 +35,9 @@
     </mat-grid-tile>
 </mat-grid-list>
 
-<mat-grid-list cols="1" rowHeight="15:1" gutterSize="5px" class="gameFeed">
-    <mat-grid-tile>
-        <mat-card>
-            <mat-card-content>
-                <img src="assets/profile-default.png" class="postProfilePicture">
-                <span class="postDescription">{{getUsername()}} has played <a>Doom</a>.</span>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
+<h2 class="activity-header">Recent Activity</h2>
+<mat-list>
+    <mat-list-item *ngFor="let post of posts | async">
+        <app-post [post]="post" ></app-post>
+    </mat-list-item> 
+</mat-list>
