@@ -19,19 +19,21 @@ declare const $:any;
 export class GamePageComponent implements OnDestroy{
 
   public game:Observable<Game>=new Observable<Game>();
+  public steamLink:string='';
+  public clicked:boolean=false;
   public reviews:any;
-
   public reviewForm:FormGroup;
-
   public showReview:boolean = false;
-
   private activeSubscriptions: Subscription[] = [];
+
 
   constructor(private activatedRoute:ActivatedRoute,private gameService:GamesService, private userService:UserService, private postsService:PostsService, private formBuilder: FormBuilder){
     
     this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
       const gameId:string | null=params.get('gameId');
-      this.game=this.gameService.getGameById((gameId)!); 
+      this.game=this.gameService.getGameById((gameId)!);
+      const steamLinkSub=this.game.subscribe(g=>{this.steamLink=g.steamLink});
+      this.activeSubscriptions.push(steamLinkSub);
       this.reviews = this.gameService.getGameReviews(gameId!);
     })
 

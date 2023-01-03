@@ -26,12 +26,16 @@
   <div class="gameHeaderRight">
     <div>{{(this.game | async)?.description}}</div>
     <div class="view-buttons-container">
-      <button mat-raised-button color="accent" class="steam-button">
-        <div class="steam-button-label">
-          <img src="./assets/steam-icon.svg" alt="steam-icon" class="steam-icon"/>
-          <div style="margin-left: 0.5em;">View on Steam</div>
-        </div>
-      </button>
+      <a [attr.href]="steamLink == '' ? null : steamLink" [attr.tabindex]="steamLink == '' ? -1 : 0"  target="_blank">
+        <button mat-raised-button color="accent" class="steam-button" (click)="clicked=true">
+          <div class="steam-button-label">
+            <img src="./assets/steam-icon.svg" alt="steam-icon" class="steam-icon"/>
+            <div style="margin-left: 0.5em;">View on Steam</div>
+          </div>
+        </button>
+      </a>
+      <br>
+      <p *ngIf="steamLink=='' && clicked">Game is not avilable on steam</p>
     </div>
   </div>
 </div>

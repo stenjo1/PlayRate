@@ -8,7 +8,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "League of Legends",
@@ -20,7 +21,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "CS:GO",
@@ -32,7 +34,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/730/CounterStrike_Global_Offensive/"
 },
 {
     "name": "World of Warcraft",
@@ -44,7 +47,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "SIMS 4",
@@ -56,7 +60,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1222670/The_Sims_4/"
 },
 {
     "name": "Stray",
@@ -68,7 +73,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1332010/Stray/"
 },
 {
     "name": "Detective Barbie",
@@ -80,7 +86,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "Call of Duty: Warzone",
@@ -92,7 +99,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1962663/Call_of_Duty_Warzone_20/"
 },
 {
     "name": "Cyberpunk 2077",
@@ -104,7 +112,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1091500/Cyberpunk_2077/"
 },
 {
     "name": "Minecraft",
@@ -116,7 +125,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/search/?term=Minecraft"
 },
 {
     "name": "Dota 2",
@@ -128,7 +138,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/570/Dota_2/"
 },
 {
     "name": "Counter-Strike 1.6",
@@ -140,7 +151,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/10/CounterStrike/"
 },
 {
     "name": "Super Mario",
@@ -152,7 +164,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "FIFA 23",
@@ -164,7 +177,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1811260/EA_SPORTS_FIFA_23/"
 },
 {
     "name": "PES 2017",
@@ -176,7 +190,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "High On Life",
@@ -188,7 +203,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1583230/High_On_Life/"
 },
 {
     "name": "Warhammer 40K Darktide",
@@ -200,7 +216,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1361210/Warhammer_40000_Darktide/"
 },
 {
     "name": "Need For Speed Unbound",
@@ -212,7 +229,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1846380/Need_for_Speed_Unbound/"
 },
 {
     "name": "Evil west",
@@ -224,7 +242,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1065310/Evil_West/"
 },
 {
     "name": "Overwatch",
@@ -236,7 +255,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "Ghost of Tsushima",
@@ -248,7 +268,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : ""
 },
 {
     "name": "Assassin's Creed Valhalla",
@@ -260,7 +281,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/2208920/Assassins_Creed_Valhalla/"
 },
 {
     "name": "Horizon Zero Dawn",
@@ -272,7 +294,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1151640/Horizon_Zero_Dawn_Complete_Edition/"
 }
 ,
 {
@@ -285,7 +308,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/10150/Prototype/"
 },
 {
     "name": "Red dead redemption 2",
@@ -297,7 +321,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/"
 },
 {
     "name": "Grand Theft Auto V",
@@ -309,7 +334,8 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/"
 },
 {
     "name": "Spore",
@@ -321,6 +347,7 @@
     "playersNumber": 0,
     "visitedNumber":0,
     "favoritesNumber": 0,
-    "likes": 0
+    "likes": 0,
+    "steamLink" : "https://store.steampowered.com/app/17390/SPORE/"
 }
 ]

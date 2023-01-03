@@ -10,7 +10,8 @@ export class Game{
                 public playersNumber:number,
                 public visitedNumber:number,
                 public favoritesNumber:number,
-                public likes:number
+                public likes:number,
+                public steamLink:string,
     ){
     }
 
