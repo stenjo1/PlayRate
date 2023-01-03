@@ -69,7 +69,9 @@ export class AuthService {
     
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
-      tap((response: {token: string}) => this.jwtService.setToken(response.token)),
+      // TOFIX:?
+      // This will stop auto login after registering so that you have to manualy login
+      //tap((response: {token: string}) => this.jwtService.setToken(response.token)),
       map((response: {token: string}) => this.sendUserDataIfExists())
     )
   }

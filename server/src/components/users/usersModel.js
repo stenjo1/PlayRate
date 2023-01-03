@@ -267,12 +267,40 @@ async function removePost(username, postId){
 
 async function getGames(username){
   const user = await getUserByUsername(username);
-  
+
   games = {
-    "finishedGames" : user.finished.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId)),
-    "playingGames" : user.playing.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId)),
-    "backlogGames" : user.backlog.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId)),
+    "finishedGames" : [],
+    "playingGames" : [],
+    "backlogGames" : [],
   } 
+
+
+  // TOFIX: 
+  // THIS THE WORST POSSIBLE IMPLEMENTATION 
+  // Problem is that when i want to read from db and the arr is empty it cant be read and it throws an error 
+  // so i came up with this stupid solution where i would try to do it and skip if it fails .....
+  try{
+    games["finishedGames"] = user.finished.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId));
+  }
+  catch( error){
+    //console.log(error);
+  }
+
+  try{
+    games["playingGames"] = user.playing.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId));
+  }
+  catch( error){
+    //console.log(error);
+  }
+
+  try{
+    games["backlogGames"] =  user.backlog.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId));
+  }
+  catch( error){
+    //console.log(error);
+  }
+
+
   return games;
 }
 
