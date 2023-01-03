@@ -41,6 +41,7 @@ export class JwtService {
   
   public removeToken(): void {
     localStorage.removeItem(JwtService.USER_TOKEN_ID);
+    location.reload();
   }
 
 

@@ -28,14 +28,18 @@ export class HeaderComponent implements OnInit {
   isExpanded = false;
 
   constructor(private gameService:GamesService,private userService:UserService, private authService : AuthService, private router : Router){
-    this.userService.getUserByUsername(this.userService.getCurrentUserUsername()).subscribe(u=>{
-      this.username=u.username;
-    });
     this.games=gameService.getGamesArray();
     
   }
   ngOnInit(): void {
 
+  }
+
+  toProfilePage() : void {
+    this.userService.getUserByUsername(this.userService.getCurrentUserUsername()).subscribe(u=>{
+      this.username=u.username;
+      this.router.navigateByUrl("/profilepage/" + this.username);    
+    });
   }
 
   isLoggedIn() : boolean {
