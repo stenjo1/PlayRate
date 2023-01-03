@@ -7,6 +7,8 @@ import { User } from "../models/user.model"
 import { map ,catchError } from "rxjs/operators";
 import { AuthService } from "./auth.service";
 import { Game } from '../models/game.model';
+import { Post } from '../models/post.model';
+import { PostsService } from './posts.service';
 
 
 export interface GameResponse{
@@ -42,7 +44,7 @@ export class UserService{
   //  I'm unsure if this code will work if the user is loged out and the new one
   // logs in, this actualy might be stuck on the old one! 
   // Alltho it should be fine once we add guards, it remains to be seen!
-  constructor(private http: HttpClient,private authService: AuthService, private jwtService: JwtService){
+  constructor(private http: HttpClient,private authService: AuthService, private jwtService: JwtService, private postsService:PostsService){
     this.authService.user.subscribe((user : User | null) =>{
       this.curUser = user;   
     });
@@ -59,8 +61,12 @@ export class UserService{
     return this.http.get<User>(this.url.getUserById + '/' + username);
   }
 
-  public getPostsByUsername(username: string): Observable<User> {
-    return this.http.get<User>(this.url.getPostsUrl + '/' + username);
+  public getPostsByUsername(username: string): Post[] {
+    let postsTemp = new Array<Post>();
+    this.http.get<Post[]>(this.url.getPostsUrl + '/' + username ).subscribe((posts) => {
+        posts.forEach((post) => postsTemp.push(post))
+    });
+    return postsTemp;
   }
 
 
@@ -82,8 +88,8 @@ export class UserService{
     return this.http.get<User>(this.url.getUserById + '/' + userId).pipe(map((user)=>user.username));
   }
 
-  public getGames() : Observable< GameResponse | null > {
-    const obs : Observable<GameResponse> = this.http.get<GameResponse>(this.url.getGamesUrl + "/" + this.curUser?.username);
+  public getGames(username:string) : Observable< GameResponse | null > {
+    const obs : Observable<GameResponse> = this.http.get<GameResponse>(this.url.getGamesUrl + "/" + username);
     return obs.pipe(
       // TOFIX 
       // This chunk of code should be removed due to bloat because it's only a test 

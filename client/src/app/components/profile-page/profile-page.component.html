@@ -11,33 +11,35 @@
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="listHolder">
-            <button class="listButton" mat-raised-button color="accent">Finished</button>
+            <button class="listButton" mat-raised-button color="accent" (click)="showFinished()">Finished</button>
             <span>{{finishedCount()}}</span>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="listHolder">
-            <button class="listButton" mat-raised-button color="accent">Playing</button>
+            <button class="listButton" mat-raised-button color="accent" (click)="showPlaying()">Playing</button>
             <span>{{playingCount()}}</span>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="listHolder">
-            <button class="listButton" mat-raised-button color="accent">Backlog</button>
+            <button class="listButton" mat-raised-button color="accent" (click)="showBacklog()">Backlog</button>
             <span>{{backlogCount()}}</span>
         </div>
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="listHolder">
-            <button class="listButton" mat-raised-button color="accent">Reviews</button>
+            <button class="listButton" mat-raised-button color="accent" (click)="showFinished()">Reviews</button>
             <span>{{reviewCount()}}</span>
         </div>
     </mat-grid-tile>
 </mat-grid-list>
 
+<app-game-list *ngIf="showPopup" [typeToShow]="typeToShow" [username]="getUsername()"></app-game-list>
+
 <h2 class="activity-header">Recent Activity</h2>
 <mat-list>
-    <mat-list-item *ngFor="let post of posts | async">
+    <mat-list-item *ngFor="let post of posts">
         <app-post [post]="post" ></app-post>
     </mat-list-item> 
 </mat-list>
