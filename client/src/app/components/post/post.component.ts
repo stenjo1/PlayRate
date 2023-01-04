@@ -12,7 +12,7 @@ import { PostsService } from 'src/app/services/posts.service';
 })
 export class PostComponent implements OnDestroy{
   @Input()
-  public post!: Post;  //povezati ovo polje sa htmlovima
+  public post!: Post; 
 
   public currentUsername: string;
   public editMode: boolean;
@@ -38,9 +38,12 @@ export class PostComponent implements OnDestroy{
     this.activeSubscriptions.push(postSub);
   }
 
+
   public deleteHandler(): void {
-    const deleteSub = this.userService.deleteAPost(this.post._id).subscribe();
-    this.activeSubscriptions.push(deleteSub);
+    const id = this.post._id;
+
+    const userSub = this.userService.deleteAPost(id).subscribe();
+    this.activeSubscriptions.push(userSub);
 
     switch(this.post.postType){
       case PostType.Backlog:
@@ -60,6 +63,11 @@ export class PostComponent implements OnDestroy{
         this.activeSubscriptions.push(deleteFromReviewed);
         break;
     }
+
+
+    const postSub = this.postService.deletePost(id).subscribe();
+    this.activeSubscriptions.push(postSub);
+
     
   }
 
