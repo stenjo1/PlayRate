@@ -72,8 +72,8 @@ module.exports.editReview = async function (req, res, next) {
         error.status = 404;
         throw error;
       }
-      post = await Post.editReview(postId, req.body.newText, req.body.newScore);
-      res.status(200).json(post);
+      const editedPost = await Post.editReview(postId, req.body.newText, req.body.newScore);
+      res.status(200).json(editedPost);
     } catch (err) {
       next(err);
     }

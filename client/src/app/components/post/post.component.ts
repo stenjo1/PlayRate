@@ -17,11 +17,13 @@ export class PostComponent implements OnDestroy{
   public currentUsername: string;
   public editMode: boolean;
   private activeSubscriptions: Subscription[] = [];
+  public show;
 
 
   public constructor(private userService: UserService, private gamesService: GamesService, private postService: PostsService) {
     this.currentUsername = userService.getCurrentUserUsername();
     this.editMode = false;
+    this.show=true;
   }
   ngOnDestroy(): void {
     this.activeSubscriptions.forEach((sub: Subscription) => sub.unsubscribe());
@@ -68,7 +70,7 @@ export class PostComponent implements OnDestroy{
     const postSub = this.postService.deletePost(id).subscribe();
     this.activeSubscriptions.push(postSub);
 
-    
+    this.show=false;
   }
 
 }
