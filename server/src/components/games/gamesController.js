@@ -28,7 +28,9 @@ module.exports.getGamesPagination = async function (req, res, next) {
 
     try {
       const reviews = await Game.getReviewsForGame(gameId);
-      res.status(200).json(reviews);
+      res.status(200).json(reviews.sort((review1, review2) => {
+        return review2.postTimestamp - review1.postTimestamp;
+      }));
     } catch (err) {
       next(err);
     }
