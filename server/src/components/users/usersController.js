@@ -1,4 +1,5 @@
 const User = require("./usersModel");
+const Game = require("../games/gamesModel")
 
 module.exports.registerUser = async (req, res, next) => {
     const username = req.body.username;
@@ -107,6 +108,26 @@ module.exports.addBacklogGame = async (req, res, next) => {
 
 };
 
+module.exports.addReviewedGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.addReviewedGame(username,gameId)
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+
+};
+
 module.exports.removeFinishedGame = async (req, res, next) => {
   const gameId = req.body.gameId;
   const username = req.body.username;
@@ -151,6 +172,25 @@ module.exports.removeBacklogGame = async (req, res, next) => {
 
   try{
     const jwt = await User.removeBacklogGame(username,gameId);
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+}
+
+module.exports.removeReviewedGame = async (req, res, next) => {
+  const gameId = req.body.gameId;
+  const username = req.body.username;
+
+  try{
+    const jwt = await User.removeReviewedGame(username,gameId);
 
     if(jwt instanceof Error)
       throw(jwt);
@@ -227,16 +267,50 @@ module.exports.getUserById = async function(req, res, next) {
   }
 }
 
-module.exports.getGames = async (req, res, next) => {
-  const games = await User.getGames(req.params.username);
+module.exports.getFinishedGames = async (req, res, next) => {
+  const username = req.params.username;
 
-  try{
-    res.status(200).json({
-      finishedGames : games["finishedGames"],
-      playingGames : games["playingGames"],
-      backlogGames : games["backlogGames"]
-    });
-  }catch(err){
+  try {
+    const finishedIDs = await User.getFinishedGames(username);
+    const finished = await Promise.all(finishedIDs.map(ID => Game.getGameById(ID)));
+    res.status(200).json(finished);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports.getPlayingGames = async (req, res, next) => {
+  const username = req.params.username;
+
+  try {
+    const playingIDs = await User.getPlayingGames(username);
+    const playing = await Promise.all(playingIDs.map(ID => Game.getGameById(ID)));
+    res.status(200).json(playing);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports.getBacklogGames = async (req, res, next) => {
+  const username = req.params.username;
+
+  try {
+    const backlogIDs = await User.getBacklogGames(username);
+    const backlog = await Promise.all(backlogIDs.map(ID => Game.getGameById(ID)));
+    res.status(200).json(backlog);
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports.getReviewedGames = async (req, res, next) => {
+  const username = req.params.username;
+
+  try {
+    const reviewedIDs = await User.getReviewedGames(username);
+    const reviewed = await Promise.all(reviewedIDs.map(ID => Game.getGameById(ID)));
+    res.status(200).json(reviewed);
+  } catch (err) {
     next(err);
   }
 }

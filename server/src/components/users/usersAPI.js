@@ -11,15 +11,21 @@ router.post("/login",auth.canAuthenticate,controller.loginUser);
 router.put("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
 router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
+router.put("/addReviewedGame",controller.addReviewedGame);
 
 router.get('/posts/:username/', controller.getPostsForUser);
 router.get('/getUser/:username', controller.getUserByUsername);
 router.get('/getUser/:userId', controller.getUserById);
-router.get("/games/:username",controller.getGames);
+router.get("/getFinishedGames/:username",controller.getFinishedGames);
+router.get("/getPlayingGames/:username",controller.getPlayingGames);
+router.get("/getBacklogGames/:username",controller.getBacklogGames);
+router.get("/getReviewedGames/:username",controller.getReviewedGames);
+
 
 router.delete("/removeFinishedGame",auth.isAuthenticated,controller.removeFinishedGame);
 router.delete("/removePlayingGame",auth.isAuthenticated,controller.removePlayingGame);
 router.delete("/removeBacklogGame",auth.isAuthenticated,controller.removeBacklogGame);
+router.delete("/removeReviewedGame",auth.isAuthenticated,controller.removeReviewedGame);
 
 router.put("/addPost",auth.isAuthenticated,controller.addPost);
 router.delete("/removePost",auth.isAuthenticated,controller.removePost);

@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     default: [],
   },
+  reviewed: {
+    type: [mongoose.Schema.Types.ObjectId],
+    default: [],
+  },
   posts: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'Post',
@@ -205,6 +209,17 @@ async function addBacklogGame(username, gameId){
   return getUserJWTByUsername(username);
 }
 
+async function addReviewedGame(username, gameId){
+  const user = await getUserByUsername(username);
+  
+  if(user.reviewed.includes(gameId))
+    return new Error("Game is already on backlog list!");
+  user.reviewed.push(gameId);
+  
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
 async function removeFinishedGame(username, gameId){
   const user = await getUserByUsername(username);
 
@@ -241,6 +256,18 @@ async function removeBacklogGame(username, gameId){
   return getUserJWTByUsername(username);
 }
 
+async function removeReviewedGame(username, gameId){
+  const user = await getUserByUsername(username);
+
+  if(!user.reviewed.includes(gameId))
+    return new Error("Game is not on reviewed list!");
+
+  user.reviewed = user.reviewed.filter(curGameId => gameId != curGameId.valueOf());
+
+  await user.save();
+  return getUserJWTByUsername(username);
+}
+
 async function addPost(username, postId){
   const user = await getUserByUsername(username);
 
@@ -265,43 +292,24 @@ async function removePost(username, postId){
   return getUserJWTByUsername(username);
 }
 
-async function getGames(username){
-  const user = await getUserByUsername(username);
+async function getFinishedGames(username){
+  const user = await (await getUserByUsername(username)).populate('finished');
+  return user.finished.map((idObject) => idObject.valueOf(mongoose.SchemaType.ObjectId));
+}
 
-  games = {
-    "finishedGames" : [],
-    "playingGames" : [],
-    "backlogGames" : [],
-  } 
+async function getPlayingGames(username){
+  const user = await (await getUserByUsername(username)).populate('playing');
+  return user.playing.map((idObject) => idObject.valueOf(mongoose.SchemaType.ObjectId));
+}
 
+async function getBacklogGames(username){
+  const user = await (await getUserByUsername(username)).populate('backlog');
+  return user.backlog.map((idObject) => idObject.valueOf(mongoose.SchemaType.ObjectId));
+}
 
-  // TOFIX: 
-  // THIS THE WORST POSSIBLE IMPLEMENTATION 
-  // Problem is that when i want to read from db and the arr is empty it cant be read and it throws an error 
-  // so i came up with this stupid solution where i would try to do it and skip if it fails .....
-  try{
-    games["finishedGames"] = user.finished.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId));
-  }
-  catch( error){
-    //console.log(error);
-  }
-
-  try{
-    games["playingGames"] = user.playing.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId));
-  }
-  catch( error){
-    //console.log(error);
-  }
-
-  try{
-    games["backlogGames"] =  user.backlog.map(gameId => gameId.valueOf(mongoose.SchemaType.ObjectId));
-  }
-  catch( error){
-    //console.log(error);
-  }
-
-
-  return games;
+async function getReviewedGames(username){
+  const user = await (await getUserByUsername(username)).populate('reviewed');
+  return user.reviewed.map((idObject) => idObject.valueOf(mongoose.SchemaType.ObjectId));
 }
 
 
@@ -317,12 +325,16 @@ module.exports = {
   addFinishedGame,
   addPlayingGame,
   addBacklogGame,
+  addReviewedGame,
   removeFinishedGame,
   removePlayingGame,
   removeBacklogGame,
+  removeReviewedGame,
   addPost,
   removePost,
-  getGames,
   getPostsForUser,
-
+  getFinishedGames,
+  getPlayingGames,
+  getBacklogGames,
+  getReviewedGames
 };

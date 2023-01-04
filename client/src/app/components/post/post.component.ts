@@ -41,6 +41,25 @@ export class PostComponent implements OnDestroy{
   public deleteHandler(): void {
     const deleteSub = this.userService.deleteAPost(this.post._id).subscribe();
     this.activeSubscriptions.push(deleteSub);
+
+    switch(this.post.postType){
+      case PostType.Backlog:
+        const deleteFromBacklog = this.userService.deleteBacklogGame(this.post.gameId).subscribe();
+        this.activeSubscriptions.push(deleteFromBacklog);
+        break;
+      case PostType.Playing:
+        const deleteFromPlaying = this.userService.deletePlayingGame(this.post.gameId).subscribe();
+        this.activeSubscriptions.push(deleteFromPlaying);
+        break;
+      case PostType.Finished:
+        const deleteFromFinished = this.userService.deleteFinishedGame(this.post.gameId).subscribe();
+        this.activeSubscriptions.push(deleteFromFinished);
+        break;
+      case PostType.Review:
+        const deleteFromReviewed = this.userService.deleteReviewedGame(this.post.gameId).subscribe();
+        this.activeSubscriptions.push(deleteFromReviewed);
+        break;
+    }
     
   }
 

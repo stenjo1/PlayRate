@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model'
-import { UserService , GameResponse} from 'src/app/services/user.service';
+import { UserService} from 'src/app/services/user.service';
 import { Game } from 'src/app/models/game.model';
 import { Post, PostType } from 'src/app/models/post.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
@@ -31,17 +31,20 @@ export class ProfilePageComponent {
       this.username=params.get('userName');
     });
 
-    this.userService.getGames(this.getUsername()).subscribe((games)=> {
-      this.finishedGames = games?.finishedGames;
-      this.playingGames = games?.playingGames;
-      this.backlogGames = games?.backlogGames;
-    });
-
+    this.userService.getFinishedGames(this.getUsername()).subscribe((finishedGames) => {
+      this.finishedGames = finishedGames;
+    })
+    this.userService.getPlayingGames(this.getUsername()).subscribe((playingGames) => {
+      this.playingGames = playingGames;
+    })
+    this.userService.getBacklogGames(this.getUsername()).subscribe((backlogGames) => {
+      this.backlogGames = backlogGames;
+    })
+    this.userService.getReviewedGames(this.getUsername()).subscribe((reviewedGames) => {
+      this.reviewedGames = reviewedGames;
+    })
+    
     this.posts = this.userService.getPostsByUsername(this.getUsername());
-
-    this.posts.filter((post) => post.postType === PostType.Review).map((post) => this.gamesService.getGameById(post.gameId).subscribe((game) => {
-        this.reviewedGames?.push(game)
-      }));
   }
 
   getUsername(): string {

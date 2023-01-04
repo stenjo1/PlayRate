@@ -98,12 +98,14 @@ export class GamePageComponent implements OnDestroy{
     const sub = this.game.subscribe((g)=>{
       const reviewText =  this.reviewForm.get("reviewText")?.value;
       const reviewScore =  this.reviewForm.get("reviewScore")?.value;
+      const obs : Observable<{token : string}>  = this.userService.putReviewedGame(g._id);
+      const userSub = obs.subscribe();
       const postSub = this.postsService.createNewPost(PostType.Review ,g._id, g.name, this.userService.getCurrentUserUsername(), reviewText, reviewScore).subscribe( (postId) => {
         const gamesSub = this.gameService.attachPost(g._id, postId, reviewScore).subscribe();
         const userSub = this.userService.putAPost(postId).subscribe();
         this.activeSubscriptions.push(gamesSub, userSub);
       });
-      this.activeSubscriptions.push(sub, postSub);
+      this.activeSubscriptions.push(sub, postSub, userSub);
     })
   }
 }

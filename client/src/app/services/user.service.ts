@@ -11,12 +11,6 @@ import { Post } from '../models/post.model';
 import { PostsService } from './posts.service';
 
 
-export interface GameResponse{
-    finishedGames : Game[],
-    playingGames : Game[],
-    backlogGames : Game[],
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -25,16 +19,21 @@ export class UserService{
 
   
   private readonly url = {
-    getGamesUrl: "http://localhost:3000/api/users/games",
+    getFinishedGamesUrl: "http://localhost:3000/api/users/getFinishedGames",
+    getPlayingGamesUrl: "http://localhost:3000/api/users/getPlayingGames",
+    getBacklogGamesUrl: "http://localhost:3000/api/users/getBacklogGames",
+    getReviewedGamesUrl: "http://localhost:3000/api/users/getReviewedGames",
     getPostsUrl: "http://localhost:3000/api/users/posts",
     putAPostUrl: "http://localhost:3000/api/users/addPost",
     deleteAPostUrl: "http://localhost:3000/api/users/removePost",
     putFinishedGame: "http://localhost:3000/api/users/addFinishedGame",
     putPlayingGame: "http://localhost:3000/api/users/addPlayingGame",
     putBacklogGame: "http://localhost:3000/api/users/addBacklogGame",
+    putReviewedGame: "http://localhost:3000/api/users/addReviewedGame",
     deleteFinishedGame: "http://localhost:3000/api/users/removeFinishedGame",
     deletePlayingGame: "http://localhost:3000/api/users/removePlayingGame",
     deleteBacklogGame: "http://localhost:3000/api/users/removeBacklogGame",
+    deleteReviewedGame: "http://localhost:3000/api/users/removeReviewedGame",
     getUserById: "http://localhost:3000/api/users/getUser"
   }
 
@@ -88,14 +87,25 @@ export class UserService{
     return this.http.get<User>(this.url.getUserById + '/' + userId).pipe(map((user)=>user.username));
   }
 
-  public getGames(username:string) : Observable< GameResponse | null > {
-    const obs : Observable<GameResponse> = this.http.get<GameResponse>(this.url.getGamesUrl + "/" + username);
-    return obs.pipe(
-      // TOFIX 
-      // This chunk of code should be removed due to bloat because it's only a test 
-      tap((response: GameResponse) => console.log("Javljam se iz pipe!!!"  + response.finishedGames)),
-    );
-  }  
+  public getFinishedGames(username:string) {
+    const obs : Observable<Game[]> = this.http.get<Game[]>(this.url.getFinishedGamesUrl + "/" + username);
+    return obs.pipe();
+  }
+
+  public getPlayingGames(username:string) {
+    const obs : Observable<Game[]> = this.http.get<Game[]>(this.url.getPlayingGamesUrl + "/" + username);
+    return obs.pipe();
+  }
+
+  public getBacklogGames(username:string) {
+    const obs : Observable<Game[]> = this.http.get<Game[]>(this.url.getBacklogGamesUrl + "/" + username);
+    return obs.pipe();
+  }
+
+  public getReviewedGames(username:string) {
+    const obs : Observable<Game[]> = this.http.get<Game[]>(this.url.getReviewedGamesUrl + "/" + username);
+    return obs.pipe();
+  }
   
   public putAPost(postIdNum : string) : Observable<{token:string}> {
     
@@ -178,6 +188,21 @@ export class UserService{
     );
   }
 
+  public putReviewedGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putReviewedGame,body,{headers})
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
   public deleteFinishedGame(gameIdNum : string) : Observable<{token:string}> {
     
     const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
@@ -235,6 +260,27 @@ export class UserService{
     }
 
     const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteBacklogGame,options)
+
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public deleteReviewedGame(gameIdNum : string) : Observable<{token:string}> {
+    
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+
+    const body = {
+      username : this.curUser?.username,
+      gameId : gameIdNum,
+    }
+
+    const options = {
+      headers : headers,
+      body : body 
+    }
+
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteReviewedGame,options)
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
