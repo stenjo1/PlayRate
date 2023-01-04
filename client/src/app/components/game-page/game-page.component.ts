@@ -91,7 +91,7 @@ export class GamePageComponent implements OnDestroy{
   }
 
   reviewOnClick(): void{
-    this.showReview = true;
+    this.showReview = !this.showReview;
   }
 
   onReview(): void {
