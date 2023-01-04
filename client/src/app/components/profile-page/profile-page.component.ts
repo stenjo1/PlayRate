@@ -21,7 +21,7 @@ export class ProfilePageComponent {
   public posts: Post[] = new Array<Post>();
   
   public showPopup:boolean = false;
-  public typeToShow:PostType = PostType.NoType;
+  public gamesToShow: Game[] | undefined;
 
   public username?: string | null;
 
@@ -75,22 +75,22 @@ export class ProfilePageComponent {
   }
 
   showFinished() {
-    this.typeToShow = PostType.Finished;
+    this.gamesToShow = this.finishedGames;
     this.showPopup = true;
   }
 
   showPlaying() {
-    this.typeToShow = PostType.Playing;
+    this.gamesToShow = this.playingGames;
     this.showPopup = true;
   }
 
   showBacklog() {
-    this.typeToShow = PostType.Backlog;
+    this.gamesToShow = this.backlogGames;
     this.showPopup = true;
   }
 
   showReviewed() {
-    this.typeToShow = PostType.Review;
+    this.gamesToShow = this.reviewedGames;
     this.showPopup = true;
   }
 

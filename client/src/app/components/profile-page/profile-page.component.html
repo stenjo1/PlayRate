@@ -29,13 +29,23 @@
     </mat-grid-tile>
     <mat-grid-tile>
         <div class="listHolder">
-            <button class="listButton" mat-raised-button color="accent" (click)="showFinished()">Reviews</button>
+            <button class="listButton" mat-raised-button color="accent" (click)="showReviewed()">Reviews</button>
             <span>{{reviewCount()}}</span>
         </div>
     </mat-grid-tile>
 </mat-grid-list>
 
-<app-game-list *ngIf="showPopup" [typeToShow]="typeToShow" [username]="getUsername()"></app-game-list>
+<div *ngIf="showPopup">
+    <mat-card>
+        <mat-list>
+            <mat-list-item *ngFor="let game of gamesToShow">
+                <mat-card color="warn">
+                    <mat-card-header class="header">{{game.name}}</mat-card-header>
+                </mat-card>
+            </mat-list-item> 
+        </mat-list>
+    </mat-card>
+</div>
 
 <h2 class="activity-header">Recent Activity</h2>
 <mat-list>
