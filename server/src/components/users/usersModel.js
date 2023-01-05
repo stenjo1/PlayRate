@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema({
   },
   imgUrl: {
     type: mongoose.Schema.Types.String,
-    default: 'default-user.png',
+    default: '',
   },
 });
 
@@ -162,8 +162,8 @@ async function changeStatus(email, curStatus){
  * @param {string} userId Identifikator korisnika.
  * @param {string} imgUrl Putanja slike na serveru.
  */
-async function changeUserProfileImage(userId, imgUrl) {
-  const user = await User.findById(userId);
+async function changeUserProfileImage(username, imgUrl) {
+  const user = await getUserByUsername(username);
   user.imgUrl = imgUrl;
   await user.save();
 }

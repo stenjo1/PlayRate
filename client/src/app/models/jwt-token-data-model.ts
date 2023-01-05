@@ -3,4 +3,5 @@ export interface IJwtTokenData {
     username: string,
     password: string,
     email: string,
+    imgUrl: string
 }

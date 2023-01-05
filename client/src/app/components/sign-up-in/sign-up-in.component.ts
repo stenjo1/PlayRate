@@ -23,7 +23,7 @@ export class SignUpInComponent implements OnDestroy,OnInit{
   userSub: Subscription = new Subscription();
  
   constructor(private formBuilder: FormBuilder,private auth: AuthService, private router: Router){
-    this.user = new User("","","");
+    this.user = new User("","","","");
     this.failedLogin = false;
  
     this.signForm = this.formBuilder.group({

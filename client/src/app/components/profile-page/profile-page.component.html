@@ -1,7 +1,23 @@
 
 <mat-grid-list cols="3" rowHeight="3:1" class="profileHeader">
     <mat-grid-tile rowspan="3">
-        <img src="assets/profile-default.png" class="profilePicture">
+        <div *ngIf="this.getUsername() === currentUserUsername">
+        <button *ngIf="this.getUsername() === currentUserUsername" mat-icon-button color="accent" (click)="showChangeURLForm()">
+            <mat-icon class="review-action-button-icon">edit</mat-icon>
+        </button>
+        <form [formGroup]="changeURLForm" (ngSubmit)="changeImgUrl()">
+            <div *ngIf="changeURLFormShown">
+                <mat-form-field  appearance="outline" color="accent">
+                    <mat-label>Image URL</mat-label>
+                    <input matInput type="text" formControlName="imgURLToSet" placeholder="https://img.url">
+                </mat-form-field> 
+                <button mat-flat-button color="warn" type="submit">SET</button>
+            </div>
+        </form>
+        </div>
+        <div>
+            <img src="{{imgUrl}}" class="profilePicture">
+        </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
         <div class="playerInfo">

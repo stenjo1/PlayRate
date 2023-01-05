@@ -34,7 +34,9 @@ export class UserService{
     deletePlayingGame: "http://localhost:3000/api/users/removePlayingGame",
     deleteBacklogGame: "http://localhost:3000/api/users/removeBacklogGame",
     deleteReviewedGame: "http://localhost:3000/api/users/removeReviewedGame",
-    getUserById: "http://localhost:3000/api/users/getUser"
+    getUserById: "http://localhost:3000/api/users/getUser",
+    getImgUrl: "http://localhost:3000/api/users/getImgUrl",
+    setImgUrl: "http://localhost:3000/api/users/setImgUrl"
   }
 
   private curUser : User | null = null;
@@ -66,6 +68,10 @@ export class UserService{
         posts.forEach((post) => postsTemp.push(post))
     });
     return postsTemp;
+  }
+
+  public getImgUrl(username: string): Observable<string> {
+    return this.getUserByUsername(username).pipe(map(user => user.imgUrl));
   }
 
 
@@ -282,6 +288,21 @@ export class UserService{
 
     const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteReviewedGame,options)
 
+    return obs.pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error)),
+    );
+  }
+
+  public setImgUrl(usernameToSet: string, imgUrlToSet: string) : Observable<{token:string}> {
+    const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+    const body = {
+      username : usernameToSet,
+      imgUrl : imgUrlToSet,
+    }
+
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.setImgUrl,body,{headers})
+
+    console.log(obs)
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
     );

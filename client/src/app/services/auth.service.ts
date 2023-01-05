@@ -43,7 +43,7 @@ export class AuthService {
       //this.failedRegister = false;
     //}
 
-    const newUser: User =  new User(payload.id, payload.username, payload.email);
+    const newUser: User =  new User(payload.id, payload.username, payload.email, payload.imgUrl);
     this.userSubject.next(newUser);
     return newUser;
   }

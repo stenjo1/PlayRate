@@ -8,6 +8,7 @@ const controller = require("./usersController");
 router.post("/register",controller.registerUser);
 router.post("/login",auth.canAuthenticate,controller.loginUser);
 
+router.put("/setImgUrl/",auth.isAuthenticated,controller.setImgUrl)
 router.put("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
 router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
@@ -29,6 +30,7 @@ router.delete("/removeReviewedGame",auth.isAuthenticated,controller.removeReview
 
 router.put("/addPost",auth.isAuthenticated,controller.addPost);
 router.delete("/removePost",auth.isAuthenticated,controller.removePost);
+
 
 
 

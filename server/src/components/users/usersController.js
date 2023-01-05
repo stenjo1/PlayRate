@@ -314,3 +314,24 @@ module.exports.getReviewedGames = async (req, res, next) => {
     next(err);
   }
 }
+
+module.exports.setImgUrl = async (req, res, next) => {
+  const username = req.body.username;
+  const imgUrl = req.body.imgUrl;
+
+  console.log(req.body)
+
+  try{
+    const jwt = await User.changeUserProfileImage(username,imgUrl)
+
+    if(jwt instanceof Error)
+      throw(jwt);
+
+    return res.status(201).json({
+      token: jwt,
+    });
+
+  }catch (err){
+    next(err);
+  }
+}

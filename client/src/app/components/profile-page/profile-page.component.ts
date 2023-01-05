@@ -6,6 +6,7 @@ import { Game } from 'src/app/models/game.model';
 import { Post, PostType } from 'src/app/models/post.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GamesService } from 'src/app/services/games.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-page',
@@ -23,13 +24,19 @@ export class ProfilePageComponent {
   public showPopup:boolean = false;
   public gamesToShow: Game[] | undefined;
 
-  public username?: string | null;
+  public changeURLFormShown:boolean = false;
+  public changeURLForm:FormGroup;
 
-  constructor(private activatedRoute:ActivatedRoute,private userService:UserService, private gamesService:GamesService){
+  public username?: string | null;
+  public currentUserUsername?: string | null;
+  public imgUrl?: string | null;
+
+  constructor(private activatedRoute:ActivatedRoute,private userService:UserService, private formBuilder: FormBuilder){
    
     this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
       this.username=params.get('userName');
     });
+    this.currentUserUsername = this.userService.getCurrentUserUsername();
 
     this.userService.getFinishedGames(this.getUsername()).subscribe((finishedGames) => {
       this.finishedGames = finishedGames;
@@ -45,6 +52,12 @@ export class ProfilePageComponent {
     })
     
     this.posts = this.userService.getPostsByUsername(this.getUsername());
+    
+    this.userService.getImgUrl(this.getUsername()).subscribe((imgUrl) => (imgUrl !== '') ? this.imgUrl = imgUrl : this.imgUrl = 'assets/profile-default.png');
+
+    this.changeURLForm = this.formBuilder.group({
+      imgURLToSet: ['', []]
+    });
   }
 
   getUsername(): string {
@@ -92,6 +105,15 @@ export class ProfilePageComponent {
   showReviewed() {
     this.gamesToShow = this.reviewedGames;
     this.showPopup = true;
+  }
+
+  showChangeURLForm() {
+    this.changeURLFormShown = !this.changeURLFormShown;
+  }
+
+  changeImgUrl() {
+    const imgUrl = this.changeURLForm.get("imgURLToSet")?.value;
+    this.userService.setImgUrl(this.getUsername(), imgUrl)
   }
 
 }
