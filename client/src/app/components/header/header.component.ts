@@ -38,7 +38,10 @@ export class HeaderComponent implements OnInit {
   toProfilePage() : void {
     this.userService.getUserByUsername(this.userService.getCurrentUserUsername()).subscribe(u=>{
       this.username=u.username;
-      this.router.navigateByUrl("/profilepage/" + this.username);    
+      this.router.navigateByUrl("/profilepage/" + this.username);
+      if (this.router.url === ("/profilepage/" + this.username)) {
+        window.location.reload();
+      }
     });
   }
 
