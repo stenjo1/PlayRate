@@ -19,7 +19,8 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { AuthService } from './services/auth.service';
 import { PostComponent } from './components/post/post.component';
 import { GameComponent } from './components/game/game.component';
-import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
+import { GamesComponent } from './components/games/games.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autoco
     GamePageComponent,
     HomePageComponent,
     PostComponent,
-    GameComponent
+    GameComponent,
+    GamesComponent
   ],
   imports: [
     HttpClientModule,

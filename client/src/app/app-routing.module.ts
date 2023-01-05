@@ -5,11 +5,13 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { SignUpInComponent } from './components/sign-up-in/sign-up-in.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { GamesComponent } from './components/games/games.component';
 import { UserAuthentificatedGuard } from './guards/user-authentificated.guard';
 
 const routes: Routes = [
   {path:'', component:SignUpInComponent},
   {path: 'homepage', component:HomePageComponent, canActivate: [UserAuthentificatedGuard]},
+  {path: 'allgames', component:GamesComponent, canActivate: [UserAuthentificatedGuard]},
   {path:'gamepage', component:GamePageComponent, canActivate: [UserAuthentificatedGuard]},
   {path:'profilepage', component:ProfilePageComponent, canActivate: [UserAuthentificatedGuard]},
   {path:'createpost', component:CreatePostComponent, canActivate: [UserAuthentificatedGuard]},

@@ -8,7 +8,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
-import { MatRadioModule } from '@angular/material/radio'
+import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -21,7 +22,8 @@ const MaterialComponents = [
   MatDividerModule,
   MatListModule,
   MatInputModule,
-  MatRadioModule
+  MatRadioModule,
+  MatPaginatorModule
 ]
 
 @NgModule({
