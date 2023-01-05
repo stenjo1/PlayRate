@@ -13,9 +13,12 @@
     width: 100%;
 }
 
-.username, .status {
-    margin-left: 1rem;
+.username {
     font-size: 40px;
+}
+
+.mat-badge-content {
+    background: #66ff00;
 }
 
 .listHolder {

@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatBadgeModule } from '@angular/material/badge'
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -23,7 +24,8 @@ const MaterialComponents = [
   MatListModule,
   MatInputModule,
   MatRadioModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatBadgeModule
 ]
 
 @NgModule({
