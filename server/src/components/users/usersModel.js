@@ -213,7 +213,7 @@ async function addReviewedGame(username, gameId){
   const user = await getUserByUsername(username);
   
   if(user.reviewed.includes(gameId))
-    return new Error("Game is already on backlog list!");
+    return new Error("Game is already reviewed!");
   user.reviewed.push(gameId);
   
   await user.save();
