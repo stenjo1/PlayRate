@@ -121,7 +121,7 @@ export class UserService{
       postId : postIdNum,
     }
 
-    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putAPostUrl,body,{headers})
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putAPostUrl,body,{headers});
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -142,7 +142,7 @@ export class UserService{
       body : body 
     }
 
-    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteAPostUrl,options)
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteAPostUrl,options);
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -172,7 +172,7 @@ export class UserService{
       gameId : gameIdNum,
     }
 
-    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putPlayingGame,body,{headers})
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putPlayingGame,body,{headers});
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -187,7 +187,7 @@ export class UserService{
       gameId : gameIdNum,
     }
 
-    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putBacklogGame,body,{headers})
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putBacklogGame,body,{headers});
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -202,7 +202,7 @@ export class UserService{
       gameId : gameIdNum,
     }
 
-    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putReviewedGame,body,{headers})
+    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.putReviewedGame,body,{headers});
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -223,7 +223,7 @@ export class UserService{
       body : body 
     }
 
-    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteFinishedGame,options)
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteFinishedGame,options);
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -244,7 +244,7 @@ export class UserService{
       body : body 
     }
 
-    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deletePlayingGame,options)
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deletePlayingGame,options);
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -265,7 +265,7 @@ export class UserService{
       body : body 
     }
 
-    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteBacklogGame,options)
+    const obs: Observable<{token: string}> = this.http.delete<{token : string}>(this.url.deleteBacklogGame,options);
 
     return obs.pipe(
       catchError((error: HttpErrorResponse) => this.handleError(error)),
@@ -300,7 +300,7 @@ export class UserService{
       imgUrl : imgUrlToSet,
     }
 
-    const obs: Observable<{token: string}> = this.http.put<{token : string}>(this.url.setImgUrl,body,{headers})
+    const obs: Observable<{token: string}> = this.http.patch<{token : string}>(this.url.setImgUrl,body,{headers});
 
     console.log(obs)
     return obs.pipe(

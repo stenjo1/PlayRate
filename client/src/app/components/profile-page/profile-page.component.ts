@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model'
 import { UserService} from 'src/app/services/user.service';
 import { Game } from 'src/app/models/game.model';
 import { Post, PostType } from 'src/app/models/post.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GamesService } from 'src/app/services/games.service';
+import { PostsService } from 'src/app/services/posts.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -13,7 +14,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css']
 })
-export class ProfilePageComponent {
+export class ProfilePageComponent implements OnDestroy{
   public user: Observable<User> = new Observable<User>();
   public finishedGames: Game[] | undefined;
   public playingGames: Game[] | undefined;
@@ -31,33 +32,41 @@ export class ProfilePageComponent {
   public currentUserUsername?: string | null;
   public imgUrl?: string | null;
 
-  constructor(private activatedRoute:ActivatedRoute,private userService:UserService, private formBuilder: FormBuilder){
+  private activeSubscriptions: Subscription[] = [];
+
+  constructor(private activatedRoute:ActivatedRoute,private userService:UserService, private postService:PostsService, private formBuilder: FormBuilder){
    
-    this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
+    const sub = this.activatedRoute.paramMap.subscribe((params:ParamMap)=>{
       this.username=params.get('userName');
     });
+
     this.currentUserUsername = this.userService.getCurrentUserUsername();
 
-    this.userService.getFinishedGames(this.getUsername()).subscribe((finishedGames) => {
+    const finishedSub = this.userService.getFinishedGames(this.getUsername()).subscribe((finishedGames) => {
       this.finishedGames = finishedGames;
     })
-    this.userService.getPlayingGames(this.getUsername()).subscribe((playingGames) => {
+    const playingSub = this.userService.getPlayingGames(this.getUsername()).subscribe((playingGames) => {
       this.playingGames = playingGames;
     })
-    this.userService.getBacklogGames(this.getUsername()).subscribe((backlogGames) => {
+    const backlogSub = this.userService.getBacklogGames(this.getUsername()).subscribe((backlogGames) => {
       this.backlogGames = backlogGames;
     })
-    this.userService.getReviewedGames(this.getUsername()).subscribe((reviewedGames) => {
+    const reviewSub  = this.userService.getReviewedGames(this.getUsername()).subscribe((reviewedGames) => {
       this.reviewedGames = reviewedGames;
     })
     
     this.posts = this.userService.getPostsByUsername(this.getUsername());
     
-    this.userService.getImgUrl(this.getUsername()).subscribe((imgUrl) => (imgUrl !== '') ? this.imgUrl = imgUrl : this.imgUrl = 'assets/profile-default.png');
+    const imgSub = this.userService.getImgUrl(this.getUsername()).subscribe((imgUrl) => (imgUrl !== '') ? this.imgUrl = imgUrl : this.imgUrl = 'assets/profile-default.png');
 
+    this.activeSubscriptions.push(imgSub, reviewSub, backlogSub, playingSub, finishedSub, sub);
+    
     this.changeURLForm = this.formBuilder.group({
       imgURLToSet: ['', []]
     });
+  }
+  ngOnDestroy(): void {
+    this.activeSubscriptions.forEach((sub: Subscription) => sub.unsubscribe());
   }
 
   getUsername(): string {
@@ -113,7 +122,8 @@ export class ProfilePageComponent {
 
   changeImgUrl() {
     const imgUrl = this.changeURLForm.get("imgURLToSet")?.value;
-    this.userService.setImgUrl(this.getUsername(), imgUrl)
+    const sub = this.userService.setImgUrl(this.getUsername(), imgUrl).subscribe();
+    this.activeSubscriptions.push(sub);
   }
 
 }

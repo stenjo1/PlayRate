@@ -8,7 +8,7 @@ const controller = require("./usersController");
 router.post("/register",controller.registerUser);
 router.post("/login",auth.canAuthenticate,controller.loginUser);
 
-router.put("/setImgUrl/",auth.isAuthenticated,controller.setImgUrl)
+router.patch("/setImgUrl",auth.isAuthenticated,controller.setImgUrl)
 router.put("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
 router.put("/addPlayingGame",controller.addPlayingGame);
 router.put("/addBacklogGame",controller.addBacklogGame);
