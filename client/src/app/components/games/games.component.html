@@ -1,7 +1,12 @@
+<mat-paginator [length]="games.length" pageSize=12
+               (page)="getPaginatorData($event)"
+               showFirstLastButtons="false">
+</mat-paginator>
 
 <div class="main-container">
     <mat-grid-list cols="6" rowHeight="20em" gutterSize="2em" class="main-mat-grid-list">
-        <a  *ngFor="let game of games | async " [routerLink]="['/gamepage',game._id]">
+        <a  *ngFor="let game of (games | 
+        slice: lowValue : highValue)" [routerLink]="['/gamepage',game._id]">
         <mat-grid-tile>
             <mat-grid-tile-header>{{game.name}}</mat-grid-tile-header>
             <img [src]="game.imgUrl" alt="game poster" class="game-img"/>

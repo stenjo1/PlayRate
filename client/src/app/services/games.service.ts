@@ -15,14 +15,10 @@ export class GamesService {
   constructor(private http:HttpClient) {
   }
 
-  public getGames(page:number=1,limit:number=10):Observable<Game[]>{
+  public getGamesPagination(page:number=1,limit:number=10):Observable<GamesPagination>{
     const params:HttpParams=new HttpParams().append('page',page).append('limit',limit);
-    const obs:Observable<GamesPagination>= this.http.get<GamesPagination>(this.gameUrl + "all", {params: params});    
-    return obs.pipe(
-      map((pagination:GamesPagination)=>{
-        return pagination.docs;
-      })
-    )
+    const obs:Observable<GamesPagination>= this.http.get<GamesPagination>(this.gameUrl, {params: params});    
+    return obs;
   }
 
   public getGamesArray (): Observable<Game[]>{
