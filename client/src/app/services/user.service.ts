@@ -55,7 +55,7 @@ export class UserService{
   private handleError(error: HttpErrorResponse): Observable<{ token: string }> {
     const serverError: { message: string; status: number; stack: string } = error.error;
     window.alert(`There was an error: ${serverError.message}. `);
-    return of({ token: this.jwtService.getToken() });
+    return of({ token: "error" });
   }
 
   public getUserByUsername(username: string): Observable<User> {
