@@ -97,23 +97,43 @@ export class ProfilePageComponent implements OnDestroy{
   }
 
   showFinished() {
-    this.gamesToShow = this.finishedGames;
-    this.showPopup = true;
+    if(this.gamesToShow === this.finishedGames && this.showPopup === true) {
+      this.showPopup = false;
+    }
+    else {
+      this.gamesToShow = this.finishedGames;
+      this.showPopup = true;
+    }
   }
 
   showPlaying() {
-    this.gamesToShow = this.playingGames;
-    this.showPopup = true;
+    if(this.gamesToShow === this.playingGames && this.showPopup === true) {
+      this.showPopup = false;
+    }
+    else {
+      this.gamesToShow = this.playingGames;
+      this.showPopup = true;
+    }
   }
 
   showBacklog() {
-    this.gamesToShow = this.backlogGames;
-    this.showPopup = true;
+    if(this.gamesToShow === this.backlogGames && this.showPopup === true) {
+      this.showPopup = false;
+    }
+    else {
+      this.gamesToShow = this.backlogGames;
+      this.showPopup = true;
+    }
   }
 
   showReviewed() {
-    this.gamesToShow = this.reviewedGames;
-    this.showPopup = true;
+    if(this.gamesToShow === this.reviewedGames && this.showPopup === true) {
+      this.showPopup = false;
+    }
+    else {
+      this.gamesToShow = this.reviewedGames;
+      this.showPopup = true;
+    }
   }
 
   showChangeURLForm() {
