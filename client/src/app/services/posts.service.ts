@@ -29,8 +29,8 @@ export class PostsService {
     return this.http.get<Post>(this.postUrl+id);
   }
 
-  public deletePost(id: string): Observable<Post> {
-    return this.http.delete<Post>(this.postUrl+id);
+  public deletePost(id: string): Observable<{token:string}> {
+    return this.http.delete<{token:string}>(this.postUrl+id);
   }
 
   public getRecentPosts(): Observable<Post[]> {

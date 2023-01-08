@@ -223,10 +223,8 @@ async function addReviewedGame(username, gameId){
 async function removeFinishedGame(username, gameId){
   const user = await getUserByUsername(username);
 
-  if(!user.finished.includes(gameId))
-    return new Error("Game is not on finished list!");
-
-  user.finished = user.finished.filter(curGameId => gameId != curGameId.valueOf());
+  if(user.finished.includes(gameId))
+    user.finished = user.finished.filter(curGameId => gameId != curGameId.valueOf());
 
   await user.save();
   return getUserJWTByUsername(username);
@@ -235,10 +233,9 @@ async function removeFinishedGame(username, gameId){
 async function removePlayingGame(username, gameId){
   const user = await getUserByUsername(username);
 
-  if(!user.playing.includes(gameId))
-    return new Error("Game is not on playing list!");
+  if(user.playing.includes(gameId))
+    user.playing = user.playing.filter(curGameId => gameId != curGameId.valueOf());
 
-  user.playing = user.playing.filter(curGameId => gameId != curGameId.valueOf());
 
   await user.save();
   return getUserJWTByUsername(username);
@@ -247,10 +244,9 @@ async function removePlayingGame(username, gameId){
 async function removeBacklogGame(username, gameId){
   const user = await getUserByUsername(username);
 
-  if(!user.backlog.includes(gameId))
-    return new Error("Game is not on backlog list!");
+  if(user.backlog.includes(gameId))
+    user.backlog = user.backlog.filter(curGameId => gameId != curGameId.valueOf());
 
-  user.backlog = user.backlog.filter(curGameId => gameId != curGameId.valueOf());
 
   await user.save();
   return getUserJWTByUsername(username);
@@ -259,10 +255,9 @@ async function removeBacklogGame(username, gameId){
 async function removeReviewedGame(username, gameId){
   const user = await getUserByUsername(username);
 
-  if(!user.reviewed.includes(gameId))
-    return new Error("Game is not on reviewed list!");
+  if(user.reviewed.includes(gameId))
+    user.reviewed = user.reviewed.filter(curGameId => gameId != curGameId.valueOf());
 
-  user.reviewed = user.reviewed.filter(curGameId => gameId != curGameId.valueOf());
 
   await user.save();
   return getUserJWTByUsername(username);
@@ -283,10 +278,8 @@ async function addPost(username, postId){
 async function removePost(username, postId){
   const user = await getUserByUsername(username);
   
-  if(!user.posts.includes(postId))
-    return new Error("This post is not linked to this user!");
-
-  user.posts = user.posts.filter(curPostId => postId != curPostId.valueOf());
+  if(user.posts.includes(postId))
+    user.posts = user.posts.filter(curPostId => postId != curPostId.valueOf());
 
   await user.save();
   return getUserJWTByUsername(username);

@@ -44,33 +44,48 @@ export class PostComponent implements OnDestroy{
   public deleteHandler(): void {
     const id = this.post._id;
 
-    const userSub = this.userService.deleteAPost(id).subscribe();
-    this.activeSubscriptions.push(userSub);
-
-    switch(this.post.postType){
-      case PostType.Backlog:
-        const deleteFromBacklog = this.userService.deleteBacklogGame(this.post.gameId).subscribe();
-        this.activeSubscriptions.push(deleteFromBacklog);
-        break;
-      case PostType.Playing:
-        const deleteFromPlaying = this.userService.deletePlayingGame(this.post.gameId).subscribe();
-        this.activeSubscriptions.push(deleteFromPlaying);
-        break;
-      case PostType.Finished:
-        const deleteFromFinished = this.userService.deleteFinishedGame(this.post.gameId).subscribe();
-        this.activeSubscriptions.push(deleteFromFinished);
-        break;
-      case PostType.Review:
-        const deleteFromReviewed = this.userService.deleteReviewedGame(this.post.gameId).subscribe();
-        this.activeSubscriptions.push(deleteFromReviewed);
-        break;
-    }
-
-
-    const postSub = this.postService.deletePost(id).subscribe();
-    this.activeSubscriptions.push(postSub);
-
-    this.show=false;
+    const postSub = this.postService.deletePost(id).subscribe((tokenPost) => {
+      if(tokenPost.token !== 'error') {
+        const userSub = this.userService.deleteAPost(id).subscribe((tokenUserPost) => {
+          if(tokenUserPost.token !== 'error') {
+            switch(this.post.postType){
+              case PostType.Backlog:
+                const deleteFromBacklog = this.userService.deleteBacklogGame(this.post.gameId).subscribe((tokenBacklog) => {
+                  if(tokenBacklog.token !== 'error') {
+                    this.show=false;
+                    this.activeSubscriptions.push(postSub, userSub, deleteFromBacklog);
+                  }
+                });
+                break;
+              case PostType.Playing:
+                const deleteFromPlaying = this.userService.deletePlayingGame(this.post.gameId).subscribe((tokenPlaying) => {
+                  if(tokenPlaying.token !== 'error') {
+                    this.show=false;
+                    this.activeSubscriptions.push(postSub, userSub, deleteFromPlaying);
+                  }
+                });
+                break;
+              case PostType.Finished:
+                const deleteFromFinished = this.userService.deleteFinishedGame(this.post.gameId).subscribe((tokenFinished) => {
+                  if(tokenFinished.token !== 'error') {
+                    this.show=false;
+                    this.activeSubscriptions.push(postSub, userSub, deleteFromFinished);
+                  }
+                });
+                break;
+              case PostType.Review:
+                const deleteFromReview = this.userService.deleteReviewedGame(this.post.gameId).subscribe((tokenReview) => {
+                  if(tokenReview.token !== 'error') {
+                    this.show=false;
+                    this.activeSubscriptions.push(postSub, userSub, deleteFromReview);
+                  }
+                });
+                break;
+            }
+          }
+        });
+      }
+      });
   }
 
 }
