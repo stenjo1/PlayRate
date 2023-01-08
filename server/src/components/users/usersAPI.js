@@ -10,9 +10,9 @@ router.post("/login",auth.canAuthenticate,controller.loginUser);
 
 router.patch("/setImgUrl",auth.isAuthenticated,controller.setImgUrl)
 router.put("/addFinishedGame",auth.isAuthenticated,controller.addFinishedGame);
-router.put("/addPlayingGame",controller.addPlayingGame);
-router.put("/addBacklogGame",controller.addBacklogGame);
-router.put("/addReviewedGame",controller.addReviewedGame);
+router.put("/addPlayingGame",auth.isAuthenticated,controller.addPlayingGame);
+router.put("/addBacklogGame",auth.isAuthenticated,controller.addBacklogGame);
+router.put("/addReviewedGame",auth.isAuthenticated,controller.addReviewedGame);
 
 router.get('/posts/:username/', controller.getPostsForUser);
 router.get('/getUser/:username', controller.getUserByUsername);
