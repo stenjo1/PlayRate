@@ -9,6 +9,7 @@ router.get('/all', controller.getAllGames);
 router.get('/popular', controller.getPopularGames);
 router.get('/:gameId', controller.getGameById);
 router.put('/post', controller.attachPost);
-router.delete("/removePost", controller.removePost);
+router.patch('/update', controller.updateReviewScore);
+router.patch("/removepost", controller.removePost);
 
 module.exports = router;

@@ -18,13 +18,13 @@ export class PostComponent implements OnDestroy,OnInit{
   public editMode: boolean;
   private activeSubscriptions: Subscription[] = [];
   public show;
+  private oldScore: number = 0;
   
 
   public constructor(private userService: UserService, private gamesService: GamesService, private postService: PostsService) {
     this.currentUsername = userService.getCurrentUserUsername();
     this.editMode = false;
     this.show=true;
-    
    
   }
   ngOnInit(): void {
@@ -37,6 +37,7 @@ export class PostComponent implements OnDestroy,OnInit{
 
 
   public editHandler(): void {
+    this.oldScore = this.post.reviewScore;
     this.editMode = !this.editMode;
   }
 
@@ -44,7 +45,9 @@ export class PostComponent implements OnDestroy,OnInit{
     this.editMode = false;    
     console.log(this.post.reviewText, this.post.reviewScore);
     const postSub = this.postService.editReview(this.post._id, this.post.reviewText, this.post.reviewScore).subscribe();
+    const gameSub = this.gamesService.updateReviewScore(this.post.gameId, this.oldScore, this.post.reviewScore).subscribe();
     this.activeSubscriptions.push(postSub);
+    this.activeSubscriptions.push(gameSub);
   }
 
 
@@ -87,6 +90,9 @@ export class PostComponent implements OnDestroy,OnInit{
                     this.activeSubscriptions.push(postSub, userSub, deleteFromReview);
                   }
                 });
+                const gameSub = this.gamesService.removePost(id, this.post.gameId, this.post.reviewScore).subscribe();
+                this.activeSubscriptions.push(gameSub);
+
                 break;
             }
           }

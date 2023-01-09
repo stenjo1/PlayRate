@@ -7,7 +7,7 @@
       </div>
       <div class="header-subtitle">
         <mat-card-subtitle>
-          <mat-icon color="warn">star</mat-icon> {{(this.game | async)?.reviewScore}}
+          <mat-icon color="warn">star</mat-icon> {{(this.game | async)?.reviewScore?.toFixed(1)}}
         </mat-card-subtitle>
       </div>
     </mat-card-header>
@@ -54,16 +54,6 @@
     </form>
 </div>
 
-<!--<mat-grid-list cols="1" rowHeight="15:1" gutterSize="5px" class="profileFeed">
-  <mat-grid-tile *ngFor="let review of reviews | async">
-      <mat-card>
-          <mat-card-content>
-              <img src="assets/profile-default.png" class="postProfilePicture">
-              <span class="postDescription">Username: {{review}}</span>
-          </mat-card-content>
-      </mat-card>
-  </mat-grid-tile>
-</mat-grid-list> -->
 
 <div class="reviews-container">
   <mat-list class="review-list">

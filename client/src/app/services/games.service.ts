@@ -43,6 +43,14 @@ export class GamesService {
     return this.http.put("http://localhost:3000/api/games/post", {"gameId": gameId, "postId": postId, "reviewScore": reviewScore });    
   }
 
+  public updateReviewScore(gameId: string, oldScore: number, newScore: number) {
+    return this.http.patch("http://localhost:3000/api/games/update", {"gameId": gameId, "oldScore": oldScore, "newScore": newScore});    
+  }
+
+  public removePost(postId: string, gameId: string, postReviewScore: number) {
+    return this.http.patch("http://localhost:3000/api/games/removepost", {"postId": postId, "gameId": gameId, "postReviewScore": postReviewScore});    
+  }
+
   public getPopularGames(num: number = 10): Observable<Game[]> {
     const params: HttpParams = new HttpParams().append('num', num)
     const obs: Observable<Game[]> = this.http.get<Game[]>(this.gameUrl + "popular", {params: params});   

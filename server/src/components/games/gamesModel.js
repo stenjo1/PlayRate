@@ -70,21 +70,45 @@ const Game = mongoose.model('Game', gameSchema);
   const game = await Game.findById(gameId).exec();
   game.relatedPosts.push(postId);
   if (reviewScore>0) {
-      newScore = game.reviewScore*game.numberOfReviews/(game.numberOfReviews+1) + reviewScore / (game.numberOfReviews+1);
-      game.reviewScore = newScore;
+      const currScore = game.reviewScore;
+      const n = game.numberOfReviews;
+      if (n==0) 
+        game.reviewScore = (currScore + reviewScore)/2;
+      else
+        game.reviewScore = (currScore*n + reviewScore)/(n+1);
+
       game.numberOfReviews+=1;
     }
   await game.save();
 } 
 
-async function removePost(gameId, postId){
+async function removePost(gameId, postId, postReviewScore){
   const game = await Game.findById(gameId);
   
   if(!game.relatedPosts.includes(gameId))
     return new Error("This post is not linked to this game!");
 
   game.relatedPosts = game.relatedPosts.filter(curPostId => postId != curPostId.valueOf());
+  const currScore = game.reviewScore;
+  const n = game.numberOfReviews;
 
+  if (n>1)
+    game.reviewScore = (currScore*n - postReviewScore)/(n-1);
+  else 
+    game.reviewScore = 0;
+
+  game.numberOfReviews-=1;
+
+  return await game.save();
+
+}
+
+async function updateReviewScore(gameId, oldScore, newScore){
+  const game = await Game.findById(gameId);
+  const currScore = game.reviewScore;
+  const n = game.numberOfReviews;
+  const updatedScore = currScore + (newScore - oldScore)/n;
+  game.reviewScore =  updatedScore;
   return await game.save();
 
 }
@@ -115,5 +139,6 @@ async function getGames(){
     paginateThroughGames,
     getGames,
     getReviewsForGame,
-    removePost
+    removePost,
+    updateReviewScore
   };

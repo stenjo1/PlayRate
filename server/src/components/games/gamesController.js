@@ -55,9 +55,10 @@ module.exports.getGameById = async function (req, res, next) {
 module.exports.removePost = async (req, res, next) => {
   const postId = req.body.postId;
   const gameId = req.body.gameId;
+  const postReviewScore = req.body.postReviewScore;
 
   try{
-    const game = await Game.removePost(gameId,postId)
+    const game = await Game.removePost(gameId,postId,postReviewScore)
     return res.status(200).json(game);
   }catch (err){
     next(err);
@@ -78,6 +79,24 @@ module.exports.attachPost = async function (req, res, next) {
     } catch (err) {
       next(err);
     }
+};
+
+module.exports.updateReviewScore = async function (req, res, next) {
+  const gameId = req.body.gameId;
+  const oldScore = req.body.oldScore;
+  const newScore = req.body.newScore;
+  try {
+    const game = await Game.getGameById(gameId);
+    if (game === null) {
+      const error = new Error(`Game is not found`);
+      error.status = 404;
+      throw error;
+    }
+    await Game.updateReviewScore(gameId, oldScore, newScore);
+    res.status(200).json(game);
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports.getPopularGames = async function (req, res, next) {
