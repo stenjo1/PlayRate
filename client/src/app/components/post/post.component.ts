@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy,OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { GamesService } from 'src/app/services/games.service';
 import { Post, PostType } from '../../models/post.model';
@@ -10,24 +10,31 @@ import { PostsService } from 'src/app/services/posts.service';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent implements OnDestroy{
-  @Input()
-  public post!: Post; 
+export class PostComponent implements OnDestroy,OnInit{
+  @Input() public post!: Post; 
+  public avatarUrl?: Observable<string>;
 
   public currentUsername: string;
   public editMode: boolean;
   private activeSubscriptions: Subscription[] = [];
   public show;
-
+  
 
   public constructor(private userService: UserService, private gamesService: GamesService, private postService: PostsService) {
     this.currentUsername = userService.getCurrentUserUsername();
     this.editMode = false;
     this.show=true;
+    
+   
+  }
+  ngOnInit(): void {
+    this.avatarUrl=this.userService.getImgUrl(this.post.username);
   }
   ngOnDestroy(): void {
     this.activeSubscriptions.forEach((sub: Subscription) => sub.unsubscribe());
   }
+
+
 
   public editHandler(): void {
     this.editMode = !this.editMode;

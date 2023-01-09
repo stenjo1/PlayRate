@@ -11,7 +11,7 @@
             <mat-grid-tile-header>{{game.name}}</mat-grid-tile-header>
             <img [src]="game.imgUrl" alt="game poster" class="game-img"/>
             <mat-grid-tile-footer>
-                <p class="game-description">{{game.description}}</p>
+                <mat-card-subtitle class="mat-card-subtitle-int">Reviews: {{ game.numberOfReviews }}</mat-card-subtitle>
                 <p [ngClass]="{'highScore' : game.reviewScore >= 7, 'mediumScore' : game.reviewScore > 3 && game.reviewScore < 7, 'lowScore' : game.reviewScore <= 3}">
                     {{game.reviewScore}}
                 </p>

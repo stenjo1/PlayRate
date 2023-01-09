@@ -1,7 +1,7 @@
 <mat-card *ngIf="this.show">
       <mat-card-header class="header">
         <div class="main-container">
-          <img mat-card-avatar src="../../assets/profile-default.png" >
+          <img mat-card-avatar [src]="(avatarUrl | async) == '' ? 'assets/profile-default.png' : (avatarUrl | async)" >
           <div class="header-content"> 
             <div>
               <a href="profilepage/{{post.username}}" class="special-text-user">{{post.username}}</a> {{post.postType.toLowerCase()==='review' ? 'has reviewed' : post.postType.toLowerCase()==='playing' ? 'is playing' : post.postType.toLowerCase()==='finished' ? 'has finished playing' : 'wants to play'}} <a href="gamepage/{{post.gameId}}" class="special-text-game">{{post.gameName}}</a>.
