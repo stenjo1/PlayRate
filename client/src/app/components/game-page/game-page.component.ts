@@ -38,7 +38,7 @@ export class GamePageComponent implements OnDestroy{
     })
 
     this.reviewForm = this.formBuilder.group({
-      reviewScore: ['', [Validators.min(1.0), Validators.max(10.0)]],
+      reviewScore: ['5', [Validators.min(1.0), Validators.max(10.0)]],
       reviewText: ['', []]
     });
 

@@ -42,10 +42,21 @@
 
 <div *ngIf="showReview" class="post-review-container">
     <form class = "post-review-form" [formGroup]="reviewForm" (ngSubmit)="onReview()">
-      <mat-form-field  appearance="outline" color="accent" class="review-form-field-rating">
-          <mat-label class="review-form-label">Your rating</mat-label>
-          <input matInput type="number" formControlName="reviewScore" value=0 min=1 max=10 placeholder="1-10">
-      </mat-form-field> 
+      <div appearance="outline" color="accent" class="review-form-field-rating">
+          <mat-label class="review-form-label">Your rating:</mat-label>
+          <mat-radio-group aria-labelledby="review-form-label" style="margin-top: 1em;" formControlName="reviewScore">
+            <mat-radio-button value="1">1</mat-radio-button>
+            <mat-radio-button value="2">2</mat-radio-button>
+            <mat-radio-button value="3">3</mat-radio-button>
+            <mat-radio-button value="4">4</mat-radio-button>
+            <mat-radio-button value="5">5</mat-radio-button>
+            <mat-radio-button value="6">6</mat-radio-button>
+            <mat-radio-button value="7">7</mat-radio-button>
+            <mat-radio-button value="8">8</mat-radio-button>
+            <mat-radio-button value="9">9</mat-radio-button>
+            <mat-radio-button value="10">10</mat-radio-button>
+          </mat-radio-group>
+        </div> 
       <mat-form-field  appearance="outline" color="accent" class="review-form-field-text">
           <mat-label class="review-form-label">Review Text</mat-label>
           <textarea matInput cdkTextareaAutosize formControlName="reviewText"></textarea>
