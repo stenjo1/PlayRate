@@ -13,7 +13,7 @@
             <mat-grid-tile-footer>
                 <mat-card-subtitle class="mat-card-subtitle-int">Reviews: {{ game.numberOfReviews }}</mat-card-subtitle>
                 <p [ngClass]="{'highScore' : game.reviewScore >= 7, 'mediumScore' : game.reviewScore > 3 && game.reviewScore < 7, 'lowScore' : game.reviewScore <= 3}">
-                    {{game.reviewScore}}
+                    {{game.reviewScore.toFixed(1)}}
                 </p>
             </mat-grid-tile-footer>
         </mat-grid-tile>
