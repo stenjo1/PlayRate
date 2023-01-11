@@ -16,10 +16,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ProfilePageComponent implements OnDestroy{
   public user: Observable<User> = new Observable<User>();
-  public finishedGames: Game[] | undefined;
-  public playingGames: Game[] | undefined;
-  public backlogGames: Game[] | undefined;
-  public reviewedGames: Game[] | undefined;
+  public finishedGames: Game[] = [];
+  public playingGames: Game[] = [];
+  public backlogGames: Game[] = [];
+  public reviewedGames: Game[] = [];
   public posts: Post[] = new Array<Post>();
   
   public showPopup:boolean = false;
@@ -138,6 +138,26 @@ export class ProfilePageComponent implements OnDestroy{
 
   showChangeURLForm() {
     this.changeURLFormShown = !this.changeURLFormShown;
+  }
+
+
+  onDeletedPost(deletedPost: Post){
+    this.posts = this.posts.filter(post=>post._id!=deletedPost._id);
+    switch(deletedPost.postType){
+      case PostType.Review:
+        this.reviewedGames = this.reviewedGames.filter(game=>game._id!=deletedPost.gameId);
+        break;
+      case PostType.Playing:
+        this.playingGames = this.playingGames.filter(game=>game._id!=deletedPost.gameId);
+        break; 
+      case PostType.Backlog:
+        this.backlogGames = this.backlogGames.filter(game=>game._id!=deletedPost.gameId);
+        break;
+      case PostType.Finished:
+        this.finishedGames = this.finishedGames.filter(game=>game._id!=deletedPost.gameId);
+        break; 
+        
+    }
   }
 
   changeImgUrl() {

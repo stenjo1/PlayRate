@@ -68,8 +68,8 @@
 
 <div class="reviews-container">
   <mat-list class="review-list">
-    <mat-list-item *ngFor="let review of reviews | async" class="review-item">
-      <app-post [post]="review"></app-post>
+    <mat-list-item *ngFor="let review of reviews" class="review-item">
+      <app-post [post]="review" (deletedPost)="onDeletedPost($event)" (updatedReviewScore)="onUpdatedReviewScore($event)"></app-post>
     </mat-list-item> 
   </mat-list>
 </div>

@@ -4,7 +4,7 @@ import { Game } from 'src/app/models/game.model';
 import { GamesService } from 'src/app/services/games.service';
 import { UserService } from 'src/app/services/user.service';
 import { PostsService } from 'src/app/services/posts.service';
-import { PostType } from 'src/app/models/post.model';
+import { Post, PostType } from 'src/app/models/post.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -21,7 +21,7 @@ export class GamePageComponent implements OnDestroy{
   public game:Observable<Game>=new Observable<Game>();
   public steamLink:string='';
   public clicked:boolean=false;
-  public reviews:any;
+  public reviews:Post[]=[];
   public reviewForm:FormGroup;
   public showReview:boolean = false;
   private activeSubscriptions: Subscription[] = [];
@@ -34,7 +34,8 @@ export class GamePageComponent implements OnDestroy{
       this.game=this.gameService.getGameById((gameId)!);
       const steamLinkSub=this.game.subscribe(g=>{this.steamLink=g.steamLink});
       this.activeSubscriptions.push(steamLinkSub);
-      this.reviews = this.gameService.getGameReviews(gameId!);
+      const reviewSub = this.gameService.getGameReviews(gameId!).subscribe(posts=>this.reviews = posts);
+      this.activeSubscriptions.push(reviewSub);
     })
 
     this.reviewForm = this.formBuilder.group({
@@ -97,6 +98,16 @@ export class GamePageComponent implements OnDestroy{
     this.showReview = !this.showReview;
   }
 
+  onUpdatedReviewScore(gameId: string) {
+    this.game = this.gameService.getGameById(gameId);
+  }
+
+  onDeletedPost(deletedPost: Post){
+    this.reviews = this.reviews.filter(post=>post._id!=deletedPost._id);
+    this.game = this.gameService.getGameById(deletedPost.gameId);
+   
+  }
+
   onReview(): void {
     const sub = this.game.subscribe((g)=>{
       const reviewText =  this.reviewForm.get("reviewText")?.value;
@@ -114,6 +125,7 @@ export class GamePageComponent implements OnDestroy{
             this.activeSubscriptions.push(sub, postSub, userSub);
           }
       });
+      this.game.subscribe(g=>console.log(g.reviewScore));
   
     })
   }

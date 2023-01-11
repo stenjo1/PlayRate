@@ -26,22 +26,6 @@ const gameSchema = new mongoose.Schema({
   reviewScore: {
     type: mongoose.Schema.Types.Number,
     required: true
-  },
-  playersNumber: {
-    type: mongoose.Schema.Types.Number,
-    required: true
-  },
-  visitedNumber: {
-    type: mongoose.Schema.Types.Number,
-    required: true
-  },
-  favoritesNumber: {
-    type: mongoose.Schema.Types.Number,
-    required: true
-  },
-  likes: {
-    type: mongoose.Schema.Types.Number,
-    required: true
   }
 });
 
@@ -66,19 +50,17 @@ const Game = mongoose.model('Game', gameSchema);
  * @param {string} postType
  * @param {number} reviewScore
  */
- async function attachPostId (gameId, postId, reviewScore) {
+ async function attachPostId (gameId, postId, score) {
   const game = await Game.findById(gameId).exec();
   game.relatedPosts.push(postId);
-  if (reviewScore>0) {
-      const currScore = game.reviewScore;
-      const n = game.numberOfReviews;
-      if (n==0) 
-        game.reviewScore = (currScore + reviewScore)/2;
-      else
-        game.reviewScore = (currScore*n + reviewScore)/(n+1);
 
-      game.numberOfReviews+=1;
-    }
+  const currScore = game.reviewScore;
+  const n = game.numberOfReviews;
+  game.reviewScore = ( currScore * n + score) / (n + 1);
+  console.log(game.reviewScore);
+
+  game.numberOfReviews+=1;
+
   await game.save();
 } 
 
@@ -91,12 +73,7 @@ async function removePost(gameId, postId, postReviewScore){
   game.relatedPosts = game.relatedPosts.filter(curPostId => postId != curPostId.valueOf());
   const currScore = game.reviewScore;
   const n = game.numberOfReviews;
-
-  if (n>1)
-    game.reviewScore = (currScore*n - postReviewScore)/(n-1);
-  else 
-    game.reviewScore = 0;
-
+  game.reviewScore = (currScore*n - postReviewScore)/(n-1);
   game.numberOfReviews-=1;
 
   return await game.save();
@@ -105,11 +82,9 @@ async function removePost(gameId, postId, postReviewScore){
 
 async function updateReviewScore(gameId, oldScore, newScore){
   const game = await Game.findById(gameId);
-  const currScore = game.reviewScore;
-  const n = game.numberOfReviews;
-  const updatedScore = currScore + (newScore - oldScore)/n;
-  game.reviewScore =  updatedScore;
-  return await game.save();
+  game.reviewScore = game.reviewScore + (newScore - oldScore)/game.numberOfReviews;
+  const updatedGame =  await game.save();
+  return updatedGame.reviewScore;
 
 }
 

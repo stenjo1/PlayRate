@@ -92,8 +92,8 @@ module.exports.updateReviewScore = async function (req, res, next) {
       error.status = 404;
       throw error;
     }
-    await Game.updateReviewScore(gameId, oldScore, newScore);
-    res.status(200).json(game);
+    const updatedScore = await Game.updateReviewScore(gameId, oldScore, newScore);
+    res.status(200).json(updatedScore);
   } catch (err) {
     next(err);
   }

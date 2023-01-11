@@ -43,8 +43,8 @@ export class GamesService {
     return this.http.put("http://localhost:3000/api/games/post", {"gameId": gameId, "postId": postId, "reviewScore": reviewScore });    
   }
 
-  public updateReviewScore(gameId: string, oldScore: number, newScore: number) {
-    return this.http.patch("http://localhost:3000/api/games/update", {"gameId": gameId, "oldScore": oldScore, "newScore": newScore});    
+  public updateReviewScore(gameId: string, oldScore: number, newScore: number) : Observable<number> {
+    return this.http.patch<number>("http://localhost:3000/api/games/update", {"gameId": gameId, "oldScore": oldScore, "newScore": newScore});    
   }
 
   public removePost(postId: string, gameId: string, postReviewScore: number) {

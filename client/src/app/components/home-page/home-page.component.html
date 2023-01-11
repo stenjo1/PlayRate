@@ -6,7 +6,7 @@
             <mat-grid-tile-header>{{game.name}}</mat-grid-tile-header>
             <img [src]="game.imgUrl" alt="game poster" class="game-img"/>
             <mat-grid-tile-footer>
-                <mat-card-subtitle class="mat-card-subtitle-int">Reviews: {{ game.numberOfReviews }}</mat-card-subtitle>
+                <mat-card-subtitle class="mat-card-subtitle-int">Reviews: {{ game.numberOfReviews - 1 }}</mat-card-subtitle>
                 <p [ngClass]="{'highScore' : game.reviewScore >= 7, 'mediumScore' : game.reviewScore > 3 && game.reviewScore < 7, 'lowScore' : game.reviewScore <= 3}">
                     {{game.reviewScore.toFixed(1)}}
                 </p>
@@ -20,8 +20,8 @@
 
     <h2 class="activity-header">Recent Activity</h2>
     <mat-list>
-        <mat-list-item *ngFor="let post of posts | async">
-          <app-post [post]="post" ></app-post>
+        <mat-list-item *ngFor="let post of posts">
+          <app-post [post]="post" (deletedPost)="onDeletedPost($event)"></app-post>
         </mat-list-item> 
     </mat-list>
 </div>

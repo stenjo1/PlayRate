@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { filter, Observable } from 'rxjs';
 import { Game } from 'src/app/models/game.model';
 import { Post } from 'src/app/models/post.model';
 import { GamesService } from 'src/app/services/games.service';
@@ -16,12 +16,12 @@ import { PostComponent } from 'src/app/components/post/post.component';
 export class HomePageComponent implements OnInit {
 
   public games: Observable<Game[]> = new Observable<Game[]>();
-  public posts: Observable<Post[]> = new Observable<Post[]>();
+  public posts: Post[] = [];
 
   constructor(private gamesService: GamesService, private postsService: PostsService, private router: Router,
      private authService: AuthService ) {
     this.games = this.gamesService.getPopularGames(12);    
-    this.posts = this.postsService.getRecentPosts();
+    this.postsService.getRecentPosts().subscribe(posts=> this.posts = posts);
 
     if (authService.sendUserDataIfExists() === null){
       router.navigateByUrl("");
@@ -30,6 +30,10 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  onDeletedPost(deletedPost: Post){
+    this.posts = this.posts.filter(post=>post._id!=deletedPost._id);
   }
 
   
