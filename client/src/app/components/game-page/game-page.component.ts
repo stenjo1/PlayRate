@@ -54,8 +54,8 @@ export class GamePageComponent implements OnDestroy{
       const obs : Observable<{token : string}>  = this.userService.putFinishedGame(g._id);
       const userSub = obs.subscribe((token) => {
         if(token.token !== "error"){
-          const postSub = this.postsService.createNewPost(PostType.Finished ,g._id, g.name, this.userService.getCurrentUserUsername(), '', 0).subscribe( (postId) => {
-            const userSub = this.userService.putAPost(postId).subscribe();
+          const postSub = this.postsService.createNewPost(PostType.Finished ,g._id, g.name, this.userService.getCurrentUserUsername(), '', 0).subscribe( (post) => {
+            const userSub = this.userService.putAPost(post._id).subscribe();
             this.activeSubscriptions.push(userSub);
            });
           this.activeSubscriptions.push(sub, postSub, userSub);
@@ -69,8 +69,8 @@ export class GamePageComponent implements OnDestroy{
       const obs : Observable<{token : string}>  = this.userService.putPlayingGame(g._id);
       const userSub = obs.subscribe((token) => {
         if(token.token !== "error"){
-          const postSub = this.postsService.createNewPost(PostType.Playing ,g._id, g.name, this.userService.getCurrentUserUsername(), '', 0).subscribe( (postId) => {
-            const userSub = this.userService.putAPost(postId).subscribe();
+          const postSub = this.postsService.createNewPost(PostType.Playing ,g._id, g.name, this.userService.getCurrentUserUsername(), '', 0).subscribe( (post) => {
+            const userSub = this.userService.putAPost(post._id).subscribe();
             this.activeSubscriptions.push(userSub);
            });
           this.activeSubscriptions.push(sub, postSub, userSub);
@@ -84,8 +84,8 @@ export class GamePageComponent implements OnDestroy{
       const obs : Observable<{token : string}>  = this.userService.putBacklogGame(g._id);
       const userSub = obs.subscribe((token) => {
         if(token.token !== "error"){
-          const postSub = this.postsService.createNewPost(PostType.Backlog ,g._id, g.name, this.userService.getCurrentUserUsername(), '', 0).subscribe( (postId) => {
-            const userSub = this.userService.putAPost(postId).subscribe();
+          const postSub = this.postsService.createNewPost(PostType.Backlog ,g._id, g.name, this.userService.getCurrentUserUsername(), '', 0).subscribe( (post) => {
+            const userSub = this.userService.putAPost(post._id).subscribe();
             this.activeSubscriptions.push(userSub);
            });
           this.activeSubscriptions.push(sub, postSub, userSub);
@@ -117,10 +117,11 @@ export class GamePageComponent implements OnDestroy{
       const obs : Observable<{token : string}>  = this.userService.putReviewedGame(g._id);
       const userSub = obs.subscribe((token) => {
           if(token.token !== "error"){
-            const postSub = this.postsService.createNewPost(PostType.Review ,g._id, g.name, this.userService.getCurrentUserUsername(), reviewText, reviewScore).subscribe( (postId) => {
-              const gamesSub = this.gameService.attachPost(g._id, postId, reviewScore).subscribe();
-              const userSub = this.userService.putAPost(postId).subscribe();
+            const postSub = this.postsService.createNewPost(PostType.Review ,g._id, g.name, this.userService.getCurrentUserUsername(), reviewText, reviewScore).subscribe( (post) => {
+              const gamesSub = this.gameService.attachPost(g._id, post._id, reviewScore).subscribe();
+              const userSub = this.userService.putAPost(post._id).subscribe();
               this.activeSubscriptions.push(gamesSub, userSub);
+              this.reviews = [...this.reviews, post];
              });
             this.activeSubscriptions.push(sub, postSub, userSub);
           }

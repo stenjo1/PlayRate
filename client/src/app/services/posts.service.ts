@@ -21,7 +21,7 @@ export class PostsService {
     "gameName" : gameName,
     "username" : username,
     "reviewText" : reviewText,
-    "reviewScore" : reviewScore}).pipe(map((res)=>{return res._id}));
+    "reviewScore" : reviewScore}).pipe(map((res)=>{return res}));
 
   }
 

@@ -46,10 +46,10 @@ export class CreatePostComponent implements OnDestroy {
     const reviewScore =  this.createPostForm.get("reviewScore")?.value;
     
     
-    const postsSub = this.postService.createNewPost(PostType.Review, gameId, gameName, username, reviewText, reviewScore).subscribe((postId)=>{
-        const gamesSub = this.gameService.attachPost(gameId, postId, reviewScore).subscribe();
+    const postsSub = this.postService.createNewPost(PostType.Review, gameId, gameName, username, reviewText, reviewScore).subscribe((post)=>{
+        const gamesSub = this.gameService.attachPost(gameId, post._id, reviewScore).subscribe();
         this.activeSubscriptions.push(gamesSub);
-        const userSub = this.userService.putAPost(postId).subscribe(); 
+        const userSub = this.userService.putAPost(post._id).subscribe(); 
         this.activeSubscriptions.push(userSub);
         
     });
