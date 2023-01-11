@@ -127,7 +127,6 @@ export class GamePageComponent implements OnDestroy{
           }
       });
       this.game.subscribe(g=>console.log(g.reviewScore));
-  
     })
   }
 }
