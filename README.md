@@ -4,7 +4,7 @@ Aplikacija za praćenje odigranih video igara i njihovo ocenjivanje.
 
 
 ## :video_camera: Demo video 
-* [Anymation](https://youtu.be/edCNb9MWaM0)
+* [PlayRate](https://youtu.be/edCNb9MWaM0)
 
 
 ## Developers
