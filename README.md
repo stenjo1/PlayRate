@@ -2,6 +2,11 @@
 
 Aplikacija za praćenje odigranih video igara i njihovo ocenjivanje.
 
+
+## :video_camera: Demo video 
+* [Anymation](https://youtu.be/edCNb9MWaM0)
+
+
 ## Developers
 
 - [Minja Popović, 039/2018](https://gitlab.com/Prophethor)
