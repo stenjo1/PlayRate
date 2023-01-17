@@ -1,4 +1,5 @@
 # Project PlayRate
+Aplikacija za praćenje odigranih video igara i njihovo ocenjivanje
 <p align="left">
     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a>
     <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a>
@@ -8,7 +9,6 @@
     <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a>  
      </p>
 
-Aplikacija za praćenje odigranih video igara i njihovo ocenjivanje.
 
 
 ## :video_camera: Demo video 
@@ -24,7 +24,7 @@ Izvorni kod projekta preuzeti komandom: `git clone https://gitlab.com/matfpveb/p
 i komandom `cd 02-PlayRate/` uci u direktorijum projekta
 
 # Podešavanje baze podataka:
-Pozicionirati se u folder `data` i pokrenuti komande: <br>
+Pozicionirati se u folder `data` i pokrenuti komande: <br><br>
 `mongoimport --db playrate --collection users --file users.json --jsonArray` <br>
 `mongoimport --db playrate --collection posts --file posts.json --jsonArray` <br>
 `mongoimport --db playrate --collection games --file games.json --jsonArray`  <br>
@@ -35,13 +35,11 @@ Post - Sadrži podatke o korisničkim postovima <br>
 Game - Sadrži podatke o igrama <br>
 
 # Pokretanje servera:
-Pozicionirati se u folder `server` i u komandoj liniji pokrenuti komandu `npm install` <br>
-Ovo ce instalirati sve neophodne biblioteke.
-Pokrenuti server komandom `node server.js`
+Pozicionirati se u folder `server` i instalirati sve potrebne biblioteke komandom `npm install` <br>
+Nakon toga pokrenuti server komandom `node server.js`
 
 # Pokretanje klijenta:
-Slicno kao i za pokretnaje servera. <br>
-Pozicionirati se u folder `client`, i instalirati sve potrebne biblioteke komandom `npm install`<br>
+Pozicionirati se u folder `client` i instalirati sve potrebne biblioteke komandom `npm install`<br>
 Nakon toga pokrenuti klijent komandom `ng serve` <br>
 Aplikaciji se pristupa kroz web browser putem adrese http://localhost:4200
 
