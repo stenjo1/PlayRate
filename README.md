@@ -49,7 +49,7 @@ Aplikaciji se pristupa kroz web browser putem adrese http://localhost:4200
 ## Developers
 
 - [Minja Popović, 039/2018](https://gitlab.com/Prophethor)
-- [Stefanija Markovic, 306/2018](https://gitlab.com/stefanijam)
+- [Stefanija Markovic, 306/2018](https://github.com/stenjo1)
 - [Pavle Vlajkovic, 298/2017](https://gitlab.com/PavleVL)
 - [Marija Škorić, 063/2018](https://gitlab.com/0MarijaS)
 - [Tihomir Stojković, 283/2018](https://gitlab.com/Tihomir-99)
